@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.6 — Workflow Completo | Skills For Real Engineers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha emerald) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .bg-emerald-900\/30 { background-color: rgba(5, 150, 105, 0.10); }
+    html:not(.dark) .bg-emerald-900\/40 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .bg-emerald-600 { background-color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500:hover { background-color: #10b981; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+
+    /* Light mode - red (Fazer/Evitar) */
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+
+    /* Light mode - blue (dados) */
+    html:not(.dark) .text-blue-400 { color: #1d4ed8; }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(29, 78, 216, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(29, 78, 216, 0.25); }
+
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Dark mode - bordas e linhas divisorias mais suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Code box */
+    .code-box { font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🛠️</span>
+            <span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1 — Fundamentos</a>
+      <span>/</span>
+      <span class="text-emerald-400">Módulo 1.6</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MÓDULO 1.6 — FINAL
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏁 Módulo 1.6 — Workflow Completo</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Da ideia ao PR mergeado. Costura todas as skills do Matt Pocock em um ciclo único e repetível: <strong class="text-emerald-400">setup → grill → PRD → issues → triage → TDD → review → merge</strong>.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">8</div>
+          <div class="text-xs text-neutral-400">Etapas</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">~45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Prática</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- SEÇÃO 1: Setup inicial -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">⚙️ Setup inicial: <code class="text-emerald-400">/setup-matt-pocock-skills</code></h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes de rodar qualquer outra skill, o repositório precisa estar configurado <strong class="text-emerald-400">uma vez</strong>. O <code class="text-emerald-400">/setup-matt-pocock-skills</code> entrevista você sobre três pontos e grava as decisões em arquivos versionados — todas as outras skills leem esse contexto para se comportarem do jeito certo.
+      </p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> O que o setup decide
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>Issue tracker:</strong> GitHub Issues, Linear, ou pasta local <code>issues/</code> em markdown. Define onde <code>/to-prd</code> e <code>/to-issues</code> vão escrever.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>Label vocabulary:</strong> os roles do <code>/triage</code> (<code>needs-triage</code>, <code>ready-for-afk</code>, <code>blocked</code>, etc.) viram labels reais no tracker.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>Doc layout:</strong> onde mora <code>CONTEXT.md</code>, onde vão os ADRs, e como o <code>/grill-with-docs</code> deve atualizá-los.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-neutral-400 mb-3 flex items-center">
+          <span class="mr-2">💻</span> Prompts típicos da skill
+        </h3>
+        <pre class="code-box text-sm text-neutral-300 overflow-x-auto"><span class="text-emerald-400">$</span> /setup-matt-pocock-skills
+
+<span class="text-neutral-500">→ Qual issue tracker este repo usa?</span>
+   [1] GitHub Issues  [2] Linear  [3] Local (issues/*.md)
+
+<span class="text-neutral-500">→ Onde fica a documentação viva?</span>
+   docs/CONTEXT.md (default)  ou caminho customizado
+
+<span class="text-neutral-500">→ Pasta de ADRs?</span>
+   docs/adr/ (default)
+
+<span class="text-neutral-500">✓ Gravado em .claude/skills-config.json</span>
+<span class="text-neutral-500">✓ Stub de docs/CONTEXT.md criado</span>
+<span class="text-neutral-500">✓ Labels recomendadas listadas (rode `gh label create ...`)</span></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica prática
+        </h3>
+        <p class="text-neutral-300">Rode <code>/setup-matt-pocock-skills</code> <strong>uma única vez por repo</strong>, logo depois do clone. Faz commit do <code>.claude/skills-config.json</code> e do stub do <code>CONTEXT.md</code> — assim todo mundo do time herda o mesmo workflow.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Setup é por repo, não global</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">Decisões viram arquivos versionados</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Habilita as outras skills</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Roda uma vez, não toda hora</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: Grilling -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔥 Etapa 1 — Grilling (alinhamento)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Toda feature nova começa pelo <code class="text-emerald-400">/grill-with-docs</code>. Ele <strong class="text-emerald-400">interroga</strong> sua ideia contra o domínio existente: vocabulário do <code>CONTEXT.md</code>, ADRs anteriores, restrições conhecidas. O output não é código — é <strong>alinhamento</strong>.
+      </p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> O que sai do grilling
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>CONTEXT.md atualizado:</strong> novos termos do domínio, ambiguidades resolvidas, escopo refinado.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>ADRs novos:</strong> decisões arquiteturais que apareceram durante o grilling viram arquivos em <code>docs/adr/</code>.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1">•</span>
+            <span><strong>Conversa salva:</strong> o transcript fica disponível para o <code>/to-prd</code> usar como insumo.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+          <span class="mr-2">🚫</span> NÃO pule essa etapa
+        </h3>
+        <p class="text-neutral-300">Pular o grilling é o erro #1 de quem começa com as skills. Sem alinhamento, você gera PRDs em cima de premissas erradas — e a cascata vira retrabalho. <strong class="text-red-400">15 minutos de grilling economizam 3 horas de refatoração.</strong></p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Grilling vem primeiro, sempre</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">Output é alinhamento, não código</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Atualiza CONTEXT.md inline</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Gera ADRs quando decide</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: /to-prd -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">📄 Etapa 2 — <code class="text-emerald-400">/to-prd</code> (sintetizar)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Com a conversa de grilling fresca, <code class="text-emerald-400">/to-prd</code> <strong class="text-emerald-400">sintetiza tudo em um PRD</strong> e cria uma issue no tracker. Note: <strong>não há nova entrevista</strong> — a skill usa o contexto da sessão atual + <code>CONTEXT.md</code>.
+      </p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧠</span> Por que sem entrevista nova
+        </h3>
+        <p class="text-neutral-300 mb-3">Re-perguntar tudo seria desperdício — o agente já viu a discussão. A skill <strong>extrai</strong>, não <strong>coleta</strong>. Isso muda o tipo de relação com o agente: cada skill é um nó de um pipeline, não uma conversa isolada.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>67%</strong> menos perguntas redundantes vs PRDs feitos do zero</li>
+          <li><strong>Contexto preservado:</strong> termos, restrições e ADRs já estão na narrativa</li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-neutral-400 mb-3 flex items-center">
+          <span class="mr-2">📋</span> PRD gerado (exemplo)
+        </h3>
+        <pre class="code-box text-sm text-neutral-300 overflow-x-auto"><span class="text-emerald-400"># PRD: Importação CSV de leads</span>
+
+<span class="text-emerald-400">## Problema</span>
+Time comercial cola CSV no Slack; ninguém importa.
+~40 leads/semana perdidos.
+
+<span class="text-emerald-400">## Solução proposta</span>
+Endpoint POST /leads/import aceita CSV multipart.
+Valida colunas obrigatórias (email, nome, fonte).
+Deduplica por email. Retorna relatório.
+
+<span class="text-emerald-400">## Fora de escopo</span>
+- UI de upload (vem em PRD futuro)
+- Enriquecimento de dados
+
+<span class="text-emerald-400">## Critérios de aceite</span>
+- [ ] CSV válido importa em &lt;5s para 1000 linhas
+- [ ] Linhas inválidas retornam no response, não 500
+- [ ] Idempotente: re-upload não duplica
+
+<span class="text-emerald-400">## Decisões herdadas</span>
+ADR-012: validação via Zod (não Yup).
+ADR-019: jobs &gt;2s vão pra fila, não inline.</pre>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Sintetiza, não entrevista</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">Cria issue no tracker</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Cita ADRs herdados</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Define "fora de escopo"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: /to-issues -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔪 Etapa 3 — <code class="text-emerald-400">/to-issues</code> (fatiar)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um PRD não é executável. <code class="text-emerald-400">/to-issues</code> quebra o PRD em <strong class="text-emerald-400">vertical slices</strong> — cada slice é uma issue independente que entrega valor visível sozinha.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Slices verticais (FAZER)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>"Aceitar upload de CSV e retornar contagem de linhas" — testável end-to-end</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>"Validar colunas obrigatórias com erro 400" — entrega comportamento visível</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>"Deduplicar por email no insert" — pode mergear sozinho</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Cada uma tem critério de aceite no PR</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Tasks técnicas isoladas (EVITAR)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>"Criar schema Zod" — não entrega nada sozinho</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>"Adicionar dependency csv-parse" — invisível</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>"Refatorar service de leads" — mergeável?? Para quê?</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>"Setup do endpoint sem lógica" — PR vazio</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica prática
+        </h3>
+        <p class="text-neutral-300">Teste cada slice com a pergunta: <strong>"Se eu mergear só essa, alguém usa amanhã?"</strong> Se a resposta for "não, precisa das outras junto", o slice está horizontal — quebre de novo.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Vertical, não horizontal</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">Cada slice mergeável sozinho</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Critério de aceite por issue</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Teste: "alguém usa amanhã?"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: /triage -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🚦 Etapa 4 — <code class="text-emerald-400">/triage</code> (priorizar)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Issues frescas chegam com label <code class="text-emerald-400">needs-triage</code>. O <code>/triage</code> as move por uma <strong class="text-emerald-400">state machine de roles</strong> — cada estado descreve onde a issue está no funil e quem pode agir.
+      </p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">needs-triage</h4>
+            <p class="text-sm text-neutral-400 mb-2">Estado inicial — saiu fresca do /to-issues</p>
+            <p class="text-neutral-300 text-sm">Ninguém revisou ainda. Pode estar mal-fatiada, duplicada, ou fora de prioridade. <strong>Bloqueia execução.</strong></p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">needs-discussion</h4>
+            <p class="text-sm text-neutral-400 mb-2">Tem ambiguidade que /grill não resolveu</p>
+            <p class="text-neutral-300 text-sm">Precisa de conversa síncrona com humano. Volta pro grilling se necessário.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">ready-for-human</h4>
+            <p class="text-sm text-neutral-400 mb-2">Pronta, mas precisa de dev sênior</p>
+            <p class="text-neutral-300 text-sm">Tem nuance arquitetural — agente sozinho não basta. Humano pega.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">ready-for-afk</h4>
+            <p class="text-sm text-neutral-400 mb-2">Agente roda sozinho, você sai pra almoçar</p>
+            <p class="text-neutral-300 text-sm">Critério de aceite cristalino, escopo curto, baixo risco. <strong class="text-emerald-400">/tdd</strong> resolve enquanto você não está.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">blocked</h4>
+            <p class="text-sm text-neutral-400 mb-2">Depende de algo externo</p>
+            <p class="text-neutral-300 text-sm">API de terceiro, decisão de produto, outra issue não mergeada. Volta pra fila quando desbloquear.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">6</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">in-progress → done</h4>
+            <p class="text-sm text-neutral-400 mb-2">Estados terminais do ciclo</p>
+            <p class="text-neutral-300 text-sm">PR aberto → in-progress. PR mergeado → done. Issue fecha automaticamente via "Closes #N".</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Cada issue tem um role</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">Roles são labels reais no tracker</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">ready-for-afk = candidato a TDD</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Estados transitam, não acumulam</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: /tdd -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🧪 Etapa 5 — Implementação com <code class="text-emerald-400">/tdd</code></h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Pega uma issue <code class="text-emerald-400">ready-for-afk</code>, abre branch, roda <code class="text-emerald-400">/tdd</code>. A skill executa o loop clássico <strong class="text-emerald-400">red → green → refactor</strong> guiado pelos critérios de aceite da issue.
+      </p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> O loop por slice
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1 font-bold">RED</span>
+            <span>Escreve teste que falha. Critério de aceite #1 vira o primeiro teste. Roda — vermelho.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1 font-bold">GREEN</span>
+            <span>Implementa o mínimo para passar. Nada além. Roda — verde.</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <span class="text-emerald-400 mt-1 font-bold">REFACTOR</span>
+            <span>Limpa o código sem mudar comportamento. Testes continuam verdes. Próximo critério vira próximo RED.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica prática
+        </h3>
+        <p class="text-neutral-300">Se o <code>/tdd</code> tentar pular o RED ("vou só implementar e depois testo"), interrompa. <strong>RED primeiro, sempre.</strong> Sem o teste falhando antes, você não sabe se ele vale alguma coisa.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">Branch por issue</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">RED → GREEN → REFACTOR</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Critérios de aceite = testes</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Sem RED, sem skip</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: Review e merge -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
+        <h2 class="text-2xl font-bold">👀 Etapa 6 — Review e merge</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Branch verde, hora do PR. Use <code class="text-emerald-400">/verify</code> (rodar o app de verdade e ver funcionando) ou <code class="text-emerald-400">code-review</code> (revisão estática do diff). Comentários endereçados, merge.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Checklist antes do merge</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Testes passam em CI</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Critérios de aceite da issue todos verdes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>/verify</code> mostrou comportamento real</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>code-review</code> sem findings de severidade alta</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>PR descrição cita "Closes #N"</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Não mergeie se</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Testes locais passam mas CI tá lento, vai assim mesmo"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Critério de aceite #3 ficou pra outra PR</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Diff tem arquivos não relacionados à issue</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Mudou comportamento sem atualizar <code>CONTEXT.md</code></span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>PR sem link pra issue ("Closes")</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> /verify vs code-review
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>/verify:</strong> roda o app, faz a ação real, prova que funciona end-to-end. Use quando o slice muda comportamento visível.</li>
+          <li><strong>code-review:</strong> análise estática do diff, busca bugs sutis, edge cases. Use sempre — barato e rápido.</li>
+          <li><strong>Ambos:</strong> em features críticas. Custo baixo, sinal alto.</li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">/verify prova funcionamento</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">code-review pega bugs sutis</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">"Closes #N" fecha automático</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Merge altera estado para done</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8: Visão geral -->
+    <section id="topico-8" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">8</span>
+        <h2 class="text-2xl font-bold">🗺️ Visão geral — o ciclo completo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Costurando tudo: o ciclo <strong class="text-emerald-400">se realimenta</strong> — o próximo grilling já começa com um <code>CONTEXT.md</code> mais maduro, ADRs novos e vocabulário refinado pela feature anterior.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-neutral-400 mb-3 flex items-center">
+          <span class="mr-2">🔀</span> Fluxograma do workflow
+        </h3>
+        <pre class="code-box text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/setup-matt-pocock-skills</span>  (uma vez por repo)        │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/grill-with-docs</span>           CONTEXT.md + ADRs        │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/to-prd</span>                    issue com PRD             │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/to-issues</span>                 N vertical slices         │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/triage</span>                    role por issue            │
+  │     needs-triage → ready-for-afk / ready-for-human       │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/tdd</span>                       red → green → refactor    │
+  │     (uma branch por issue)                               │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">/verify</span> + <span class="text-emerald-400">code-review</span>     PR review                 │
+  └────────────────────────┬────────────────────────────────┘
+                           ▼
+  ┌─────────────────────────────────────────────────────────┐
+  │  <span class="text-emerald-400">merge</span>                      issue → done              │
+  │  CONTEXT.md atualizado pelo próximo /grill              │
+  └────────────────────────┬────────────────────────────────┘
+                           │
+                           └───── volta pro /grill-with-docs ─────┐
+                                  (próxima feature)               │
+                                                                  ▼
+                                                          (ciclo se repete)
+</pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">♻️</span> O ciclo se realimenta
+        </h3>
+        <p class="text-neutral-300">Cada volta deixa o <code>CONTEXT.md</code> mais denso, os ADRs mais completos, e o vocabulário do domínio mais preciso. <strong>Grilling #10 é mais rápido e mais profundo que o grilling #1</strong> — porque o agente já entende seu domínio. Esse é o composto real das skills do Matt Pocock.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 1</div>
+          <div class="text-sm text-neutral-300">8 etapas, 1 ciclo</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 2</div>
+          <div class="text-sm text-neutral-300">CONTEXT.md como artefato vivo</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 3</div>
+          <div class="text-sm text-neutral-300">Cada volta deixa repo melhor</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-emerald-400 text-xs font-bold mb-1">CONCEITO 4</div>
+          <div class="text-sm text-neutral-300">Composto, não linear</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO FINAL DO CURSO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">🎓</span> Conclusão do curso
+        </h2>
+
+        <p class="text-neutral-300 mb-6">Você fechou a Trilha 1. Vamos recapitular os <strong class="text-emerald-400">4 problemas</strong> que abriram o curso — e como cada skill resolve um pedaço.</p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1 font-bold">1.</span>
+            <div>
+              <strong class="text-white">"O agente esquece tudo entre sessões"</strong>
+              <span class="text-neutral-400"> → <code class="text-emerald-400">CONTEXT.md</code> + <code class="text-emerald-400">/grill-with-docs</code> dão memória versionada e refinável.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1 font-bold">2.</span>
+            <div>
+              <strong class="text-white">"Especificações ambíguas viram código errado"</strong>
+              <span class="text-neutral-400"> → grilling antes do PRD pega ambiguidade no nascedouro; <code class="text-emerald-400">/to-prd</code> sintetiza com escopo claro.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1 font-bold">3.</span>
+            <div>
+              <strong class="text-white">"Tarefas grandes nunca terminam"</strong>
+              <span class="text-neutral-400"> → <code class="text-emerald-400">/to-issues</code> em vertical slices torna cada pedaço mergeável sozinho.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1 font-bold">4.</span>
+            <div>
+              <strong class="text-white">"Não dá pra confiar no que o agente entrega"</strong>
+              <span class="text-neutral-400"> → <code class="text-emerald-400">/tdd</code> + <code class="text-emerald-400">/verify</code> + <code class="text-emerald-400">code-review</code> formam o tripé de confiança: testes que provam, execução que demonstra, revisão que questiona.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-5 mb-6">
+          <h3 class="font-semibold text-emerald-400 mb-3 flex items-center">
+            <span class="mr-2">🚀</span> Próximos passos
+          </h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">→</span>
+              <span><strong>Pratique em um projeto real.</strong> Escolha um repo seu, rode <code>/setup-matt-pocock-skills</code>, e use o workflow numa feature pequena (1-2 slices). Não tente aplicar tudo de uma vez em projeto grande.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">→</span>
+              <span><strong>Itere o CONTEXT.md.</strong> Releia depois de cada feature mergeada. Acrescente o que aprendeu. É o seu maior ativo.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">→</span>
+              <span><strong>Compartilhe com o time.</strong> O workflow só compõe se mais gente usa — todos lendo o mesmo CONTEXT.md, todos respeitando os mesmos roles do /triage.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-5 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-3 flex items-center">
+            <span class="mr-2">🔗</span> Links úteis
+          </h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span><strong>Newsletter do Matt Pocock sobre skills:</strong> <a href="https://www.aihero.dev/s/skills-newsletter" target="_blank" class="text-sky-400 hover:text-sky-300">aihero.dev/s/skills-newsletter</a> — recebe novidades direto da fonte.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span><strong>Repositório do curso:</strong> <a href="https://github.com/inematds/mp-skill" target="_blank" class="text-sky-400 hover:text-sky-300">github.com/inematds/mp-skill</a> — código-fonte das skills e do curso.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Módulo 1.5
+          </a>
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Voltar à Trilha →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Skills For Real Engineers — 2026</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      html.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

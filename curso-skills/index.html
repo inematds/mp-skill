@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills For Real Engineers | Curso PT-BR</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha emerald) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-600 { background-color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500:hover { background-color: #10b981; }
+
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Dark mode - bordas e linhas divisorias mais suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🛠️</span>
+            <span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <!-- Trilha 1 (unica trilha, presente mas inativa pois estamos na landing) -->
+          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-16 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        CURSO PT-BR
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">🛠️ Skills For Real Engineers</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl mb-8">
+        Curso em PT-BR sobre as <strong class="text-emerald-400">skills</strong> do Matt Pocock para Claude Code — fundamentos, workflow e exemplos práticos para engenheiros que querem parar de brigar com o agente e começar a colher resultado.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="curso/trilha1/index.html" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
+          Começar pela Trilha 1: Fundamentos →
+        </a>
+        <a href="#sobre" class="inline-flex items-center justify-center px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg font-semibold transition-colors">
+          Saber mais
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEUDO -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- POR QUE SKILLS EXISTEM -->
+    <section id="sobre" class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Por que skills existem</h2>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Skills são <strong class="text-emerald-400">pacotes de instruções carregadas sob demanda</strong> que o Claude Code (ou Codex) ativa só quando o contexto pede. Em vez de empilhar regras gigantes no system prompt e torcer pra elas serem seguidas, você descreve a habilidade uma vez, em um lugar, e o agente carrega quando precisa.
+      </p>
+      <p class="text-neutral-300 leading-relaxed">
+        O Matt Pocock formalizou esse padrão pra resolver quatro dores muito específicas que todo engenheiro que usa LLM com seriedade encontra. Cada uma delas vira um módulo da trilha.
+      </p>
+    </section>
+
+    <!-- 4 PROBLEMAS -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Os 4 problemas que skills resolvem</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center">1</span>
+            <h3 class="text-lg font-semibold">Desalinhamento</h3>
+          </div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            O agente faz <em>quase</em> o que você quer, mas com convenções erradas: nomes de variável, estilo de teste, padrão de commit. Skills travam o "como" antes do agente decidir sozinho.
+          </p>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center">2</span>
+            <h3 class="text-lg font-semibold">Verbosidade</h3>
+          </div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            Você reexplica as mesmas regras toda sessão. Uma skill bem-feita mata esse loop — basta o trigger certo e ela carrega tudo de uma vez.
+          </p>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center">3</span>
+            <h3 class="text-lg font-semibold">Código quebrado</h3>
+          </div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            O agente gera código que <em>parece</em> certo mas não roda — falta validação, falta type check, falta o passo de teste. Skills codificam o checklist de qualidade.
+          </p>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center">4</span>
+            <h3 class="text-lg font-semibold">Ball of mud</h3>
+          </div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            CLAUDE.md vira um arquivão de 2000 linhas, ninguém lê inteiro e nada é seguido. Skills quebram esse monolito em peças carregadas só quando relevantes.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PUBLICO ALVO + PRE REQUISITOS + O QUE APRENDE -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Para quem é este curso</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+            <span class="mr-2">👥</span> Público-alvo
+          </h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Engenheiros usando Claude Code ou Codex no dia a dia</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Time líderes que querem padronizar workflow com LLM</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Quem já tentou CLAUDE.md e ficou frustrado com o resultado</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+            <span class="mr-2">📋</span> Pré-requisitos
+          </h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Conta no Claude Code (ou Codex CLI) instalada</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Confortável com linha de comando e Git</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Já ter feito ao menos uma sessão real com agente</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+            <span class="mr-2">🎯</span> O que você vai aprender
+          </h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Anatomia de uma skill: SKILL.md, triggers, escopo</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Como escrever descrições que disparam no momento certo</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Workflow do Matt: do esboço à skill publicada</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400 mt-1">•</span>
+              <span>Exemplos reais: handoff, code review, debugging</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA TRILHA 1 -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <div class="flex items-center space-x-3 mb-4">
+          <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">
+            TRILHA 1
+          </span>
+          <span class="text-xs text-neutral-500">Disponível agora</span>
+        </div>
+        <h2 class="text-2xl font-bold mb-3">🌱 Fundamentos de Skills</h2>
+        <p class="text-neutral-300 mb-6 leading-relaxed max-w-3xl">
+          A primeira trilha cobre o essencial: o que é uma skill, como o agente decide carregar uma, a anatomia do <code class="text-emerald-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">SKILL.md</code>, e o workflow ponta-a-ponta de criar, testar e versionar a sua primeira skill.
+        </p>
+        <a href="curso/trilha1/index.html" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
+          Entrar na Trilha 1 →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Skills For Real Engineers — Curso PT-BR · 2026</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>
