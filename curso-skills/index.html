@@ -128,8 +128,8 @@
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="curso/trilha1/index.html" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
-          Começar pela Trilha 1: Fundamentos →
+        <a href="#trilhas" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
+          Ver as 3 trilhas →
         </a>
         <a href="#sobre" class="inline-flex items-center justify-center px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg font-semibold transition-colors">
           Saber mais
@@ -148,7 +148,7 @@
         Skills são <strong class="text-emerald-400">pacotes de instruções carregadas sob demanda</strong> que o Claude Code (ou Codex) ativa só quando o contexto pede. Em vez de empilhar regras gigantes no system prompt e torcer pra elas serem seguidas, você descreve a habilidade uma vez, em um lugar, e o agente carrega quando precisa.
       </p>
       <p class="text-neutral-300 leading-relaxed">
-        O Matt Pocock formalizou esse padrão pra resolver quatro dores muito específicas que todo engenheiro que usa LLM com seriedade encontra. Cada uma delas vira um módulo da trilha.
+        O Matt Pocock formalizou esse padrão pra resolver quatro dores muito específicas que todo engenheiro que usa LLM com seriedade encontra. Este curso cobre tudo em <strong class="text-emerald-400">3 trilhas</strong>: fundamentos, anatomia do repositório e uso avançado.
       </p>
     </section>
 
@@ -273,22 +273,65 @@
       </div>
     </section>
 
-    <!-- CTA TRILHA 1 -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <div class="flex items-center space-x-3 mb-4">
-          <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">
-            TRILHA 1
+    <!-- TRILHAS DO CURSO -->
+    <section id="trilhas" class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">As 3 trilhas do curso</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- TRILHA 1 -->
+        <a href="curso/trilha1/index.html" class="block bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-6 hover:border-emerald-500/60 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">
+              TRILHA 1
+            </span>
+            <span class="text-xs text-neutral-500">6 módulos</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">🌱 Fundamentos</h3>
+          <p class="text-sm text-emerald-400 font-medium mb-3">Os 4 problemas que matam projetos com agentes</p>
+          <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+            O essencial: grilling, linguagem ubíqua (<code class="text-emerald-400 bg-dark-700 px-1 rounded text-xs">CONTEXT.md</code>), TDD com agente, arquitetura saudável e o workflow ponta-a-ponta.
+          </p>
+          <span class="inline-flex items-center text-emerald-400 text-sm font-semibold">
+            Entrar na Trilha 1 →
           </span>
-          <span class="text-xs text-neutral-500">Disponível agora</span>
-        </div>
-        <h2 class="text-2xl font-bold mb-3">🌱 Fundamentos de Skills</h2>
-        <p class="text-neutral-300 mb-6 leading-relaxed max-w-3xl">
-          A primeira trilha cobre o essencial: o que é uma skill, como o agente decide carregar uma, a anatomia do <code class="text-emerald-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">SKILL.md</code>, e o workflow ponta-a-ponta de criar, testar e versionar a sua primeira skill.
-        </p>
-        <a href="curso/trilha1/index.html" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
-          Entrar na Trilha 1 →
         </a>
+
+        <!-- TRILHA 2 -->
+        <a href="curso/trilha2/index.html" class="block bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 hover:border-blue-500/60 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">
+              TRILHA 2
+            </span>
+            <span class="text-xs text-neutral-500">3 módulos</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">📦 Sobre o Repositório</h3>
+          <p class="text-sm text-blue-400 font-medium mb-3">Como o mp-skill está organizado e como contribuir</p>
+          <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+            Origem do projeto, filosofia (small, composable, adaptable), estrutura de pastas (<code class="text-blue-400 bg-dark-700 px-1 rounded text-xs">engineering/</code>, <code class="text-blue-400 bg-dark-700 px-1 rounded text-xs">productivity/</code>, <code class="text-blue-400 bg-dark-700 px-1 rounded text-xs">misc/</code>) e instalação via <code class="text-blue-400 bg-dark-700 px-1 rounded text-xs">skills.sh</code>.
+          </p>
+          <span class="inline-flex items-center text-blue-400 text-sm font-semibold">
+            Entrar na Trilha 2 →
+          </span>
+        </a>
+
+        <!-- TRILHA 3 -->
+        <a href="curso/trilha3/index.html" class="block bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 hover:border-purple-500/60 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full">
+              TRILHA 3
+            </span>
+            <span class="text-xs text-neutral-500">3 módulos</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">🧩 Uso Avançado</h3>
+          <p class="text-sm text-purple-400 font-medium mb-3">Compor, customizar e integrar com outros agentes</p>
+          <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+            Padrões de composição de skills, customização de templates, forks vs overrides, e integração cross-runtime (Claude Code, Codex, MCP, CI/CD).
+          </p>
+          <span class="inline-flex items-center text-purple-400 text-sm font-semibold">
+            Entrar na Trilha 3 →
+          </span>
+        </a>
+
       </div>
     </section>
 
