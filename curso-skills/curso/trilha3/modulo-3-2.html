@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.2 - Customizando skills | Curso de Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Bordas dark suavizadas */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Light mode - base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha purple) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .bg-purple-900\/20 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .bg-purple-900\/30 { background-color: rgba(124, 58, 237, 0.10); }
+    html:not(.dark) .bg-purple-900\/40 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+
+    /* Light mode - emerald (boxes positivos) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+
+    /* Light mode - blue (boxes de dados) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+
+    /* Light mode - red (boxes de erro) */
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+
+    /* Light mode - gradientes off */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Code box */
+    .code-box {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    html:not(.dark) .code-box { background-color: #0f172a; color: #e2e8f0; }
+    .code-box .c-key { color: #c084fc; }
+    .code-box .c-str { color: #86efac; }
+    .code-box .c-cmt { color: #94a3b8; font-style: italic; }
+    .code-box .c-add { color: #86efac; }
+    .code-box .c-del { color: #fca5a5; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">Curso de Skills</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Criando Skills</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Customizando</span>
+          </a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Customizando Skills</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.2</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.2
+      </span>
+      <h3 class="text-2xl font-bold mb-2">🛠️ Customizando skills</h3>
+      <p class="text-lg text-neutral-400 max-w-3xl mb-2">
+        Pegue a skill, faça sua.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">9</div>
+          <div class="text-xs text-neutral-400">Secoes</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Intermediario</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- SECAO 1: Por que customizar -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎯 Por que customizar</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Uma skill instalada direto do repositorio publico ja funciona — mas funciona <strong class="text-purple-400">de forma genérica</strong>. Ela nao conhece o seu cliente, o seu vocabulario, o seu stack, as suas regras de compliance. O salto de qualidade entre uma skill <em>boa</em> e uma skill <em>excelente</em> esta em uma camada fina: o domínio que voce injeta nela.
+      </p>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Customizar uma skill nao é refazer ela. É pegar uma base que ja resolve o problema generico (revisar codigo, gerar documentacao, planejar feature) e adicionar as 5–10 perguntas, 3 termos tecnicos e 2 regras de negocio que transformam a skill em uma colega de equipe que <strong class="text-purple-400">fala o idioma da sua empresa</strong>.
+      </p>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Skill generica vira otima quando voce carrega ela com o <strong>vocabulario do seu dominio</strong>. Ex: a skill <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">code-review</code> generica acha bug de logica; a versao customizada para um time fiscal acha tambem <em>"esta calculando ICMS sem considerar substituicao tributaria"</em>. Mesma estrutura, contexto novo, valor 10x.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Skill adaptada ao seu dominio</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Conhece termos da empresa (siglas, produtos, equipes)</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Faz perguntas especificas do seu negocio</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Trigger se ativa nos contextos certos</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Reaproveita logica e workflow do upstream</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Mantem updates da comunidade quando quiser</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Skill out of the box</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>Faz perguntas genericas que voce ja respondeu</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>Nao reconhece termos do seu dominio</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>Trigger ativa em contextos errados (ou nunca ativa)</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>Resultado precisa de muita correcao manual depois</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <span>Pode entrar em conflito com regras internas (compliance)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECAO 2: Anatomia detalhada SKILL.md -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔍 Anatomia detalhada de uma SKILL.md</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes de customizar, voce precisa enxergar a anatomia. Toda skill tem 3 camadas: o <strong class="text-purple-400">frontmatter YAML</strong> (metadados de ativacao), o <strong class="text-purple-400">corpo em Markdown</strong> (instrucoes para o agente) e, opcionalmente, <strong class="text-purple-400">arquivos de referencia</strong> em <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">references/</code>. A maior parte das customizacoes acontece nas duas primeiras.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📄</span> SKILL.md completo (modelo de referencia)
+        </h3>
+        <pre class="code-box"><span class="c-key">---</span>
+<span class="c-key">name:</span> <span class="c-str">minha-skill</span>
+<span class="c-key">description:</span> <span class="c-str">Use when X happens. Triggers: keyword1, keyword2.</span>
+<span class="c-key">---</span>
+
+<span class="c-cmt"># Skill Body</span>
+
+<span class="c-cmt">## When to use</span>
+
+Descreva os cenarios onde o agente DEVE carregar esta skill.
+Inclua exemplos de frases do usuario que devem ativar.
+
+<span class="c-cmt">## Workflow</span>
+
+1. Read the relevant project files
+2. Ask the domain-specific questions in references/QUESTIONS.md
+3. Produce the output document at docs/output.md
+4. Validate against the checklist in references/CHECKLIST.md
+
+<span class="c-cmt">## Output format</span>
+
+Sempre devolva um resumo em 3 bullets + caminho do arquivo gerado.</pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cada parte tem um papel diferente:
+      </p>
+
+      <ul class="space-y-3 text-neutral-300 mb-6">
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">name</strong> — identificador unico. Usado pelo agente internamente e por voce no terminal (<code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">/minha-skill</code>).</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">description</strong> — o campo mais critico. É o que o agente lê pra decidir se carrega a skill ou nao. Triggers ruins = skill morta.</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">When to use</strong> — cenarios em prosa. Reforça os triggers e adiciona contexto.</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">Workflow</strong> — passos numerados. É o roteiro que o agente segue.</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">Output format</strong> — define o formato de saida. Sem isso o agente improvisa.</span>
+        </li>
+      </ul>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> O campo que decide tudo
+        </h3>
+        <p class="text-neutral-300">
+          O <code class="text-primary bg-dark-700 px-1.5 py-0.5 rounded text-sm">description</code> é o gatilho. Se ele for vago, sua skill nunca vai ser ativada — mesmo com workflow brilhante. Antes de customizar workflow, customize <strong>description</strong>. É a porta de entrada.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECAO 3: Triggers e descriptions eficazes -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎣 Triggers e descriptions eficazes</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A description ideal tem 3 partes: <strong class="text-purple-400">quando ativar</strong> (cenario em prosa), <strong class="text-purple-400">triggers explicitos</strong> (palavras-chave) e, opcionalmente, <strong class="text-purple-400">contra-indicacoes</strong> (quando NAO ativar). Esse formato reduz drasticamente falso positivo e falso negativo.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Description vaga</h4>
+          <p class="text-neutral-300 text-sm mb-3">"Ajuda com código"</p>
+          <p class="text-neutral-400 text-sm">
+            Ativa em <em>qualquer</em> conversa sobre programacao. Resultado: skill carregada o tempo todo, sem foco. O agente nao sabe quando ela é util de verdade.
+          </p>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Description especifica</h4>
+          <p class="text-neutral-300 text-sm mb-3">"Use ao debugar bugs intermitentes em pipelines async. Triggers: race condition, flaky test, retry storm, intermitente."</p>
+          <p class="text-neutral-400 text-sm">
+            Ativa so quando o problema é desse tipo. O agente carrega skills focadas e o ruido cai.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔧</span> 3 antes/depois reais
+        </h3>
+        <pre class="code-box"><span class="c-cmt"># Exemplo 1 — Skill de revisao de PR</span>
+<span class="c-del">description: Revisa pull requests</span>
+<span class="c-add">description: Use ao revisar PRs em monorepo TypeScript com Turborepo.
+Triggers: revisar PR, code review, analisar diff, checar mudancas.
+NAO usar para revisao de docs ou changelog.</span>
+
+<span class="c-cmt"># Exemplo 2 — Skill de migration SQL</span>
+<span class="c-del">description: Cria migrations de banco</span>
+<span class="c-add">description: Use ao criar/ajustar migrations Postgres com Prisma
+em ambiente multi-tenant. Triggers: migration, alter table,
+adicionar coluna, schema change, prisma migrate.</span>
+
+<span class="c-cmt"># Exemplo 3 — Skill de checklist de compliance</span>
+<span class="c-del">description: Ajuda com compliance</span>
+<span class="c-add">description: Use antes de fazer deploy em ambiente que processa
+dados de cartao (PCI-DSS). Triggers: deploy, release, producao,
+pagamento, cartao, PCI. Bloqueia o deploy se faltar item.</span></pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Observe o padrao: cada description virou uma <strong class="text-purple-400">frase + lista de triggers + opcional bloqueio</strong>. Esse e o formato que o agente usa melhor para decidir ativacao.
+      </p>
+    </section>
+
+    <!-- SECAO 4: Editando templates internos -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">✏️ Editando templates internos</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Muita skill carrega <strong class="text-purple-400">templates</strong>: arquivos em <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">references/</code> ou <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">templates/</code> com perguntas, checklists ou modelos de documento. Customizar uma skill geralmente significa editar esses arquivos — nao a SKILL.md em si.
+      </p>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Exemplo: a skill <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">/grill-with-docs</code> usa um arquivo <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">QUESTIONS.md</code> com perguntas genericas pra desafiar seu plano. Pra um time que trabalha com regulacao fiscal brasileira, essas perguntas sao insuficientes. Voce <strong>adiciona</strong> as perguntas do dominio fiscal sem mexer no resto.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Editando references/QUESTIONS.md
+        </h3>
+        <pre class="code-box"><span class="c-cmt"># QUESTIONS.md (template original)</span>
+
+<span class="c-cmt">## Architecture</span>
+- Por que essa solucao e nao outra?
+- Quais alternativas voce considerou?
+- O que acontece se a carga 10x?
+
+<span class="c-cmt">## Data</span>
+- Como esses dados sao persistidos?
+- Qual o owner do schema?
+
+<span class="c-add"><span class="c-cmt">## Fiscal (BR) — adicionado pelo time</span>
+- Esta operacao gera fato gerador de ICMS?
+- Tem substituicao tributaria (ICMS-ST) envolvida?
+- Estado de origem e destino sao os mesmos? Se nao,
+  qual a aliquota interestadual aplicavel?
+- O CFOP escolhido bate com a natureza da operacao?
+- Existe regime especial (Simples, MEI, Lucro Real)
+  que muda o calculo?
+- Como o XML da NFe vai refletir essa mudanca?</span></pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Note que voce <strong class="text-purple-400">acrescenta</strong>, nao remove. Mantem o que veio do upstream (boas praticas gerais de arquitetura e dados) e <strong>injeta o conhecimento de dominio</strong>. Assim, quando o time fiscal usa <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">/grill-with-docs</code>, ele recebe um interrogatorio que cobre <em>tanto</em> arquitetura geral <em>quanto</em> regras fiscais brasileiras.
+      </p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Onde editar
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>references/*.md</strong> — Perguntas, checklists, dicionarios de termos.</li>
+          <li><strong>templates/*.md</strong> — Modelos de documento que a skill preenche.</li>
+          <li><strong>SKILL.md (workflow)</strong> — So edite se a sequencia de passos mudou.</li>
+          <li><strong>SKILL.md (description)</strong> — Edite SEMPRE que adicionar novos triggers de dominio.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECAO 5: Forks vs overrides locais -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🍴 Forks vs overrides locais</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Duas estrategias dominam no mundo real: <strong class="text-purple-400">forkar o repo inteiro</strong> de skills (voce vira dono de tudo) ou <strong class="text-purple-400">override local</strong> em <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.claude/skills/</code> (voce mantem o upstream limpo e sobrescreve so o que precisa). Cada uma tem trade-off claro.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Fork do repo inteiro</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Controle total: pode mudar qualquer skill</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Versionamento unico, historico claro</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Bom pra times grandes (CI valida tudo)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Atualizar com upstream é trabalho recorrente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Conflitos de merge podem apilhar</span></li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Override local em ~/.claude/skills/</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Upstream continua atualizando sozinho</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Voce versiona so o que customizou</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Otimo pra individuo ou time pequeno</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Override pode conflitar quando upstream muda estrutura</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Compartilhar entre maquinas exige sync manual ou repo paralelo</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A escolha quase nunca é binaria — é um <strong class="text-purple-400">caminho de decisao</strong> baseado em quantas skills voce muda e quao critico é manter sync com a comunidade.
+      </p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Voce customiza 1–3 skills?</h4>
+            <p class="text-sm text-neutral-400 mb-3">Caso individual ou time pequeno</p>
+            <p class="text-neutral-300 text-sm">Use <strong class="text-purple-400">override local</strong>. Copia a SKILL.md para <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.claude/skills/nome-skill/</code> e edita. Upstream segue independente.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Voce customiza 5+ skills e tem time?</h4>
+            <p class="text-sm text-neutral-400 mb-3">Compartilhamento e padronizacao importam</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-purple-400">Fork</strong> do repo + repositorio interno. Time inteiro consome a mesma versao customizada. CI roda checagens de qualidade.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Voce precisa de updates frequentes do upstream?</h4>
+            <p class="text-sm text-neutral-400 mb-3">A comunidade evolui rapido a base</p>
+            <p class="text-neutral-300 text-sm">Use <strong class="text-purple-400">override local</strong> com <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">git pull</code> regular no upstream. Override absorve so o que voce mudou — o resto se atualiza sozinho.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Voce mudou o workflow inteiro?</h4>
+            <p class="text-sm text-neutral-400 mb-3">A skill virou outra coisa</p>
+            <p class="text-neutral-300 text-sm">Considere <strong class="text-purple-400">criar skill nova</strong> (modulo 3.3). Customizacao tem limite — quando o workflow muda muito, é mais limpo nascer skill propria.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECAO 6: Versionamento com git -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🌿 Versionamento com git</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Customizacao sem versionamento é perda de tempo. Em algum momento voce vai querer voltar atras, comparar versoes ou compartilhar com o time. A pratica que funciona melhor: <strong class="text-purple-400">branch separado para customizacoes + rebase periodico com upstream</strong>.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚙️</span> Setup inicial — fluxo completo
+        </h3>
+        <pre class="code-box"><span class="c-cmt"># 1. Clone o repo de skills (publico ou fork do time)</span>
+git clone https://github.com/seu-org/skills.git
+cd skills
+
+<span class="c-cmt"># 2. Crie um branch para suas customizacoes do dominio</span>
+git checkout -b custom/fiscal-br
+
+<span class="c-cmt"># 3. Customize as skills (edite SKILL.md, references/, etc)</span>
+$EDITOR grill-with-docs/references/QUESTIONS.md
+
+<span class="c-cmt"># 4. Commit com mensagem que explica O QUE de dominio mudou</span>
+git add grill-with-docs/
+git commit -m "grill-with-docs: adiciona perguntas fiscais BR (ICMS-ST, CFOP)"
+
+<span class="c-cmt"># 5. Periodicamente, pegue updates do upstream</span>
+git fetch origin main
+git rebase origin/main
+
+<span class="c-cmt"># 6. Se houver conflito, resolva preservando seu dominio</span>
+<span class="c-cmt">#    Em geral conflitos sao em paragrafos de exemplo,</span>
+<span class="c-cmt">#    nao em estrutura — facil de resolver.</span>
+
+<span class="c-cmt"># 7. Empurre para o seu fork ou repo do time</span>
+git push origin custom/fiscal-br --force-with-lease</pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Tres regras que evitam dor:
+      </p>
+
+      <ul class="space-y-3 text-neutral-300 mb-6">
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">Commits pequenos por dominio.</strong> "adiciona perguntas fiscais" é um commit; "ajusta workflow do grill" é outro. Faz rebase ser barato.</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">Rebase, nao merge.</strong> Mantem historico linear; quando voce volta no log, ve exatamente quais skills voce customizou em ordem.</span>
+        </li>
+        <li class="flex items-start space-x-2">
+          <span class="text-purple-400 mt-1">•</span>
+          <span><strong class="text-purple-400">Tag de versao quando estabilizar.</strong> <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">git tag fiscal-v1.0</code>. Da pra rollback rapido se uma customizacao der ruim.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECAO 7: Exemplo completo customizando grill-with-docs -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">7</span>
+        <h2 class="text-2xl font-bold">🧪 Exemplo completo: customizando /grill-with-docs</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Vamos juntar tudo em um caso real. Voce é tech lead em uma fintech brasileira. A skill <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">/grill-with-docs</code> da <em>context-mode</em> faz um interrogatorio bom no plano antes de codar, mas nao conhece compliance fiscal. Vamos customizar passo a passo.
+      </p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Copia a skill para o override local</h4>
+            <p class="text-neutral-300 text-sm">Trazemos a estrutura completa pra <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.claude/skills/</code> renomeando para isolar a versao fiscal.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Adiciona secao "Domain Questions"</h4>
+            <p class="text-neutral-300 text-sm">No <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">references/QUESTIONS.md</code>, acrescenta o bloco fiscal sem remover nada do generico.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Atualiza description com triggers fiscais</h4>
+            <p class="text-neutral-300 text-sm">No <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">SKILL.md</code>, inclui palavras-chave de dominio (ICMS, CFOP, NFe) pra ativacao certa.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold mb-2">Testa e versiona</h4>
+            <p class="text-neutral-300 text-sm">Roda em um plano real, confirma que o agente faz as perguntas fiscais, e commita no branch <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">custom/fiscal-br</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📂</span> Diff completo da customizacao
+        </h3>
+        <pre class="code-box"><span class="c-cmt"># Passo 1: copia para override local</span>
+mkdir -p ~/.claude/skills/grill-with-docs-fiscal
+cp -r ./grill-with-docs/* ~/.claude/skills/grill-with-docs-fiscal/
+
+<span class="c-cmt"># Passo 2: SKILL.md — antes e depois</span>
+<span class="c-key">---</span>
+<span class="c-key">name:</span> grill-with-docs-fiscal
+<span class="c-del">description: Grilling session that challenges your plan
+  against the existing domain model.</span>
+<span class="c-add">description: Grilling session that challenges your plan
+  against the domain model AND Brazilian fiscal rules.
+  Triggers: grill, desafiar plano, plano fiscal, ICMS,
+  ICMS-ST, CFOP, NFe, substituicao tributaria, fiscal BR.
+  NAO usar para revisao puramente de UI/frontend.</span>
+<span class="c-key">---</span>
+
+<span class="c-cmt"># Passo 3: references/QUESTIONS.md — adiciona secao</span>
+<span class="c-add">## Domain Questions — Fiscal BR
+
+### Operacao
+- Esta operacao gera fato gerador de ICMS?
+- Tem ICMS-ST (substituicao tributaria)?
+- Existe DIFAL entre estados envolvidos?
+- O CFOP escolhido bate com a natureza da operacao?
+
+### Regime
+- Cliente esta em Simples Nacional, Lucro Real ou Presumido?
+- Tem regime especial (RETID, Reintegra, Zona Franca)?
+
+### Documento fiscal
+- Como NFe vai refletir a mudanca?
+- Precisa de carta de correcao para historico?
+- Vai impactar SPED Fiscal ou EFD-Contribuicoes?
+
+### Compliance
+- A regra esta no nosso parecer juridico fiscal vigente?
+- Quem é o owner contabil para validar?</span>
+
+<span class="c-cmt"># Passo 4: commit no branch de customizacoes</span>
+cd ~/skills-fork
+git checkout -b custom/fiscal-br
+git add grill-with-docs-fiscal/
+git commit -m "grill-with-docs-fiscal: customiza com regras fiscais BR
+
+- adiciona triggers ICMS, ICMS-ST, CFOP, NFe
+- adiciona secao Domain Questions com 15 perguntas fiscais
+- mantem questoes genericas de arquitetura do upstream"</pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Resultado: quando voce ou alguem do time roda <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">/grill-with-docs-fiscal</code> num plano que envolve emissao de NFe, o agente passa pelas <strong>15 perguntas fiscais</strong> alem das genericas. O plano que sai dali ja considerou substituicao tributaria, DIFAL e SPED — coisa que a skill generica jamais ia perguntar.
+      </p>
+    </section>
+
+    <!-- SECAO 8: Compartilhando customizacoes com o time -->
+    <section id="topico-8" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">8</span>
+        <h2 class="text-2xl font-bold">👥 Compartilhando customizacoes com o time</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Customizacao individual é bom; <strong class="text-purple-400">customizacao compartilhada é multiplicador</strong>. Quando o time inteiro usa a mesma versao customizada das skills, as decisoes ficam consistentes — todo PR é revisado com o mesmo rigor, todo plano passa pelo mesmo grill.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Monorepo de skills do time</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Uma fonte da verdade, versionada</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>CI valida estrutura (frontmatter, secoes obrigatorias)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Onboarding novo: <code class="text-purple-400 bg-dark-700 px-1 rounded text-xs">git clone</code> e pronto</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Reviews em PR garantem qualidade da skill</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Time inteiro pensa igual em areas criticas</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Cada um na sua maquina</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Drift: cada dev tem versao ligeiramente diferente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Conhecimento fica preso na maquina de quem customizou</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Onboarding: novo dev nao herda nada</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem CI, sem revisao, sem qualidade garantida</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Decisoes do agente variam entre devs (mesmo plano, perguntas diferentes)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Sincronizacao no monorepo do time
+        </h3>
+        <pre class="code-box"><span class="c-cmt"># Repo: github.com/empresa/skills-team</span>
+
+<span class="c-cmt"># Dev novo: instala todas as skills do time</span>
+git clone git@github.com:empresa/skills-team.git ~/.claude/skills
+
+<span class="c-cmt"># Dev existente: pega atualizacoes</span>
+cd ~/.claude/skills
+git pull origin main
+
+<span class="c-cmt"># Customizou algo? Manda PR para o monorepo do time</span>
+git checkout -b feat/grill-fiscal-novas-perguntas
+$EDITOR grill-with-docs-fiscal/references/QUESTIONS.md
+git commit -m "grill-fiscal: 3 perguntas sobre EFD-Reinf"
+git push origin feat/grill-fiscal-novas-perguntas
+gh pr create --fill</pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Esse fluxo transforma cada melhoria individual em ativo do time. Quando alguem descobre que falta uma pergunta importante, é PR — nao um arquivo na maquina dele que ninguem mais vai usar.
+      </p>
+    </section>
+
+    <!-- SECAO 9: Quando criar skill nova vs customizar -->
+    <section id="topico-9" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">9</span>
+        <h2 class="text-2xl font-bold">🤔 Quando criar skill nova vs customizar</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nem toda necessidade é customizacao. As vezes o que voce precisa é uma skill <strong class="text-purple-400">nova</strong> — o workflow é tao diferente que estender uma existente fica pior do que comecar do zero. Quatro perguntas resolvem essa duvida.
+      </p>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🧭</span> As 4 perguntas
+        </h3>
+        <ol class="space-y-3 text-neutral-300 list-decimal pl-6">
+          <li><strong class="text-primary">O workflow (sequencia de passos) é o mesmo?</strong> Se sim → customizar. Se o roteiro de execucao muda completamente → skill nova.</li>
+          <li><strong class="text-primary">O output final tem o mesmo formato?</strong> Se sim → customizar. Se voce esta gerando um artefato diferente (codigo vs documento vs json) → skill nova.</li>
+          <li><strong class="text-primary">Os triggers se sobrepoem com a skill base?</strong> Se sim → customizar (mesmo trigger, mais contexto). Se sao triggers totalmente novos → skill nova.</li>
+          <li><strong class="text-primary">Voce esta adicionando &lt;30% de conteudo?</strong> Se sim → customizar. Se voce vai reescrever metade do SKILL.md → skill nova (e mais limpo).</li>
+        </ol>
+        <p class="text-neutral-300 mt-4 text-sm">
+          Regra de bolso: <strong class="text-primary">3+ "skill nova" nas respostas</strong> = pare de customizar e crie do zero. Voce vai sofrer menos no longo prazo.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECAO 10: Exercicio pratico -->
+    <section id="topico-10" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">10</span>
+        <h2 class="text-2xl font-bold">🏋️ Exercicio pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de colocar a mao. O exercicio é simples e curto, mas é o que separa quem so leu de quem realmente aprendeu a customizar.
+      </p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Passo a passo
+        </h3>
+        <ol class="space-y-3 text-neutral-300 list-decimal pl-6">
+          <li><strong class="text-blue-400">Escolha 1 skill</strong> que voce usa pelo menos 1x por semana.</li>
+          <li><strong class="text-blue-400">Identifique 1 ponto</strong> onde ela "nao conhece seu dominio" — uma pergunta generica demais, um trigger que pega contexto errado, ou um template sem termos do seu trabalho.</li>
+          <li><strong class="text-blue-400">Copie</strong> a SKILL.md para <code class="text-purple-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.claude/skills/</code>.</li>
+          <li><strong class="text-blue-400">Customize</strong> o ponto que voce identificou (description, references/* ou workflow).</li>
+          <li><strong class="text-blue-400">Documente o antes/depois</strong>: copie e cole o texto antigo, copie e cole o novo, e descreva em 2 frases o que melhorou.</li>
+          <li><strong class="text-blue-400">Use</strong> a versao nova por 1 semana. Se ajudou, commite e compartilhe. Se nao, ajuste ou volte ao original.</li>
+        </ol>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Onde costuma estar o ponto fraco
+        </h3>
+        <p class="text-neutral-300">
+          Na grande maioria dos casos, o ponto que "nao conhece seu dominio" é uma <strong>pergunta generica em references/</strong>. Comece por la antes de mexer em workflow.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📌</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Skill generica vira otima com vocabulario do dominio</strong>
+              <span class="text-neutral-400"> — adicionar 5–10 perguntas certas vale mais que reescrever workflow.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">A description decide ativacao</strong>
+              <span class="text-neutral-400"> — invista nela antes de customizar qualquer outra coisa.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Edite templates em references/, nao a SKILL.md</strong>
+              <span class="text-neutral-400"> — é onde o conhecimento de dominio mora.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Fork x override local é trade-off claro</strong>
+              <span class="text-neutral-400"> — 1–3 skills = override; 5+ ou time = fork.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Versione com branch separado e rebase</strong>
+              <span class="text-neutral-400"> — historico linear, rollback barato, conflito raro.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Compartilhe no monorepo do time</strong>
+              <span class="text-neutral-400"> — customizacao individual é ok, customizacao do time é multiplicador.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Saiba a hora de parar de customizar</strong>
+              <span class="text-neutral-400"> — 3+ "skill nova" nas 4 perguntas = crie do zero.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Proximo Modulo:</h3>
+          <p class="text-neutral-300">3.3 — Criando skills do zero</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Modulo 3.1
+          </a>
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            Voltar para Trilha
+          </a>
+          <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">
+            Modulo 3.3 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Curso de Skills — 2026</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      html.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

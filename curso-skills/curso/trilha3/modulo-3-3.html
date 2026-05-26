@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.3 — Integração com outros agentes | Skills For Real Engineers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha purple) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .bg-purple-900\/20 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .bg-purple-900\/30 { background-color: rgba(124, 58, 237, 0.10); }
+    html:not(.dark) .bg-purple-900\/40 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) .bg-purple-600 { background-color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500:hover { background-color: #8b5cf6; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+
+    /* Light mode - emerald (Fazer) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+
+    /* Light mode - red (Evitar) */
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+
+    /* Light mode - blue (dados) */
+    html:not(.dark) .text-blue-400 { color: #1d4ed8; }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(29, 78, 216, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(29, 78, 216, 0.25); }
+
+    /* Light mode - hover trilhas */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Dark mode - bordas suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Code box */
+    .code-box { font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🛠️</span>
+            <span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Sobre o Repo</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avançado</span>
+          </a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 — Avançado</a>
+      <span>/</span>
+      <span class="text-purple-400">Módulo 3.3</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MÓDULO 3.3 — FINAL DO CURSO
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔌 Módulo 3.3 — Integração com outros agentes</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        <strong class="text-purple-400">Claude Code, Codex, Cursor — uma skill em todos.</strong> Como escrever skills portáveis, rodar elas em CI/CD, expor via MCP e integrar com outros agentes. O último módulo do curso.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">10</div>
+          <div class="text-xs text-neutral-400">Seções</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">~50</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Prática</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- SEÇÃO 1: Cross-runtime: o problema -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🌐 Cross-runtime: o problema</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Você escreve uma <strong class="text-purple-400">skill</strong> para o Claude Code. Funciona perfeito. Aí seu colega usa Codex e pergunta: "como rodo isso aqui?". Resposta curta: <em>não roda</em>. Resposta longa: cada agente tem sua sintaxe — frontmatter, formato de tools, sistema de permissões. Copiar e colar não basta.
+      </p>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica
+        </h3>
+        <p class="text-neutral-300">
+          Skills são <strong>documentação executável</strong>. A lógica é a mesma em qualquer runtime — o que muda é o <em>envelope</em>: como o agente carrega, ativa e chama tools. Resolver o envelope é o trabalho.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Formato portável (fonte única)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Escreve <strong>uma vez</strong> em formato neutro</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Build emite versões pra cada runtime</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mudança propaga pra todos com um comando</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Testes rodam contra a fonte, não cópias</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Copy-paste entre runtimes</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>3 cópias divergem em 2 semanas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Bug fix em uma, esquecida nas outras</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Frontmatter quebrado por runtime errado</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não tem como testar consistência</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: polyskill — formato portável -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📦 <code class="text-purple-400">polyskill</code> — formato portável</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A skill <code class="text-purple-400">polyskill</code> (presente no repo) resolve o problema do envelope. Você escreve <strong class="text-purple-400">uma fonte única</strong> e ela emite builds específicos pra cada runtime. Pense em "Babel pra skills".
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🗂️</span> Estrutura típica de um <code>polyskill</code>
+        </h3>
+        <pre class="code-box bg-dark-900/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"><code>minha-skill/
+├── source.md              # fonte única (neutra)
+├── polyskill.config.json  # mapeamento de tools
+├── claude-code/           # build pra Claude Code
+│   └── SKILL.md           # frontmatter + Read/Edit/Bash
+├── codex/                 # build pra Codex
+│   └── skill.yaml         # frontmatter Codex + read_file/write_file
+└── tests/
+    └── snapshot.test.ts   # garante paridade entre builds</code></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⚡</span> Tradução automática
+        </h3>
+        <p class="text-neutral-300 mb-3">
+          O <code>polyskill</code> faz três tradutoras essenciais:
+        </p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">→</span><span><strong>Frontmatter:</strong> <code>name/description/tools</code> mapeados pra cada runtime</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">→</span><span><strong>Tools:</strong> <code>Read</code> ↔ <code>read_file</code>, <code>Bash</code> ↔ <code>shell</code></span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">→</span><span><strong>Ativação:</strong> Skill tool (Claude Code) vs activate_skill (Codex)</span></li>
+        </ul>
+      </div>
+
+      <p class="text-neutral-300 leading-relaxed">
+        Vantagem prática: você ajusta um parágrafo na fonte única, roda <code class="text-purple-400">polyskill build</code> e os dois builds saem coerentes. Bug em produção é um <code>git diff</code>, não um <em>"em qual cópia eu fixei isso mesmo?"</em>.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 3: Diferenças entre Claude Code e Codex -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🔀 Diferenças entre Claude Code e Codex</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes de portar uma skill, vale entender <strong>onde</strong> os dois divergem. Spoiler: na superfície são iguais (markdown + frontmatter), no detalhe são bem diferentes.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-700">
+            <tr>
+              <th class="text-left p-4 text-purple-400 font-semibold">Dimensão</th>
+              <th class="text-left p-4 text-purple-400 font-semibold">Claude Code</th>
+              <th class="text-left p-4 text-purple-400 font-semibold">Codex</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-600">
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Tools de arquivo</td>
+              <td class="p-4 text-neutral-300"><code>Read</code>, <code>Edit</code>, <code>Write</code></td>
+              <td class="p-4 text-neutral-300"><code>read_file</code>, <code>write_file</code>, <code>apply_patch</code></td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Execução de shell</td>
+              <td class="p-4 text-neutral-300"><code>Bash</code> com sandbox por permissão</td>
+              <td class="p-4 text-neutral-300"><code>shell</code> com workspace-write/read</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Carregamento de skill</td>
+              <td class="p-4 text-neutral-300">Skill tool (<code>/skill-name</code>) + descrição dispara automático</td>
+              <td class="p-4 text-neutral-300"><code>activate_skill</code> explícito ou prompt-trigger</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Permissões</td>
+              <td class="p-4 text-neutral-300">Allowlist em <code>settings.json</code>, prompt por tool</td>
+              <td class="p-4 text-neutral-300">Modos (suggest / auto-edit / full-auto)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Suporte a MCP</td>
+              <td class="p-4 text-neutral-300">Nativo, configurado em <code>~/.claude/mcp.json</code></td>
+              <td class="p-4 text-neutral-300">Suporte recente, em evolução</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Subagents</td>
+              <td class="p-4 text-neutral-300">Sim (Task tool, agentes paralelos)</td>
+              <td class="p-4 text-neutral-300">Limitado — uma sessão por vez</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-neutral-100">Slash commands</td>
+              <td class="p-4 text-neutral-300">Sim, <code>~/.claude/commands/</code></td>
+              <td class="p-4 text-neutral-300">Sim, mas formato distinto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-neutral-300 leading-relaxed">
+        A regra prática: se sua skill <strong>só lê arquivos e escreve markdown</strong>, ela é trivialmente portável. Se ela <strong>orquestra subagents paralelos com hooks</strong>, vai precisar de adaptação séria — provavelmente vira duas skills.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 4: Chamando skills via MCP -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔗 Chamando skills via MCP</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Em vez de pedir pro outro agente entender seu formato de skill, <strong class="text-purple-400">embrulhe a skill num MCP server</strong>. Qualquer cliente MCP (Claude Code, Codex, Cursor, Cline) pode chamar como tool, sem saber que por trás é uma skill.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🛠️</span> Snippet: skill como endpoint MCP
+        </h3>
+        <pre class="code-box bg-dark-900/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"><code>// mcp-skills-server/index.ts
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { readFileSync } from "fs";
+
+const server = new Server({ name: "skills-bridge", version: "0.1.0" });
+
+server.tool({
+  name: "grill-me",
+  description: "Stress-test a plan adversarially. Returns gaps and risks.",
+  inputSchema: {
+    type: "object",
+    properties: { plan: { type: "string" } },
+    required: ["plan"]
+  },
+  handler: async ({ plan }) => {
+    const skillBody = readFileSync("./skills/grill-me/SKILL.md", "utf8");
+    return runAgentLoop({ system: skillBody, user: plan });
+  }
+});
+
+server.start();</code></pre>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Use case: <strong>skills como API</strong>. Sua skill <code class="text-purple-400">/grill-me</code> vira um endpoint que qualquer agente — ou até seu CI — chama via HTTP/MCP. Centraliza a lógica, evita duplicação.
+      </p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Quando usar MCP vs polyskill
+        </h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong>polyskill:</strong> skill é principalmente <em>documentação</em> — guia o modelo, não executa lógica pesada</li>
+          <li><strong>MCP server:</strong> skill chama APIs externas, mantém estado, ou tem código que você não quer duplicar</li>
+          <li><strong>Híbrido:</strong> polyskill emite a doc, MCP server expõe as tools especializadas</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: Skills em CI/CD -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🤖 Skills em CI/CD</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Skills não precisam ser interativas. Em CI/CD você roda em modo <strong>batch</strong> (não-interativo, com input fixo, output em arquivo). Útil pra revisão automática de PR, geração de docs, validação de migrations.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Funciona em CI</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Skills <strong>determinísticas</strong> com input bem definido</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Saída em arquivo (markdown, JSON)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Tools restritas (Read + Write, sem Bash livre)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Timeout configurado, fallback em caso de erro</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Não funciona em CI</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skills que <strong>perguntam ao usuário</strong> (clarificações)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skills que dependem de estado de sessão local</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skills com TUIs interativas ou prompts</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skills que demoram &gt; 10min (timeout do runner)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Dica importante
+        </h3>
+        <p class="text-neutral-300">
+          Antes de rodar uma skill em CI, teste com <code>--non-interactive</code> localmente. Se ela pede input em algum ponto, ela <strong>vai travar</strong> no runner — e o GitHub Actions cobra os 6h até o timeout.
+        </p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: Exemplo prático — /tdd em GitHub Actions -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🧪 Exemplo prático: <code class="text-purple-400">/tdd</code> em GitHub Actions</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cenário concreto: <strong>quando um PR quebra testes, dispare a skill /tdd automaticamente</strong>. Ela analisa o erro, propõe um fix e abre um commit no próprio PR. O dev acorda no dia seguinte com o build verde.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📄</span> <code>.github/workflows/tdd-loop.yml</code>
+        </h3>
+        <pre class="code-box bg-dark-900/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"><code>name: tdd-loop
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  run-tdd:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run tests (capture failure)
+        id: tests
+        run: npm test || echo "failed=true" &gt;&gt; $GITHUB_OUTPUT
+
+      - name: Run /tdd skill
+        if: steps.tests.outputs.failed == 'true'
+        uses: anthropics/claude-action@v1
+        with:
+          skill: tdd
+          input: "fix failing tests in this PR"
+          allowed-tools: "Read,Edit,Bash(npm test)"
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit fix
+        if: steps.tests.outputs.failed == 'true'
+        run: |
+          git config user.name "tdd-bot"
+          git config user.email "bot@example.com"
+          git add -A
+          git commit -m "fix: /tdd auto-repair" || exit 0
+          git push</code></pre>
+      </div>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Trigger no PR</h4>
+            <p class="text-sm text-neutral-400 mb-3">Roda em cada <code>opened</code> e <code>synchronize</code> (novos commits)</p>
+            <p class="text-neutral-300 text-sm">Capturamos o fluxo desde o início — não esperamos o dev pedir ajuda.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Roda testes e detecta falha</h4>
+            <p class="text-sm text-neutral-400 mb-3">Output <code>failed=true</code> serve de condição pros próximos steps</p>
+            <p class="text-neutral-300 text-sm">Só ativa a skill se de fato algo quebrou — não desperdiça quota de API.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Aciona /tdd com tools restritas</h4>
+            <p class="text-sm text-neutral-400 mb-3"><code>allowed-tools</code> limita a Read, Edit e Bash(npm test) — nada de <code>rm</code> ou <code>curl</code></p>
+            <p class="text-neutral-300 text-sm">A allowlist é o cinto de segurança. Sem ela, a skill teria poder demais num ambiente sem revisão humana.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Commit + push de volta no PR</h4>
+            <p class="text-sm text-neutral-400 mb-3">A correção vira parte da história do PR, com autoria do bot</p>
+            <p class="text-neutral-300 text-sm">O dev revisa o diff humano e o do bot — não um patch fantasma sem contexto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: Integração com Cursor, Aider, Continue -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">7</span>
+        <h2 class="text-2xl font-bold">🧩 Integração com Cursor, Aider, Continue</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cursor, Aider e Continue <strong>não têm</strong> o conceito de skill nativo. Eles têm <em>rules</em>, <em>conventions</em> ou <em>system prompts</em>. A boa notícia: o conteúdo de uma skill cabe perfeitamente nesses formatos.
+      </p>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">📐</span> Estado atual de portabilidade
+        </h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong>Cursor:</strong> arquivos <code>.cursorrules</code> aceitam markdown direto da skill (sem frontmatter)</li>
+          <li><strong>Aider:</strong> usa <code>CONVENTIONS.md</code> ou <code>--read</code> pra carregar contexto</li>
+          <li><strong>Continue:</strong> <code>config.json</code> permite <code>systemMessage</code> com o corpo da skill</li>
+          <li><strong>Cline / Roo Code:</strong> aceita <code>.clinerules</code> em markdown</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Adapter genérico — emite pra qualquer agente
+        </h3>
+        <pre class="code-box bg-dark-900/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"><code>// scripts/sync-skills.ts
+import { readFileSync, writeFileSync } from "fs";
+import { stripFrontmatter } from "./utils";
+
+const skill = readFileSync("./skills/tdd/SKILL.md", "utf8");
+const body = stripFrontmatter(skill);
+
+// Cursor
+writeFileSync(".cursorrules", body);
+
+// Aider
+writeFileSync("CONVENTIONS.md", body);
+
+// Continue
+const config = JSON.parse(readFileSync(".continue/config.json", "utf8"));
+config.systemMessage = body;
+writeFileSync(".continue/config.json", JSON.stringify(config, null, 2));
+
+console.log("✓ skill syncronized to Cursor / Aider / Continue");</code></pre>
+      </div>
+
+      <p class="text-neutral-300 leading-relaxed">
+        Limitação: agentes <em>sem</em> conceito de skill carregam o conteúdo o tempo todo (sem ativação dinâmica). Pra skills curtas, sem problema. Pra skills longas, considere quebrar em rules menores e específicas por contexto.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 8: Skills + MCP servers -->
+    <section id="topico-8" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">8</span>
+        <h2 class="text-2xl font-bold">🎼 Skills + MCP servers</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A composição mais poderosa hoje: <strong class="text-purple-400">skill orquestra, MCP server executa</strong>. A skill guia o modelo no <em>quando</em> e <em>como</em>; o MCP server entrega tools especializadas (DB, GitHub, Figma, Slack).
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🏗️</span> Arquitetura de composição
+        </h3>
+        <pre class="code-box bg-dark-900/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"><code>┌──────────────────────────────────────────────────────────┐
+│                      USUÁRIO                              │
+│                  "/release-notes v2.3"                    │
+└────────────────────────┬─────────────────────────────────┘
+                         │
+                         ▼
+┌──────────────────────────────────────────────────────────┐
+│          SKILL: /release-notes (markdown + frontmatter)   │
+│   "Quando o user pedir release notes:                     │
+│    1. liste commits desde a última tag                    │
+│    2. agrupe por tipo (feat/fix/chore)                    │
+│    3. publique no Slack #releases"                        │
+└──────┬───────────────────┬───────────────────┬───────────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+┌──────────────┐   ┌───────────────┐   ┌──────────────┐
+│ MCP: github  │   │ MCP: linear   │   │ MCP: slack   │
+│ list-commits │   │ get-issues    │   │ post-message │
+└──────────────┘   └───────────────┘   └──────────────┘</code></pre>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Princípio de design
+        </h3>
+        <p class="text-neutral-300 mb-3">
+          A skill é o <strong>roteiro</strong>; o MCP é a <strong>caixa de ferramentas</strong>. Roteiro sem caixa é teoria; caixa sem roteiro é caos.
+        </p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">→</span><span>Skill descreve <strong>quando</strong> usar cada tool MCP</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">→</span><span>MCP server expõe <strong>o que</strong> cada tool faz e seu schema</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">→</span><span>Modelo amarra os dois no <strong>como</strong> da execução</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 9: Limitações atuais -->
+    <section id="topico-9" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">9</span>
+        <h2 class="text-2xl font-bold">🚧 Limitações atuais</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cross-runtime é um <strong>trabalho em andamento</strong>. Algumas coisas já funcionam bem; outras ainda dependem de gambiarra. Mapa honesto do território:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Funciona bem cross-runtime</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Skills declarativas (sem código)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Tools básicas: ler, escrever, executar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>MCP servers (padrão aberto)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Skills curtas (&lt; 200 linhas)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Sync via polyskill / adapters</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Ainda não / com ressalvas</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Subagents paralelos (só Claude Code)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Hooks (PreToolUse, PostToolUse): específicos</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Slash commands com argumentos complexos</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Modelos de permissão divergem bastante</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skills que usam <em>features experimentais</em> de um runtime</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🗺️</span> Roadmap (estado real, não promessas)
+        </h3>
+        <p class="text-neutral-300 mb-3">
+          O Matt mencionou no repo que o objetivo é que <em>"toda skill do curso rode em pelo menos Claude Code e Codex"</em>. Hoje (2026), isso vale pras 80% mais simples. As skills que dependem de subagents paralelos ou hooks pesados ainda são específicas de runtime.
+        </p>
+        <p class="text-neutral-300">
+          Tendência: padronização vai vir do MCP, não de um formato de skill universal. Se sua skill é principalmente um <em>system prompt + tools</em>, ela já é portável hoje.
+        </p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 10: Conclusão do curso -->
+    <section id="topico-10" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">10</span>
+        <h2 class="text-2xl font-bold">🎓 Conclusão do curso</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Você chegou ao fim. Recap das três trilhas, num parágrafo cada — pra fixar o caminho percorrido.
+      </p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">T1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Trilha 1 — Fundamentos: os 4 problemas</h4>
+            <p class="text-sm text-neutral-400 mb-3">Por que skills existem e o que elas resolvem</p>
+            <p class="text-neutral-300 text-sm">Mostramos os 4 problemas que skills resolvem: contexto repetido, prompts difusos, falta de processo replicável e ausência de memória entre sessões. A partir daí, escolher uma skill virou uma decisão racional, não estética.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">T2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Trilha 2 — Sobre o Repo: estrutura e instalação</h4>
+            <p class="text-sm text-neutral-400 mb-3">Como o repositório do Matt Pocock está organizado e como instalar</p>
+            <p class="text-neutral-300 text-sm">Caminhamos pela estrutura <code>skills/</code>, <code>productivity/</code>, <code>engineering/</code>, <code>misc/</code>, e fizemos instalação via plugin do Claude Code. Depois disso, qualquer skill nova encontra seu lugar sem você precisar perguntar.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">T3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Trilha 3 — Avançado: composição, customização, integração</h4>
+            <p class="text-sm text-neutral-400 mb-3">Como ir além do uso básico</p>
+            <p class="text-neutral-300 text-sm">Compomos skills entre si, customizamos pro contexto local do projeto e integramos com outros agentes via MCP e CI/CD. Agora você não <em>usa</em> skills — você <em>constrói</em> com elas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🚀</span> Próximos passos
+        </h3>
+        <p class="text-neutral-300 mb-3">
+          Teoria sem prática vira poeira. <strong>Próximo passo concreto:</strong> escolha um projeto real seu nas próximas 48h e instale 3 skills. Use por uma semana inteira. Note o que economiza e o que falha.
+        </p>
+        <p class="text-neutral-300 mb-3">Depois disso, três caminhos:</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">1.</span><span><strong>Customize:</strong> ajuste o frontmatter, edite o corpo, faça suas próprias</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">2.</span><span><strong>Componha:</strong> encadeie skills (ex: <code>/grill-me</code> + <code>/tdd</code>)</span></li>
+          <li class="flex items-start space-x-2"><span class="text-primary mt-1">3.</span><span><strong>Porte:</strong> use <code>polyskill</code> e leve suas skills pra Codex / Cursor</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8 mb-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">🎯</span> O que você sai sabendo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Reconhecer quando uma skill resolve um problema</strong>
+              <span class="text-neutral-400"> — em vez de escrever um prompt longo do zero toda vez</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Instalar, customizar e versionar skills</strong>
+              <span class="text-neutral-400"> — local, global, por projeto</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Compor skills</strong>
+              <span class="text-neutral-400"> — encadear /grill-me, /tdd, /handoff, etc.</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Portar skills entre agentes</strong>
+              <span class="text-neutral-400"> — Claude Code, Codex, Cursor via polyskill / MCP</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Rodar skills em CI/CD</strong>
+              <span class="text-neutral-400"> — automação real, não só demo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-6">
+          <h3 class="font-semibold text-purple-400 mb-2">Continue aprendendo:</h3>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>📬 Newsletter do Matt Pocock: <a href="https://www.aihero.dev/s/skills-newsletter" target="_blank" class="text-sky-400 hover:text-sky-300">aihero.dev/s/skills-newsletter</a></li>
+            <li>📦 Repositório do curso: <a href="https://github.com/inematds/mp-skill" target="_blank" class="text-sky-400 hover:text-sky-300">github.com/inematds/mp-skill</a></li>
+            <li>🌐 INEMA.CLUB — comunidade brasileira: <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">inema.club</a></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Módulo anterior (3.2)
+          </a>
+          <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">
+            Voltar para a landing 🏁
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Skills For Real Engineers — 2026</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      html.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>
