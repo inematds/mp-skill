@@ -1,3 +1,71 @@
+<p align="center">
+  <img alt="MP SKILL — Skills para agentes de IA" src="assets/readme-hero.png" />
+</p>
+
+# mp-skill — Skills para Agentes de IA (PT-BR)
+
+Fork em português do repositório **[mattpocock/skills](https://github.com/mattpocock/skills)** — uma coleção de skills (slash commands e behaviors) para Claude Code, Codex e outros agentes — com tradução PT-BR e um **curso completo** sobre como usar tudo isso na prática.
+
+> _"Não é sobre 'promptar melhor'. É sobre construir sistemas reutilizáveis de raciocínio."_
+
+---
+
+## 🎓 Curso: Skills For Real Engineers (PT-BR)
+
+Curso completo em português explicando os fundamentos, a estrutura do repositório e o uso avançado das skills. **14 páginas HTML** divididas em 3 trilhas:
+
+| Trilha | Cor | Conteúdo |
+|--------|-----|----------|
+| **T1 — Fundamentos** 🌱 | Emerald | Os 4 problemas que skills resolvem (desalinhamento, verbosidade, código quebrado, ball of mud). 6 módulos sobre grilling, linguagem ubíqua, TDD+diagnose, arquitetura e workflow completo. |
+| **T2 — Sobre o Repositório** 📦 | Blue | Origem do projeto, filosofia, estrutura de pastas e instalação. 3 módulos. |
+| **T3 — Uso Avançado** 🧩 | Purple | Composição de skills, customização e integração cross-runtime (Claude Code, Codex, MCP, CI/CD). 3 módulos. |
+
+**👉 Acesse o curso: [inematds.github.io/mp-skill/curso-skills/](https://inematds.github.io/mp-skill/curso-skills/)**
+
+Os arquivos do curso ficam em [`curso-skills/`](./curso-skills/).
+
+---
+
+## 📂 O que tem neste repositório
+
+| Pasta | Conteúdo |
+|-------|----------|
+| **[`skills/`](./skills/)** | As skills propriamente ditas, organizadas em buckets: `engineering/` (10 skills de código diário), `productivity/` (workflow não-código), `misc/` (uso raro), `personal/`, `in-progress/`, `deprecated/`. |
+| **[`curso-skills/`](./curso-skills/)** | Curso PT-BR em HTML estático no formato INEMA.CLUB — landing + 3 trilhas + 12 módulos. |
+| **[`docs/pt-BR/`](./docs/pt-BR/)** | Tradução PT-BR do README, do CONTEXT.md e índice de todas as skills. |
+| **[`CONTEXT.md`](./CONTEXT.md)** | Linguagem ubíqua do repo — termos canônicos (Issue tracker, Issue, Triage role). |
+| **[`CLAUDE.md`](./CLAUDE.md)** | Convenções do projeto carregadas automaticamente pelo Claude Code. |
+| **[`.claude-plugin/plugin.json`](./.claude-plugin/plugin.json)** | Manifest do plugin pra Claude Code descobrir as skills. |
+
+### Skills disponíveis (resumo)
+
+**Engineering** — `diagnose`, `grill-with-docs`, `triage`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `zoom-out`, `prototype`
+
+**Productivity** — `grill-me`, `handoff`, e outras de workflow
+
+**Misc** — skills mantidas para uso raro
+
+Lista completa traduzida em [`docs/pt-BR/skills-pt-BR.md`](./docs/pt-BR/skills-pt-BR.md).
+
+---
+
+## 🚀 Instalação rápida
+
+```bash
+npx skills@latest add mattpocock/skills
+```
+
+Selecione `/setup-matt-pocock-skills` na lista, depois rode esse comando dentro do seu agente. Detalhes no [Módulo 2.3 do curso](https://inematds.github.io/mp-skill/curso-skills/curso/trilha2/modulo-2-3.html).
+
+---
+
+## 🌐 Versões em outros idiomas
+
+- **🇧🇷 README em PT-BR (estendido):** [`docs/pt-BR/README.pt-BR.md`](./docs/pt-BR/README.pt-BR.md)
+- **🇺🇸 README original em inglês:** seguir abaixo ↓
+
+---
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
