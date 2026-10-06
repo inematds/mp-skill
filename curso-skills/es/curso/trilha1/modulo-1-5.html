@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 1.5 — Arquitectura saludable | Skills For Real Engineers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* Light mode - cores de acento (trilha emerald T1) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .bg-emerald-900\/30 { background-color: rgba(5, 150, 105, 0.10); }
+    html:not(.dark) .bg-emerald-900\/40 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    /* Dark mode - bordas e linhas divisorias mais suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* Code box */
+    .code-box { font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.6; }
+  </style>
+<link href="https://inematds.github.io/mp-skill/curso-skills/curso/trilha1/modulo-1-5.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/en/curso/trilha1/modulo-1-5.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/es/curso/trilha1/modulo-1-5.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-5.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha1/modulo-1-5.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-1-5.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<!-- NAVIGATION -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🛠️</span>
+<span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
+<span class="sm:hidden">T1</span>
+<span class="hidden sm:inline">Fundamentos</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 hover:bg-blue-500/10" href="../trilha2/index.html">
+<span class="sm:hidden">T2</span>
+<span class="hidden sm:inline">Sobre el Repo</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 hover:bg-purple-500/10" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span>
+<span class="hidden sm:inline">Avanzado</span>
+</a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-emerald-400" href="../../index.html">Inicio</a>
+<span>/</span>
+<a class="hover:text-emerald-400" href="index.html">Ruta 1</a>
+<span>/</span>
+<span class="text-emerald-400">Módulo 1.5</span>
+</div>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MÓDULO 1.5
+      </span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏗️ Arquitectura saludable</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Salir de la bola de barro sin refactorizar todo. Identifica puntos de mejora, abórdalos incrementalmente, mantén vivas las decisiones.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">8</div>
+<div class="text-xs text-neutral-400">Secciones</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">35</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Inter</div>
+<div class="text-xs text-neutral-400">Nivel</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Práctica</div>
+<div class="text-xs text-neutral-400">Tipo</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- SEÇÃO 1: Sintomas de ball of mud -->
+<section class="mb-16" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🪣 Síntomas de una bola de lodo</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        "Big ball of mud" es el término arquitectónico para código donde <strong class="text-emerald-400">nada tiene lugar</strong>:
+        responsabilidades mezcladas, dependencias circulares, módulos que crecen por acreción. Lo reconoces por el
+        olor: cada cambio simple se propaga en cascada a tres archivos no relacionados.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Código saludable</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Cada módulo tiene una responsabilidad clara y fácil de nombrar</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Las dependencias fluyen en una dirección (nivel alto → nivel bajo)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Vocabulario coherente entre código, pruebas y documentación</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>La duplicación es una excepción justificada</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Prevés dónde vivirá una nueva feature</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Cambiar una implementación no se filtra a 10 lugares</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Ball of mud</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Helper" / "utils" / "core" gigantes y sin enfoque</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A importa B, que importa A (ciclos)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>El mismo concepto tiene 3 nombres (user / customer / account)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Copiar y pegar con pequeñas modificaciones en varios lugares</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Toda feature nueva requiere un "recorrido" para saber dónde ponerla</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Cambiar una regla requiere buscar en 8 archivos</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">Señales típicas (code smells arquitectónicos)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• <strong>God modules:</strong> un archivo de 2.000 líneas que "todos importan"</li>
+<li>• <strong>Shotgun surgery:</strong> un cambio simple toca 15 archivos</li>
+<li>• <strong>Envidia de funcionalidades:</strong> métodos que modifican más los datos de otra clase que los propios</li>
+<li>• <strong>Magic strings / numbers</strong> dispersos, sin una constante central</li>
+<li>• <strong>Condicionales por tipo:</strong> if/elif gigante que comprueba "type === 'X'"</li>
+<li>• <strong>Wrappers que solo reenvían:</strong> capas que no deciden nada</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Responsabilidad</div><div class="text-xs text-neutral-400">Cada módulo hace una cosa y tiene un buen nombre.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Dirección</div><div class="text-xs text-neutral-400">Dependencias sin ciclos.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Vocabulario</div><div class="text-xs text-neutral-400">Un concepto = un nombre.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Previsibilidad</div><div class="text-xs text-neutral-400">¿Dónde vive una feature nueva? Tú lo sabes.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 2: /improve-codebase-architecture -->
+<section class="mb-16" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🔍 /improve-codebase-architecture</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        El comando <strong class="text-emerald-400">/improve-codebase-architecture</strong> no pide "refactorizar todo".
+        Hace lo más útil: <strong class="text-emerald-400">lista oportunidades de profundización</strong> — puntos donde
+        el código puede quedar significativamente más saludable, ordenados por impacto. El análisis se basa en el
+        <code class="text-emerald-400 text-sm">CONTEXT.md</code> y por los ADR del proyecto, así que las sugerencias respetan
+        lo que ya se decidió.
+      </p>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">⚙️</span> Qué hace el comando
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Lee CONTEXT.md para entender el dominio y el vocabulario del proyecto</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Lee los ADRs para saber qué decisiones arquitectónicas están vigentes</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Recorre la estructura del código buscando señales que contradigan el dominio</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Devuelve una lista priorizada de oportunidades, no un plan de reescritura</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Cada elemento tiene: descripción, impacto estimado, esfuerzo y punto de partida</span></li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-semibold text-neutral-100">Ejemplo de salida</h4>
+<span class="text-xs text-neutral-500">terminal</span>
+</div>
+<pre class="code-box text-neutral-300 overflow-x-auto"><span class="text-emerald-400">$</span> /improve-codebase-architecture
+<span class="text-neutral-500"># 5 deepening opportunities identified (sorted by impact)</span>
+<span class="text-emerald-400">[1] HIGH</span>  src/billing/ — "materialization cascade" lives in 4 modules
+       Impact:  unifica lógica fragmentada, fecha conceito do CONTEXT.md
+       Effort:  2-3 dias  |  Risk: medium
+       Start:   src/billing/cascade.py (extract; ADR-009 references this)
+<span class="text-emerald-400">[2] HIGH</span>  src/utils/helpers.py — 1,847 lines, 23 unrelated functions
+       Impact:  quebra god module; melhora descoberta
+       Effort:  1-2 dias  |  Risk: low (mostly mechanical)
+       Start:   agrupar por consumer; mover; testar
+<span class="text-emerald-400">[3] MED</span>   "customer" vs "user" vs "account" usados intercambiavelmente
+       Impact:  alinha código ao glossário do CONTEXT.md (Sec. 2.3)
+       Effort:  1 dia    |  Risk: low
+       Start:   renomear customer.* (canonical) e atualizar callsites
+<span class="text-emerald-400">[4] MED</span>   ciclo: api/orders → services/inventory → api/orders
+       Impact:  remove ciclo; clarifica direção de dependência
+       Effort:  meio dia |  Risk: low
+       Start:   extract InventoryPort interface
+<span class="text-emerald-400">[5] LOW</span>   tests/ duplica fixtures de billing em 6 arquivos
+       Impact:  reduz manutenção de testes
+       Effort:  2h       |  Risk: very low
+       Start:   conftest.py compartilhado por subdir</pre>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Consejo
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Ejecuta este comando <strong>antes</strong> de planificar el próximo ciclo. Te da una lista honesta de deuda
+          arquitectónica para elegir 1 elemento por sprint, no para abordarlo todo de una vez.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Informado</div><div class="text-xs text-neutral-400">Lee CONTEXT.md y los ADRs.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Priorizado</div><div class="text-xs text-neutral-400">Impacto × esfuerzo.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Accionable</div><div class="text-xs text-neutral-400">Cada elemento tiene un punto de partida.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">No destructivo</div><div class="text-xs text-neutral-400">Sugiere profundizar, no reescribir.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 3: /zoom-out -->
+<section class="mb-16" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🔭 /zoom-out — perspectiva general</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        Hay un patrón de falla común: el agente entra en un archivo, empieza a optimizar una función y, después de
+        20 minutos, está reescribiendo lógica aislada, sin darse cuenta de que <strong class="text-emerald-400">esa función
+        ni siquiera debería existir en este módulo</strong>. <code class="text-emerald-400 text-sm">/zoom-out</code> sirve para
+        esto: obligar al agente a detenerse y pedir contexto de nivel superior antes de continuar.
+      </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Zoom-in inicial (detalle)</h4>
+<p class="text-sm text-neutral-400 mb-3">El agente entra en el archivo X y empieza a editar</p>
+<p class="text-neutral-300 text-sm">
+              Un enfoque estrecho es necesario para hacer el cambio inmediato, pero se convierte en una trampa cuando la función, el archivo,
+              o incluso todo el módulo están en el lugar equivocado. El agente «se hunde» sin preguntar si el problema es mayor.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Zoom-out (panorama)</h4>
+<p class="text-sm text-neutral-400 mb-3">/zoom-out — pide contexto arquitectónico</p>
+<p class="text-neutral-300 text-sm">
+              El comando sube un nivel: ¿cuál es la responsabilidad de este módulo? ¿Qué dice CONTEXT.md? ¿Dónde está esta lógica
+              <em>debería</em> ¿pertenecer? La pregunta correcta cambia de «¿cómo mejorar esta función?» a «¿esta función pertenece
+              aquí?». A menudo, la mejor edición es <strong class="text-emerald-400">mover o eliminar</strong>, no optimizar.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Zoom-in con contexto (detalle con mapa)</h4>
+<p class="text-sm text-neutral-400 mb-3">Vuelves al código, pero con una visión general</p>
+<p class="text-neutral-300 text-sm">
+              Ahora la edición local se guía por la arquitectura. Sabes qué NO hacer (crear nuevo acoplamiento,
+              duplicar la lógica de otro módulo) y qué SÍ hacer (extraer, mover, alinear los nombres con el glosario).
+              El detalle importa, pero está al servicio de la estructura.
+            </p>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Usa /zoom-out cuando…
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• Estás editando el mismo archivo desde hace &gt;15 minutos sin un progreso claro</li>
+<li>• El cambio simple se está convirtiendo en 4 archivos diferentes</li>
+<li>• El agente está "corrigiendo" algo que, en realidad, es síntoma de otro problema</li>
+<li>• Antes de aceptar una sugerencia grande que afecta varios módulos</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Para el foco</div><div class="text-xs text-neutral-400">Divide los detalles en partes pequeñas.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Reposiciona</div><div class="text-xs text-neutral-400">La pregunta correcta, no una respuesta rápida.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Usa CONTEXT.md</div><div class="text-xs text-neutral-400">El dominio como brújula.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Vuelves mejor</div><div class="text-xs text-neutral-400">Zoom-in 2 ≠ zoom-in 1.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 4: Deepening (não rewrite) -->
+<section class="mb-16" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🌱 Oportunidades para profundizar, no reescrituras</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+<strong class="text-emerald-400">Deepening</strong> es un término tomado de Eric Evans (DDD): profundizar en el
+        modelado donde el dominio es más importante, sin descartar lo que ya funciona. Es lo opuesto al impulso de "vamos a
+        reescribir desde cero", que cuesta caro, rara vez cumple lo prometido y descarta todo el aprendizaje
+        incorporado en el código actual.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Reescritura destructiva</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Vamos a desecharlo y rehacerlo con la nueva arquitectura"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Rama paralela de 3-6 meses sin entregar</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pierde casos límite que el código actual ya contempla</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Merge big bang → regresiones silenciosas masivas</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>El equipo se queda atascado en lo nuevo y se retrasa el soporte de lo anterior</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Las lecciones aprendidas (CONTEXT.md, ADRs) se vuelven basura</span></li>
+</ul>
+</div>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Profundización incremental</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Vamos a mejorar 1 oportunidad por sprint, sin dejar de entregar"</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Cada PR es pequeño, fácil de revisar y de integrar</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mantiene los casos límite mientras refina la forma</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Las regresiones aparecen pronto, en cambios pequeños</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>El equipo sigue entregando funcionalidades en paralelo</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>CONTEXT.md y ADRs evolucionan juntos y se convierten en una referencia viva</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">📖</span> Término: deepening
+        </h3>
+<p class="text-neutral-300 text-sm mb-2">
+<strong>Deepening</strong> = profundizar en el modelado del dominio de forma incremental. En vez de reescribir, identificas conceptos que están "torcidos" en el código (ocultos en utils, dispersos, con nombres inadecuados) y los elevas a ciudadanos de primera clase, una extracción a la vez.
+        </p>
+<p class="text-neutral-300 text-sm">
+          Origen: <em>Domain-Driven Design</em> (Eric Evans, 2003) — "deepening the model".
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Incremental</div><div class="text-xs text-neutral-400">1 mejora por sprint.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Sin ramas largas</div><div class="text-xs text-neutral-400">Merge continuo.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Conserva</div><div class="text-xs text-neutral-400">Los edge cases ya están dominados.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Acumulativo</div><div class="text-xs text-neutral-400">La arquitectura mejora visiblemente.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 5: CONTEXT.md como guia -->
+<section class="mb-16" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🧭 CONTEXT.md como guía</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        O <code class="text-emerald-400 text-sm">CONTEXT.md</code> no es solo onboarding: es
+        <strong class="text-emerald-400">la pauta arquitectónica</strong> del proyecto. El lenguaje del dominio que
+        describe es lo que orienta dónde refactorizar: los módulos que implementan conceptos centrales merecen más atención
+        arquitectónica que la infraestructura genérica.
+      </p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<span class="mr-2">🎯</span> Principio: concepto de dominio = atención arquitectónica
+        </h3>
+<p class="text-neutral-300 text-sm mb-3">
+          Ejemplo: si CONTEXT.md describe "cascada de materialización" como un concepto clave del sistema de billing —
+          la cadena por la que los cambios de precio se propagan a los contratos activos—, entonces el módulo que implementa
+          esa cascada <strong class="text-blue-400">no puede</strong> estar oculto en <code>utils/helpers.py</code>
+          dividido en 4 funciones independientes.
+        </p>
+<p class="text-neutral-300 text-sm">
+          Lo más obvio para profundizar aquí es extraer <code>billing/cascade.py</code> con la cascade como entidad con nombre,
+          alineada con el vocabulario de CONTEXT.md. El comando <code>/improve-codebase-architecture</code> ves esta
+          desalineación porque <em>él lee el CONTEXT.md</em>.
+        </p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">Preguntas que responde CONTEXT.md</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• <strong>¿Cuáles son los conceptos centrales?</strong> → merecen módulos propios y nombres consistentes</li>
+<li>• <strong>¿Cuál es el glosario canónico?</strong> → «customer» vs. «user» se resuelve aquí, no en la revisión del PR</li>
+<li>• <strong>¿Cuáles son los límites?</strong> → dónde pertenece una feature es función del bounded context</li>
+<li>• <strong>¿Qué invariantes existen?</strong> → reglas que NO se pueden violar al refactorizar</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Consejo
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Si el CONTEXT.md es vago o está desactualizado, <strong>esta</strong> es la primera oportunidad de profundización. Sin
+          él, cualquier mejora arquitectónica será local y perderá coherencia.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Escala</div><div class="text-xs text-neutral-400">Contrasta el código con el dominio.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Glosario</div><div class="text-xs text-neutral-400">Resuelve disputas de nombres.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Límites</div><div class="text-xs text-neutral-400">Dónde vive la feature.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Invariantes</div><div class="text-xs text-neutral-400">Reglas intocables al refactorizar.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 6: ADRs -->
+<section class="mb-16" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">📜 ADRs como memoria arquitectónica</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        ADR = <strong class="text-emerald-400">Registro de decisiones de arquitectura</strong>. Un documento breve por cada decisión
+        arquitectónica relevante. Sin ADRs, la siguiente refactorización deshace silenciosamente una decisión consciente, porque
+        nadie la recuerda <em>por qué</em> X se separó de Y.
+      </p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-semibold text-neutral-100">ADR-009 — ejemplo</h4>
+<span class="text-xs text-neutral-500">docs/adr/0009-separate-cascade.md</span>
+</div>
+<pre class="code-box text-neutral-300 overflow-x-auto"><span class="text-emerald-400"># ADR-009: Separar materialization cascade de pricing</span>
+<span class="text-emerald-400">## Status</span>
+Accepted — 2025-08-14
+<span class="text-emerald-400">## Contexto</span>
+A "materialization cascade" propaga mudanças de preço para contratos
+ativos. Originalmente vivia dentro de pricing/calculator.py porque
+parecia "cálculo de preço". Na prática, são duas responsabilidades:
+  - pricing/    → calcula o preço de UM item, sem estado
+  - cascade/    → reage a mudanças, atualiza N contratos, com estado
+Misturadas, qualquer mudança em pricing arriscava efeito colateral
+em milhares de contratos ativos.
+<span class="text-emerald-400">## Decisão</span>
+Extrair cascade para billing/cascade.py como entidade nomeada e
+independente. pricing/ vira pure function. cascade/ orquestra.
+<span class="text-emerald-400">## Consequências</span>
++ pricing testável sem mock de DB
++ cascade tem ownership claro de invariantes (idempotência, ordem)
++ vocabulário do CONTEXT.md (Sec. 4) finalmente reflete o código
+- duas pastas onde antes havia uma (custo de descoberta)
+- imports adicionais entre os módulos (acoplamento explícito)
+<span class="text-emerald-400">## Alternativas consideradas</span>
+- Manter junto: rejeitado, acopla cálculo a propagação
+- Event bus: prematuro, sem necessidade de async hoje
+- Inline em cada caller: rejeitado, duplicação garantida</pre>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">🧠</span> Por qué importan los ADR en el deepening
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• Sin ADR, dentro de 6 meses alguien volverá a "consolidar" la cascada en pricing porque parece redundante</li>
+<li>• El ADR demuestra que la separación <em>ya fue pensada</em> y tiene un motivo</li>
+<li>• <code>/improve-codebase-architecture</code> lee los ADR antes de sugerir — no propondrá algo ya rechazado</li>
+<li>• Los ADRs descontinuados también sirven: registran aprendizajes ("intentamos X, no funcionó porque Y")</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Consejo: ADR corto &gt; ADR perfecto
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Un ADR de 1 página le gana a uno de 10 páginas que nadie escribe. Estado, Contexto, Decisión, Consecuencias: cuatro encabezados, párrafos cortos. Numéralos secuencialmente (0001, 0002…) y no los elimines: márcalos como
+          <code>Superseded by ADR-XXX</code> cuando se sustituya.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Memoria</div><div class="text-xs text-neutral-400">Por qué X ≠ Y, registrado.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Antirregresión</div><div class="text-xs text-neutral-400">El siguiente refactor no deshace los cambios.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Breve</div><div class="text-xs text-neutral-400">1 página &gt; 10.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Inmortal</div><div class="text-xs text-neutral-400">Sustituye, no elimines.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 7: Exemplo de melhoria progressiva -->
+<section class="mb-16" id="topico-7">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
+<h2 class="text-2xl font-bold">📈 Ejemplo de mejora progresiva</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        Cómo un equipo sale de una bola de lodo sin detener el producto. Narrativa de 3 sprints, basada en un patrón real:
+        <strong class="text-emerald-400">una oportunidad por sprint</strong>, CONTEXT.md y ADRs actualizados en cada ciclo.
+      </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S0</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 0 — Diagnóstico</h4>
+<p class="text-sm text-neutral-400 mb-3">Ejecutamos /improve-codebase-architecture por primera vez</p>
+<p class="text-neutral-300 text-sm">
+              La salida enumera 5 oportunidades. El equipo las debate en 30 min, elige abordar 3 en las próximas 3 sprints, en orden
+              de impacto. Las otras 2 quedan explícitamente en el backlog: no se olvidan ni son urgentes.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 1 — Extraer cascade</h4>
+<p class="text-sm text-neutral-400 mb-3">Oportunidad #1: cascada de materialización dispersa</p>
+<p class="text-neutral-300 text-sm">
+              El equipo extrae <code>billing/cascade.py</code> como módulo con nombre. PR pequeño, ~400 líneas movidas, sin
+              cambiar el comportamiento. Escribe ADR-009 para documentar la decisión. Actualiza CONTEXT.md (Sec. 4) con el
+              vocabulario canónico. Las nuevas features siguen desarrollándose en paralelo, sin una rama aparte.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 2 — Dividir god module</h4>
+<p class="text-sm text-neutral-400 mb-3">Oportunidad #2: utils/helpers.py con 1.847 líneas</p>
+<p class="text-neutral-300 text-sm">
+              La mayoría es mecánica: agrupa las funciones por consumer y muévelas a módulos cercanos. 3 funciones «huérfanas» plantean preguntas: ¿qué son? La respuesta está en CONTEXT.md (una es cascade, debería haber ido en la S1; las otras dos exponen un concepto nuevo que se convierte en ADR-010). Bug evitado.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 3 — Alinear el vocabulario</h4>
+<p class="text-sm text-neutral-400 mb-3">Oportunidad #3: customer / user / account intercambiables</p>
+<p class="text-neutral-300 text-sm">
+              Renombrado guiado por el glosario de CONTEXT.md. Es mecánico, pero afecta muchos archivos: aquí una feature flag
+              no ayuda, así que haz PRs pequeños por subdir, con la aprobación del codeowner del subdir. Al final, el código
+              habla el mismo idioma que la documentación y los equipos de producto.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S4</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 4 — Repetir el diagnóstico</h4>
+<p class="text-sm text-neutral-400 mb-3">Vuelve a ejecutar /improve-codebase-architecture</p>
+<p class="text-neutral-300 text-sm">
+              Lista nueva: las 3 oportunidades originales desaparecieron (se resolvieron). Las 2 que quedaron en el backlog
+              continúan. Pero surgieron 2 nuevas porque el dominio evolucionó en los 3 sprints. La arquitectura mejoró
+              <strong class="text-emerald-400">visiblemente</strong>, sin big bang, sin dejar de entregar.
+            </p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+<span class="mr-2">📊</span> Resultado en 4 sprints
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>3 oportunidades de alto impacto resueltas, 2 ADR nuevos</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>CONTEXT.md actualizado 3 veces, se convirtió en una referencia viva</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Cero pausas en las features del producto</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Bug evitado (cascade huérfana en helpers), encontrado por casualidad</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>El equipo confía en el proceso: la siguiente ronda ya está planificada</span></li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">1 por sprint</div><div class="text-xs text-neutral-400">Cadencia sostenible.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Docs vivas</div><div class="text-xs text-neutral-400">CONTEXT.md + ADRs evolucionan.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Sin pausa</div><div class="text-xs text-neutral-400">Las funcionalidades continúan.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Acumulativo</div><div class="text-xs text-neutral-400">El nuevo diagnóstico muestra una mejora.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 8: Exercício -->
+<section class="mb-16" id="topico-8">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">8</span>
+<h2 class="text-2xl font-bold">🎯 Ejercicio práctico</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        No aprendes deepening leyendo. Aprendes ejecutando el comando en tu proyecto y <strong class="text-emerald-400">defendiendo
+        la elección</strong> de la primera oportunidad que abordar.
+      </p>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">🛠️</span> Pasos
+        </h3>
+<ol class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">1.</span>
+<div>
+<strong class="text-emerald-400">Confirma las bases:</strong> ¿tu proyecto tiene CONTEXT.md? ¿Tiene al menos
+              1-2 ADRs? Si no, empieza por ahí (ese es el pre-deepening).
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">2.</span>
+<div>
+<strong class="text-emerald-400">Ejecuta /improve-codebase-architecture</strong> en el proyecto real (no en
+              sandbox).
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">3.</span>
+<div>
+<strong class="text-emerald-400">Anota las 3 primeras sugerencias</strong> con: descripción, impacto, esfuerzo.
+              No las 5: solo las 3 primeras.
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">4.</span>
+<div>
+<strong class="text-emerald-400">¿Cuál abordas primero?</strong> Puede ser la #1, pero quizá no.
+              Defiende tu elección en 3 frases: por qué esta, por qué ahora y cuál es el riesgo de dejarla para después.
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">5.</span>
+<div>
+<strong class="text-emerald-400">Bonus:</strong> redacta el ADR antes de tocar el código. Si no
+              puedes escribir 1 página para justificarlo, quizás la propuesta aún no esté madura.
+            </div>
+</li>
+</ol>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Criterio de selección
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Buena primera opción: <strong>alto impacto, esfuerzo bajo-medio, riesgo bajo, toca un concepto del CONTEXT.md</strong>.
+          Mala primera elección: alto impacto, pero también alto riesgo; guárdala para cuando el equipo ya confíe en el proceso.
+        </p>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+<span class="mr-2">⚠️</span> No hagas
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Atacar las 5 oportunidades de una vez: volverás al rewrite</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Omitir el ADR: dentro de 6 meses nadie recordará el motivo</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Refactorizar sin una prueba preexistente que cubra el camino: escríbela primero</span></li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Ejecuta</div><div class="text-xs text-neutral-400">En el proyecto real, no en un ejemplo.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">3, no 5</div><div class="text-xs text-neutral-400">Enfoque en la elección.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Defiende</div><div class="text-xs text-neutral-400">3 frases: esta, ahora, riesgo.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">ADR primero</div><div class="text-xs text-neutral-400">Si no está escrito, no está listo.</div></div>
+</div>
+</section>
+<!-- RESUMO + PRÓXIMOS PASSOS -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center">
+<span class="mr-3">✅</span> Resumen del Módulo
+        </h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Ball of mud se puede diagnosticar</strong>
+<span class="text-neutral-400"> — señales específicas (god modules, ciclos, vocabulario inconsistente, duplicación).</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">/improve-codebase-architecture enumera oportunidades</strong>
+<span class="text-neutral-400"> — informadas por CONTEXT.md y ADRs, priorizadas según su impacto.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">/zoom-out rompe el túnel del detalle</strong>
+<span class="text-neutral-400"> — devuelve la perspectiva arquitectónica antes de la próxima edición.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Deepening &gt; rewrite</strong>
+<span class="text-neutral-400"> — una mejora acumulativa por sprint, sin ramas largas.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">CONTEXT.md es la vara de medir</strong>
+<span class="text-neutral-400"> — un concepto de dominio merece un módulo, un nombre y atención arquitectónica.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Los ADRs preservan decisiones</strong>
+<span class="text-neutral-400"> — sin ellos, el próximo refactor lo deshace por desconocimiento.</span>
+</div>
+</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-emerald-400 mb-2">Siguiente módulo:</h3>
+<p class="text-neutral-300">1.6 — continuando el recorrido de skills.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">
+            ← Volver a la ruta
+          </a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-6.html">
+            Siguiente módulo →
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Skills For Real Engineers — 2026</p>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      html.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

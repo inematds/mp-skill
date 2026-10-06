@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+
+<html class="dark" lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Módulo 1.2 — Grilling: alinhamento com o agente | MP Skills</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo 1.2 — Grilling: alinhamento com o agente | MP Skills</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -18,8 +19,8 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
     .topic-explanation { display: none; }
@@ -97,795 +98,724 @@
     /* Code box styling */
     .code-box { font-family: 'Menlo', 'Monaco', 'Consolas', monospace; }
   </style>
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <!-- NAVIGATION -->
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🎓</span>
-            <span class="font-bold text-lg hidden sm:inline">MP Skills</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-        </div>
-
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
-            <span class="sm:hidden">T1</span>
-            <span class="hidden sm:inline">Fundamentos</span>
-          </a>
-          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
-            <span class="sm:hidden">T2</span>
-            <span class="hidden sm:inline">Workflows</span>
-          </a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
-            <span class="sm:hidden">T3</span>
-            <span class="hidden sm:inline">Skills</span>
-          </a>
-          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
-            <span class="sm:hidden">T4</span>
-            <span class="hidden sm:inline">Avançado</span>
-          </a>
-
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-            </svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- BREADCRUMB -->
-  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="flex items-center space-x-2 text-sm text-neutral-400">
-      <a href="../../index.html" class="hover:text-emerald-400">Início</a>
-      <span>/</span>
-      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
-      <span>/</span>
-      <span class="text-emerald-400">Módulo 1.2</span>
-    </div>
-  </nav>
-
-  <!-- HEADER -->
-  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+<link href="https://inematds.github.io/mp-skill/curso-skills/curso/trilha1/modulo-1-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/en/curso/trilha1/modulo-1-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/es/curso/trilha1/modulo-1-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-1-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha1/modulo-1-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha1/modulo-1-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAVIGATION -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🎓</span>
+<span class="font-bold text-lg hidden sm:inline">MP Skills</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
+<span class="sm:hidden">T1</span>
+<span class="hidden sm:inline">Fundamentos</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html">
+<span class="sm:hidden">T2</span>
+<span class="hidden sm:inline">Workflows</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span>
+<span class="hidden sm:inline">Skills</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors" href="../trilha4/index.html">
+<span class="sm:hidden">T4</span>
+<span class="hidden sm:inline">Avançado</span>
+</a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20">
+<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+</svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-emerald-400" href="../../index.html">Início</a>
+<span>/</span>
+<a class="hover:text-emerald-400" href="index.html">Trilha 1</a>
+<span>/</span>
+<span class="text-emerald-400">Módulo 1.2</span>
+</div>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
         MÓDULO 1.2
       </span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔥 Grilling: alinhamento com o agente</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Pare de adivinhar o que você quer. Deixe o agente perguntar antes de codar — e ganhe horas de retrabalho.</p>
-
-      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">8</div>
-          <div class="text-xs text-neutral-400">Tópicos</div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">35</div>
-          <div class="text-xs text-neutral-400">Minutos</div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Básico</div>
-          <div class="text-xs text-neutral-400">Nível</div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Prática</div>
-          <div class="text-xs text-neutral-400">Tipo</div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-    <!-- ============================ -->
-    <!-- TÓPICO 1: O que é grilling -->
-    <!-- ============================ -->
-    <section id="topico-1" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
-        <h2 class="text-2xl font-bold">🔍 O que é grilling</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
-        <strong class="text-emerald-400">Grilling</strong> é uma sessão onde o <strong>agente pergunta detalhes antes de codificar</strong>. Não é você listando requisitos. É o agente, posicionado como entrevistador adversarial, te puxando para zonas que você ainda não pensou: edge cases, decisões que você está adiando, premissas que você nem sabia que estava fazendo.
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🔥 Grilling: alinhamento com o agente</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Pare de adivinhar o que você quer. Deixe o agente perguntar antes de codar — e ganhe horas de retrabalho.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">8</div>
+<div class="text-xs text-neutral-400">Tópicos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">35</div>
+<div class="text-xs text-neutral-400">Minutos</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Básico</div>
+<div class="text-xs text-neutral-400">Nível</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Prática</div>
+<div class="text-xs text-neutral-400">Tipo</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- ============================ -->
+<!-- TÓPICO 1: O que é grilling -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🔍 O que é grilling</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+<strong class="text-emerald-400">Grilling</strong> é uma sessão onde o <strong>agente pergunta detalhes antes de codificar</strong>. Não é você listando requisitos. É o agente, posicionado como entrevistador adversarial, te puxando para zonas que você ainda não pensou: edge cases, decisões que você está adiando, premissas que você nem sabia que estava fazendo.
       </p>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+<p class="text-neutral-300 mb-6 leading-relaxed">
         A maioria das pessoas usa LLM como autocomplete glorificado: dão um prompt vago e aceitam o primeiro código. Resultado: 3 rodadas de retrabalho. Grilling inverte isso. O agente vira o chato que pergunta "e se o usuário não tiver conexão?", "como você quer tratar duplicatas?", "isso é por tenant ou global?" — antes de uma única linha sair.
       </p>
-
-      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-          <span class="mr-2">🎯</span> O princípio central
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">🎯</span> O princípio central
         </h3>
-        <p class="text-neutral-300 mb-4">
+<p class="text-neutral-300 mb-4">
           Código ruim não vem de modelo fraco. Vem de <strong class="text-emerald-400">brief fraco</strong>. Grilling força o brief a virar bom <em>antes</em> de gastar tokens em implementação.
         </p>
-        <ul class="space-y-2 text-neutral-300">
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-400 mt-1">•</span>
-            <span>O agente não assume — ele pergunta.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-400 mt-1">•</span>
-            <span>Você não escreve spec — você responde.</span>
-          </li>
-          <li class="flex items-start space-x-2">
-            <span class="text-emerald-400 mt-1">•</span>
-            <span>O alinhamento sai escrito, não na sua cabeça.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">💡</span> Por que a inversão muda tudo
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span>O agente não assume — ele pergunta.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span>Você não escreve spec — você responde.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-emerald-400 mt-1">•</span>
+<span>O alinhamento sai escrito, não na sua cabeça.</span>
+</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Por que a inversão muda tudo
         </h3>
-        <p class="text-neutral-300 mb-3">
+<p class="text-neutral-300 mb-3">
           Quando <em>você</em> escreve a spec, você só lista o que já pensou. Quando o <em>agente</em> pergunta, ele explora o espaço de decisões que você ainda não viu. O agente leu mil sistemas parecidos — ele sabe onde mora o bug.
         </p>
-        <p class="text-neutral-300">
+<p class="text-neutral-300">
           A pergunta do agente é o mapa do que você ainda não sabia que precisava decidir.
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Inversão</div>
-          <div class="text-sm text-neutral-400">Agente pergunta, você responde.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Antes do código</div>
-          <div class="text-sm text-neutral-400">Zero linha implementada na sessão de grill.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Adversarial</div>
-          <div class="text-sm text-neutral-400">Postura de devil's advocate, não de assistente.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Materializado</div>
-          <div class="text-sm text-neutral-400">Output vira documento, não memória volátil.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 2: grill-me vs grill-with-docs -->
-    <!-- ============================ -->
-    <section id="topico-2" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
-        <h2 class="text-2xl font-bold">⚖️ /grill-me vs /grill-with-docs</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Inversão</div>
+<div class="text-sm text-neutral-400">Agente pergunta, você responde.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Antes do código</div>
+<div class="text-sm text-neutral-400">Zero linha implementada na sessão de grill.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Adversarial</div>
+<div class="text-sm text-neutral-400">Postura de devil's advocate, não de assistente.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Materializado</div>
+<div class="text-sm text-neutral-400">Output vira documento, não memória volátil.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 2: grill-me vs grill-with-docs -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">⚖️ /grill-me vs /grill-with-docs</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Existem dois sabores. Escolher errado não quebra nada — só desperdiça contexto. O <strong class="text-emerald-400">/grill-me</strong> é leve, conversacional, ótimo para decisões não-código. O <strong class="text-emerald-400">/grill-with-docs</strong> é pesado, lê seu CONTEXT.md e ADRs, e atualiza-os ao final.
       </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-          <h4 class="font-bold text-emerald-400 mb-4">✓ /grill-me</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Decisões de produto sem código pesado</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Brainstorming de feature antes de PRD</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Não-engenharia: copy, posicionamento, fluxo</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Output: bullets de decisão na conversa</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Não toca arquivos do projeto</span></li>
-          </ul>
-        </div>
-        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-          <h4 class="font-bold text-emerald-400 mb-4">✓ /grill-with-docs</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Engenharia: feature, refactor, decisão técnica</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Lê CONTEXT.md, ADRs e domain model</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Atualiza CONTEXT.md e cria ADR ao final</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Output: documentos persistentes</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usa terminologia do projeto, não genérica</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Comparação direta</h3>
-      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden mb-6">
-        <table class="w-full text-sm">
-          <thead class="bg-dark-700">
-            <tr>
-              <th class="text-left p-4 text-emerald-400 font-semibold">Aspecto</th>
-              <th class="text-left p-4 text-emerald-400 font-semibold">/grill-me</th>
-              <th class="text-left p-4 text-emerald-400 font-semibold">/grill-with-docs</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-dark-600">
-            <tr>
-              <td class="p-4 font-semibold">Input</td>
-              <td class="p-4 text-neutral-300">Ideia solta</td>
-              <td class="p-4 text-neutral-300">Ideia + projeto indexado</td>
-            </tr>
-            <tr>
-              <td class="p-4 font-semibold">Lê arquivos?</td>
-              <td class="p-4 text-neutral-300">Não</td>
-              <td class="p-4 text-neutral-300">Sim — CONTEXT.md, ADRs, código</td>
-            </tr>
-            <tr>
-              <td class="p-4 font-semibold">Escreve arquivos?</td>
-              <td class="p-4 text-neutral-300">Não</td>
-              <td class="p-4 text-neutral-300">Sim — atualiza CONTEXT.md, cria ADR</td>
-            </tr>
-            <tr>
-              <td class="p-4 font-semibold">Duração típica</td>
-              <td class="p-4 text-neutral-300">5–10 min</td>
-              <td class="p-4 text-neutral-300">15–40 min</td>
-            </tr>
-            <tr>
-              <td class="p-4 font-semibold">Próximo passo</td>
-              <td class="p-4 text-neutral-300">Documentar manualmente</td>
-              <td class="p-4 text-neutral-300">/to-prd direto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-          <span class="mr-2">📊</span> Regra prática
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ /grill-me</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Decisões de produto sem código pesado</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Brainstorming de feature antes de PRD</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Não-engenharia: copy, posicionamento, fluxo</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Output: bullets de decisão na conversa</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Não toca arquivos do projeto</span></li>
+</ul>
+</div>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ /grill-with-docs</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Engenharia: feature, refactor, decisão técnica</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Lê CONTEXT.md, ADRs e domain model</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Atualiza CONTEXT.md e cria ADR ao final</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Output: documentos persistentes</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usa terminologia do projeto, não genérica</span></li>
+</ul>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-4">Comparação direta</h3>
+<div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden mb-6">
+<table class="w-full text-sm">
+<thead class="bg-dark-700">
+<tr>
+<th class="text-left p-4 text-emerald-400 font-semibold">Aspecto</th>
+<th class="text-left p-4 text-emerald-400 font-semibold">/grill-me</th>
+<th class="text-left p-4 text-emerald-400 font-semibold">/grill-with-docs</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-dark-600">
+<tr>
+<td class="p-4 font-semibold">Input</td>
+<td class="p-4 text-neutral-300">Ideia solta</td>
+<td class="p-4 text-neutral-300">Ideia + projeto indexado</td>
+</tr>
+<tr>
+<td class="p-4 font-semibold">Lê arquivos?</td>
+<td class="p-4 text-neutral-300">Não</td>
+<td class="p-4 text-neutral-300">Sim — CONTEXT.md, ADRs, código</td>
+</tr>
+<tr>
+<td class="p-4 font-semibold">Escreve arquivos?</td>
+<td class="p-4 text-neutral-300">Não</td>
+<td class="p-4 text-neutral-300">Sim — atualiza CONTEXT.md, cria ADR</td>
+</tr>
+<tr>
+<td class="p-4 font-semibold">Duração típica</td>
+<td class="p-4 text-neutral-300">5–10 min</td>
+<td class="p-4 text-neutral-300">15–40 min</td>
+</tr>
+<tr>
+<td class="p-4 font-semibold">Próximo passo</td>
+<td class="p-4 text-neutral-300">Documentar manualmente</td>
+<td class="p-4 text-neutral-300">/to-prd direto</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">📊</span> Regra prática
         </h3>
-        <p class="text-neutral-300">
+<p class="text-neutral-300">
           Se a decisão vai virar código — <strong>/grill-with-docs</strong>. Se a decisão fica só na sua cabeça — <strong>/grill-me</strong>. Quando em dúvida, escolha <strong>/grill-with-docs</strong>: o custo de gerar um ADR a mais é zero, o custo de perder contexto é alto.
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Leve vs pesado</div>
-          <div class="text-sm text-neutral-400">Conversa vs documento.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Persistência</div>
-          <div class="text-sm text-neutral-400">Só /grill-with-docs grava.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">ADR</div>
-          <div class="text-sm text-neutral-400">Architecture Decision Record.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Domínio</div>
-          <div class="text-sm text-neutral-400">Terminologia do projeto, não genérica.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 3: Quando usar / não usar -->
-    <!-- ============================ -->
-    <section id="topico-3" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
-        <h2 class="text-2xl font-bold">🎯 Quando usar (e quando NÃO usar)</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Leve vs pesado</div>
+<div class="text-sm text-neutral-400">Conversa vs documento.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Persistência</div>
+<div class="text-sm text-neutral-400">Só /grill-with-docs grava.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">ADR</div>
+<div class="text-sm text-neutral-400">Architecture Decision Record.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Domínio</div>
+<div class="text-sm text-neutral-400">Terminologia do projeto, não genérica.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 3: Quando usar / não usar -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🎯 Quando usar (e quando NÃO usar)</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Grilling não é grátis — custa 10 a 40 minutos. Para mudanças triviais, esse custo é maior que o retrabalho que evita. Para decisões arquiteturais, é o investimento mais barato que existe.
       </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-          <h4 class="font-bold text-emerald-400 mb-4">✓ USAR grilling</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Feature nova</strong> — primeiro contato com o problema</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Decisão arquitetural</strong> — escolha de banco, fila, padrão</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Bug confuso</strong> — você não sabe nem como reproduzir</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Refactor</strong> — antes de tocar 20 arquivos</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Integração</strong> — terceiro, webhook, contratos</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Migração</strong> — schema, framework, versão</span></li>
-          </ul>
-        </div>
-        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-          <h4 class="font-bold text-red-400 mb-4">✗ PULAR grilling</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Typo / fix trivial</strong> — uma linha, escopo claro</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Mudança de copy</strong> — texto já aprovado</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Bump de versão</strong> — sem breaking changes</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Padrão já documentado</strong> — segue o ADR existente</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Bug com causa óbvia</strong> — stack trace claro</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Sessão de pair programming</strong> — alinhamento humano já feito</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">⚠️</span> Cuidado com "parece trivial"
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ USAR grilling</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Feature nova</strong> — primeiro contato com o problema</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Decisão arquitetural</strong> — escolha de banco, fila, padrão</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Bug confuso</strong> — você não sabe nem como reproduzir</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Refactor</strong> — antes de tocar 20 arquivos</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Integração</strong> — terceiro, webhook, contratos</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Migração</strong> — schema, framework, versão</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ PULAR grilling</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Typo / fix trivial</strong> — uma linha, escopo claro</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Mudança de copy</strong> — texto já aprovado</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Bump de versão</strong> — sem breaking changes</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Padrão já documentado</strong> — segue o ADR existente</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Bug com causa óbvia</strong> — stack trace claro</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Sessão de pair programming</strong> — alinhamento humano já feito</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">⚠️</span> Cuidado com "parece trivial"
         </h3>
-        <p class="text-neutral-300">
+<p class="text-neutral-300">
           "Só adicionar um campo no formulário" virou refactor de validação, migration de banco e mudança de API em três projetos diferentes. Quando ouvir <em>"é só uma coisinha"</em> e a coisa toca persistência ou contrato — gaste 10 min de grill. Vai descobrir que não é tão "só" assim.
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Custo-benefício</div>
-          <div class="text-sm text-neutral-400">10 min de grill &lt; 3h de retrabalho.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Limiar</div>
-          <div class="text-sm text-neutral-400">Toca persistência ou contrato? Grill.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Escala oculta</div>
-          <div class="text-sm text-neutral-400">"Pequeno" que vira grande precisa de grill.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Já documentado</div>
-          <div class="text-sm text-neutral-400">ADR existe? Segue o ADR.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 4: Exemplo de sessão (CODE BOX) -->
-    <!-- ============================ -->
-    <section id="topico-4" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
-        <h2 class="text-2xl font-bold">💬 Exemplo de sessão completa</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Custo-benefício</div>
+<div class="text-sm text-neutral-400">10 min de grill &lt; 3h de retrabalho.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Limiar</div>
+<div class="text-sm text-neutral-400">Toca persistência ou contrato? Grill.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Escala oculta</div>
+<div class="text-sm text-neutral-400">"Pequeno" que vira grande precisa de grill.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Já documentado</div>
+<div class="text-sm text-neutral-400">ADR existe? Segue o ADR.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 4: Exemplo de sessão (CODE BOX) -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">💬 Exemplo de sessão completa</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Diálogo realista de <strong class="text-emerald-400">/grill-with-docs</strong> sobre uma feature comum: "quero adicionar autenticação". Observe como cada pergunta do agente fecha uma decisão que viraria bug se ficasse implícita.
       </p>
-
-      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 code-box">
-        <div class="text-xs text-neutral-500 mb-4 uppercase tracking-wide">Sessão de grilling — autenticação</div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Quero adicionar autenticação ao app.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P1)</div>
-          <div class="text-neutral-300 text-sm">Antes de codar: é app B2B (uma empresa = vários usuários) ou B2C (cada login é uma pessoa autônoma)? A resposta muda toda a modelagem de tenancy.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">B2B. Cada empresa tem usuários internos.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P2)</div>
-          <div class="text-neutral-300 text-sm">Beleza. Os dados são isolados por empresa (multi-tenant single DB) ou cada empresa tem schema/DB separado? E o admin da empresa convida ou self-signup?</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Single DB com tenant_id em toda tabela. Admin convida por email.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P3)</div>
-          <div class="text-neutral-300 text-sm">Quais provedores de auth? Email+senha próprio, SSO (Google/Microsoft), magic link, ou combinação? E o que acontece quando um usuário pertence a duas empresas?</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Magic link primeiro, SSO depois. Um email só pode estar em uma empresa por enquanto.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P4)</div>
-          <div class="text-neutral-300 text-sm">Roles dentro da empresa? (owner/admin/member) E o que um admin pode fazer que um member não pode — listar usuários, faturamento, deletar dados?</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Owner, admin, member. Só owner mexe em faturamento. Admin gerencia usuários.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P5)</div>
-          <div class="text-neutral-300 text-sm">Sessão: JWT stateless, sessão server-side, ou híbrido? Tempo de expiração? Refresh token? E logout em todos os devices é requisito?</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Server-side com cookie httpOnly. 7 dias de duração. Logout em todos os devices — sim, é requisito.</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P6)</div>
-          <div class="text-neutral-300 text-sm">Última: o que acontece quando o último owner sai? Bloqueia? Promove o admin mais antigo? E exclusão de conta — soft delete ou hard delete com GDPR?</div>
-        </div>
-
-        <div class="mb-4">
-          <div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
-          <div class="text-neutral-300 text-sm">Bloqueia saída do último owner. Soft delete primeiro, hard delete só por suporte.</div>
-        </div>
-
-        <div class="mt-6 pt-6 border-t border-dark-600">
-          <div class="text-blue-400 text-xs font-bold mb-2">▸ AGENTE — SÍNTESE</div>
-          <div class="text-neutral-300 text-sm leading-relaxed">
-            Vou registrar como ADR-0007 e atualizar CONTEXT.md:<br>
-            <span class="text-emerald-400">• Modelo:</span> B2B multi-tenant, single DB com tenant_id<br>
-            <span class="text-emerald-400">• Onboarding:</span> Admin convida por email, sem self-signup<br>
-            <span class="text-emerald-400">• Auth:</span> Magic link (fase 1), SSO (fase 2). Email único por tenant<br>
-            <span class="text-emerald-400">• Roles:</span> owner > admin > member; owner exclusivo p/ billing<br>
-            <span class="text-emerald-400">• Sessão:</span> cookie httpOnly server-side, 7d, revogação global suportada<br>
-            <span class="text-emerald-400">• Lifecycle:</span> último owner não pode sair; soft delete default<br>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 code-box">
+<div class="text-xs text-neutral-500 mb-4 uppercase tracking-wide">Sessão de grilling — autenticação</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Quero adicionar autenticação ao app.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P1)</div>
+<div class="text-neutral-300 text-sm">Antes de codar: é app B2B (uma empresa = vários usuários) ou B2C (cada login é uma pessoa autônoma)? A resposta muda toda a modelagem de tenancy.</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">B2B. Cada empresa tem usuários internos.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P2)</div>
+<div class="text-neutral-300 text-sm">Beleza. Os dados são isolados por empresa (multi-tenant single DB) ou cada empresa tem schema/DB separado? E o admin da empresa convida ou self-signup?</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Single DB com tenant_id em toda tabela. Admin convida por email.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P3)</div>
+<div class="text-neutral-300 text-sm">Quais provedores de auth? Email+senha próprio, SSO (Google/Microsoft), magic link, ou combinação? E o que acontece quando um usuário pertence a duas empresas?</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Magic link primeiro, SSO depois. Um email só pode estar em uma empresa por enquanto.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P4)</div>
+<div class="text-neutral-300 text-sm">Roles dentro da empresa? (owner/admin/member) E o que um admin pode fazer que um member não pode — listar usuários, faturamento, deletar dados?</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Owner, admin, member. Só owner mexe em faturamento. Admin gerencia usuários.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P5)</div>
+<div class="text-neutral-300 text-sm">Sessão: JWT stateless, sessão server-side, ou híbrido? Tempo de expiração? Refresh token? E logout em todos os devices é requisito?</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Server-side com cookie httpOnly. 7 dias de duração. Logout em todos os devices — sim, é requisito.</div>
+</div>
+<div class="mb-4">
+<div class="text-blue-400 text-xs font-bold mb-1">▸ AGENTE (P6)</div>
+<div class="text-neutral-300 text-sm">Última: o que acontece quando o último owner sai? Bloqueia? Promove o admin mais antigo? E exclusão de conta — soft delete ou hard delete com GDPR?</div>
+</div>
+<div class="mb-4">
+<div class="text-emerald-400 text-xs font-bold mb-1">▸ VOCÊ</div>
+<div class="text-neutral-300 text-sm">Bloqueia saída do último owner. Soft delete primeiro, hard delete só por suporte.</div>
+</div>
+<div class="mt-6 pt-6 border-t border-dark-600">
+<div class="text-blue-400 text-xs font-bold mb-2">▸ AGENTE — SÍNTESE</div>
+<div class="text-neutral-300 text-sm leading-relaxed">
+            Vou registrar como ADR-0007 e atualizar CONTEXT.md:<br/>
+<span class="text-emerald-400">• Modelo:</span> B2B multi-tenant, single DB com tenant_id<br/>
+<span class="text-emerald-400">• Onboarding:</span> Admin convida por email, sem self-signup<br/>
+<span class="text-emerald-400">• Auth:</span> Magic link (fase 1), SSO (fase 2). Email único por tenant<br/>
+<span class="text-emerald-400">• Roles:</span> owner &gt; admin &gt; member; owner exclusivo p/ billing<br/>
+<span class="text-emerald-400">• Sessão:</span> cookie httpOnly server-side, 7d, revogação global suportada<br/>
+<span class="text-emerald-400">• Lifecycle:</span> último owner não pode sair; soft delete default<br/>
             Pronto para /to-prd?
           </div>
-        </div>
-      </div>
-
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">💡</span> Observação importante
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Observação importante
         </h3>
-        <p class="text-neutral-300">
+<p class="text-neutral-300">
           Note como NENHUMA dessas 6 perguntas estava no prompt original "quero adicionar autenticação". Cada resposta fechou uma decisão que viraria reunião de 2h ou bug em produção. Esse é o ROI do grilling.
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Uma pergunta de cada vez</div>
-          <div class="text-sm text-neutral-400">Não atropela com 10 questões juntas.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Justifica o porquê</div>
-          <div class="text-sm text-neutral-400">"A resposta muda X" — não pergunta solta.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Síntese ao fim</div>
-          <div class="text-sm text-neutral-400">Recapitula decisões antes de gravar.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Próximo passo</div>
-          <div class="text-sm text-neutral-400">Aponta para /to-prd, não para código.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 5: Anti-padrões -->
-    <!-- ============================ -->
-    <section id="topico-5" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
-        <h2 class="text-2xl font-bold">🚫 Anti-padrões de grilling</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Uma pergunta de cada vez</div>
+<div class="text-sm text-neutral-400">Não atropela com 10 questões juntas.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Justifica o porquê</div>
+<div class="text-sm text-neutral-400">"A resposta muda X" — não pergunta solta.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Síntese ao fim</div>
+<div class="text-sm text-neutral-400">Recapitula decisões antes de gravar.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Próximo passo</div>
+<div class="text-sm text-neutral-400">Aponta para /to-prd, não para código.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 5: Anti-padrões -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🚫 Anti-padrões de grilling</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Grilling é simples mas tem armadilhas. O sintoma comum: você terminou o grill, mas continua sentindo que vai ter retrabalho. Quase sempre é um dos três anti-padrões abaixo.
       </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-          <h4 class="font-bold text-emerald-400 mb-4">✓ Postura saudável</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Refuta o primeiro draft do agente se sentir vago</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pede para reformular perguntas genéricas</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Trata mudança "pequena" que escala como feature</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Para o grill quando perceber que o problema mudou</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Responde "não sei" quando for verdade — e pesquisa antes de fechar</span></li>
-          </ul>
-        </div>
-        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-          <h4 class="font-bold text-red-400 mb-4">✗ Anti-padrões</h4>
-          <ul class="space-y-3 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Aceitar primeiro draft sem grilling — "tá bom assim"</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Engolir perguntas vagas tipo "como você quer fazer isso?"</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pular grill em mudança "trivial" que toca contrato</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Responder com "depende" para fugir da decisão</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não revisar o ADR final — assina sem ler</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
-          <span class="mr-2">🚨</span> Pergunta vaga é red flag
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Postura saudável</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Refuta o primeiro draft do agente se sentir vago</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pede para reformular perguntas genéricas</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Trata mudança "pequena" que escala como feature</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Para o grill quando perceber que o problema mudou</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Responde "não sei" quando for verdade — e pesquisa antes de fechar</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Anti-padrões</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Aceitar primeiro draft sem grilling — "tá bom assim"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Engolir perguntas vagas tipo "como você quer fazer isso?"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pular grill em mudança "trivial" que toca contrato</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Responder com "depende" para fugir da decisão</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não revisar o ADR final — assina sem ler</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+<span class="mr-2">🚨</span> Pergunta vaga é red flag
         </h3>
-        <p class="text-neutral-300 mb-3">
+<p class="text-neutral-300 mb-3">
           Se o agente perguntar "<em>como você quer estruturar isso?</em>" — pare. Essa não é uma pergunta de grill, é o agente jogando a decisão de volta pra você. Força especificidade:
         </p>
-        <p class="text-neutral-300 text-sm">
-          <strong class="text-emerald-400">Resposta correta:</strong> "Me dá 3 opções com tradeoffs e me pergunte o critério que importa pra eu escolher."
+<p class="text-neutral-300 text-sm">
+<strong class="text-emerald-400">Resposta correta:</strong> "Me dá 3 opções com tradeoffs e me pergunte o critério que importa pra eu escolher."
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Refutar vago</div>
-          <div class="text-sm text-neutral-400">Pergunta sem direção volta para refinar.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Trivial que escala</div>
-          <div class="text-sm text-neutral-400">Toca contrato? Não é trivial.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Sem "depende"</div>
-          <div class="text-sm text-neutral-400">Fecha decisão ou marca como aberta.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Lê o ADR</div>
-          <div class="text-sm text-neutral-400">Síntese do agente pode ter desvios.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 6: Integração com PRDs (TIMELINE) -->
-    <!-- ============================ -->
-    <section id="topico-6" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
-        <h2 class="text-2xl font-bold">🔗 Integração com PRDs</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Refutar vago</div>
+<div class="text-sm text-neutral-400">Pergunta sem direção volta para refinar.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Trivial que escala</div>
+<div class="text-sm text-neutral-400">Toca contrato? Não é trivial.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Sem "depende"</div>
+<div class="text-sm text-neutral-400">Fecha decisão ou marca como aberta.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Lê o ADR</div>
+<div class="text-sm text-neutral-400">Síntese do agente pode ter desvios.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 6: Integração com PRDs (TIMELINE) -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🔗 Integração com PRDs</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Grilling não é um evento isolado — é a primeira etapa de um pipeline. As decisões viram contexto, o contexto vira PRD, o PRD vira issues, as issues viram código. Tudo encadeado.
       </p>
-
-      <div class="space-y-6 mb-6">
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <span class="text-emerald-400 font-bold">1</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-            <h4 class="font-semibold mb-2">/grill-with-docs</h4>
-            <p class="text-sm text-neutral-400 mb-3">Entrada: ideia solta. Saída: decisões fechadas.</p>
-            <p class="text-neutral-300 text-sm">O agente lê CONTEXT.md, faz 5–10 perguntas dirigidas, sintetiza as respostas em decisões nomeadas.</p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <span class="text-emerald-400 font-bold">2</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-            <h4 class="font-semibold mb-2">CONTEXT.md atualizado</h4>
-            <p class="text-sm text-neutral-400 mb-3">Decisões viram texto permanente.</p>
-            <p class="text-neutral-300 text-sm">As respostas do grill são gravadas em CONTEXT.md (e quando arquiteturais, num ADR numerado em <span class="code-box text-emerald-400">docs/adr/</span>).</p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <span class="text-emerald-400 font-bold">3</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-            <h4 class="font-semibold mb-2">/to-prd usa o contexto</h4>
-            <p class="text-sm text-neutral-400 mb-3">PRD nasce alinhado, não da imaginação do LLM.</p>
-            <p class="text-neutral-300 text-sm">O comando /to-prd lê CONTEXT.md + ADRs frescos e gera um PRD que cita as decisões. Sem grill, o PRD vira ficção.</p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <span class="text-emerald-400 font-bold">4</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-            <h4 class="font-semibold mb-2">/to-issues fatia em vertical slices</h4>
-            <p class="text-sm text-neutral-400 mb-3">PRD vira tarefas executáveis ponta a ponta.</p>
-            <p class="text-neutral-300 text-sm">Cada issue é um vertical slice: UI + API + persistência + teste. Não horizontal por camada. Issues herdam terminologia do CONTEXT.md.</p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <span class="text-emerald-400 font-bold">5</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-            <h4 class="font-semibold mb-2">Implementação</h4>
-            <p class="text-sm text-neutral-400 mb-3">Código sai com brief forte.</p>
-            <p class="text-neutral-300 text-sm">Quando o agente vai codar a issue, ele tem ADR + PRD + issue. O retrabalho cai em 60–80% comparado a partir de prompt vago.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-          <span class="mr-2">📊</span> O encadeamento é o produto
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">/grill-with-docs</h4>
+<p class="text-sm text-neutral-400 mb-3">Entrada: ideia solta. Saída: decisões fechadas.</p>
+<p class="text-neutral-300 text-sm">O agente lê CONTEXT.md, faz 5–10 perguntas dirigidas, sintetiza as respostas em decisões nomeadas.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">CONTEXT.md atualizado</h4>
+<p class="text-sm text-neutral-400 mb-3">Decisões viram texto permanente.</p>
+<p class="text-neutral-300 text-sm">As respostas do grill são gravadas em CONTEXT.md (e quando arquiteturais, num ADR numerado em <span class="code-box text-emerald-400">docs/adr/</span>).</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">/to-prd usa o contexto</h4>
+<p class="text-sm text-neutral-400 mb-3">PRD nasce alinhado, não da imaginação do LLM.</p>
+<p class="text-neutral-300 text-sm">O comando /to-prd lê CONTEXT.md + ADRs frescos e gera um PRD que cita as decisões. Sem grill, o PRD vira ficção.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">4</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">/to-issues fatia em vertical slices</h4>
+<p class="text-sm text-neutral-400 mb-3">PRD vira tarefas executáveis ponta a ponta.</p>
+<p class="text-neutral-300 text-sm">Cada issue é um vertical slice: UI + API + persistência + teste. Não horizontal por camada. Issues herdam terminologia do CONTEXT.md.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">5</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Implementação</h4>
+<p class="text-sm text-neutral-400 mb-3">Código sai com brief forte.</p>
+<p class="text-neutral-300 text-sm">Quando o agente vai codar a issue, ele tem ADR + PRD + issue. O retrabalho cai em 60–80% comparado a partir de prompt vago.</p>
+</div>
+</div>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">📊</span> O encadeamento é o produto
         </h3>
-        <p class="text-neutral-300">
+<p class="text-neutral-300">
           Grilling sozinho gera um documento. O <strong>pipeline grill → ADR → PRD → issues</strong> gera previsibilidade. É a diferença entre "uso IA" e "tenho processo com IA".
         </p>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Pipeline</div>
-          <div class="text-sm text-neutral-400">Grill é etapa 1, não evento isolado.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Persistência</div>
-          <div class="text-sm text-neutral-400">CONTEXT.md guarda a memória.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Vertical slice</div>
-          <div class="text-sm text-neutral-400">Issue ponta-a-ponta, não por camada.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Encadeamento</div>
-          <div class="text-sm text-neutral-400">Cada comando consome o anterior.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 7: Exercício prático (CODE BOX) -->
-    <!-- ============================ -->
-    <section id="topico-7" class="mb-16">
-      <div class="flex items-center space-x-4 mb-6">
-        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
-        <h2 class="text-2xl font-bold">🛠️ Exercício prático</h2>
-      </div>
-
-      <p class="text-neutral-300 mb-6 leading-relaxed">
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Pipeline</div>
+<div class="text-sm text-neutral-400">Grill é etapa 1, não evento isolado.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Persistência</div>
+<div class="text-sm text-neutral-400">CONTEXT.md guarda a memória.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Vertical slice</div>
+<div class="text-sm text-neutral-400">Issue ponta-a-ponta, não por camada.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Encadeamento</div>
+<div class="text-sm text-neutral-400">Cada comando consome o anterior.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 7: Exercício prático (CODE BOX) -->
+<!-- ============================ -->
+<section class="mb-16" id="topico-7">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
+<h2 class="text-2xl font-bold">🛠️ Exercício prático</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
         Pegue uma feature que você quer construir <strong class="text-emerald-400">hoje</strong> — não daqui a duas semanas. Rode /grill-with-docs e responda com honestidade. Não trapaceie acelerando o grill.
       </p>
-
-      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 code-box">
-        <div class="text-xs text-neutral-500 mb-3 uppercase tracking-wide">Prompt sugerido</div>
-        <div class="text-neutral-300 text-sm leading-relaxed">
-          <span class="text-emerald-400">/grill-with-docs</span><br><br>
-          Quero adicionar [<em>sua feature em uma frase</em>] ao projeto.<br><br>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 code-box">
+<div class="text-xs text-neutral-500 mb-3 uppercase tracking-wide">Prompt sugerido</div>
+<div class="text-neutral-300 text-sm leading-relaxed">
+<span class="text-emerald-400">/grill-with-docs</span><br/><br/>
+          Quero adicionar [<em>sua feature em uma frase</em>] ao projeto.<br/><br/>
           Faça grilling antes de eu escrever PRD. Quero perguntas <strong>específicas</strong>, justificando por que cada uma muda a implementação. Uma pergunta de cada vez. Se eu der resposta vaga, refute e refaça. Ao final, sintetize as decisões e proponha o ADR.
         </div>
-      </div>
-
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">📝</span> Anote durante o exercício
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">📝</span> Anote durante o exercício
         </h3>
-        <ul class="space-y-2 text-neutral-300 text-sm">
-          <li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Quantas perguntas</strong> o agente fez antes da síntese?</span></li>
-          <li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Quais 2 perguntas</strong> você não tinha pensado e te surpreenderam?</span></li>
-          <li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Qual decisão</strong> mudou de rumo durante o grill? (sinal de grill valioso)</span></li>
-          <li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Tempo total</strong> do grill — compare com a sua estimativa inicial.</span></li>
-          <li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>O ADR final</strong> tem alguma decisão que você não lembra de ter tomado? Marque pra revisar.</span></li>
-        </ul>
-      </div>
-
-      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-          <span class="mr-2">🎯</span> Critério de sucesso
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Quantas perguntas</strong> o agente fez antes da síntese?</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Quais 2 perguntas</strong> você não tinha pensado e te surpreenderam?</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Qual decisão</strong> mudou de rumo durante o grill? (sinal de grill valioso)</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>Tempo total</strong> do grill — compare com a sua estimativa inicial.</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">•</span><span><strong>O ADR final</strong> tem alguma decisão que você não lembra de ter tomado? Marque pra revisar.</span></li>
+</ul>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">🎯</span> Critério de sucesso
         </h3>
-        <p class="text-neutral-300 mb-3">
+<p class="text-neutral-300 mb-3">
           O exercício deu certo se ao final você consegue responder, sem olhar:
         </p>
-        <ul class="space-y-1 text-neutral-300 text-sm">
-          <li>• Quais 3 decisões irreversíveis foram tomadas;</li>
-          <li>• Quais 2 decisões ficaram explicitamente <em>adiadas</em>;</li>
-          <li>• Qual seria o próximo passo (rodar /to-prd? buscar dado externo?).</li>
-        </ul>
-      </div>
-
-      <h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Feature real</div>
-          <div class="text-sm text-neutral-400">Use algo do roadmap, não exemplo fake.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Sem trapaça</div>
-          <div class="text-sm text-neutral-400">Responda honesto, inclusive "não sei".</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Surpresas</div>
-          <div class="text-sm text-neutral-400">Perguntas que te pegam medem ROI do grill.</div>
-        </div>
-        <div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
-          <div class="text-emerald-400 font-bold mb-1">Revisa o ADR</div>
-          <div class="text-sm text-neutral-400">Nada vira documento sem você ler.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ -->
-    <!-- TÓPICO 8: Resumo e próximos passos -->
-    <!-- ============================ -->
-    <section id="topico-8" class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="mr-3">✅</span> Resumo do módulo
+<ul class="space-y-1 text-neutral-300 text-sm">
+<li>• Quais 3 decisões irreversíveis foram tomadas;</li>
+<li>• Quais 2 decisões ficaram explicitamente <em>adiadas</em>;</li>
+<li>• Qual seria o próximo passo (rodar /to-prd? buscar dado externo?).</li>
+</ul>
+</div>
+<h3 class="text-xl font-bold mb-4">Conceitos-chave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Feature real</div>
+<div class="text-sm text-neutral-400">Use algo do roadmap, não exemplo fake.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Sem trapaça</div>
+<div class="text-sm text-neutral-400">Responda honesto, inclusive "não sei".</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Surpresas</div>
+<div class="text-sm text-neutral-400">Perguntas que te pegam medem ROI do grill.</div>
+</div>
+<div class="bg-dark-800 rounded-lg border border-dark-600 p-4">
+<div class="text-emerald-400 font-bold mb-1">Revisa o ADR</div>
+<div class="text-sm text-neutral-400">Nada vira documento sem você ler.</div>
+</div>
+</div>
+</section>
+<!-- ============================ -->
+<!-- TÓPICO 8: Resumo e próximos passos -->
+<!-- ============================ -->
+<section class="mb-12" id="topico-8">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center">
+<span class="mr-3">✅</span> Resumo do módulo
         </h2>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Grilling inverte o jogo</strong>
-              <span class="text-neutral-400"> — o agente pergunta antes de codar. O brief sai forte sem você precisar ser arquiteto.</span>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Dois sabores</strong>
-              <span class="text-neutral-400"> — /grill-me para decisões leves; /grill-with-docs para qualquer coisa que vire código.</span>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Use em features novas, decisões arquiteturais, bugs confusos e refactors</strong>
-              <span class="text-neutral-400"> — pule em typos e fixes triviais.</span>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Anti-padrões matam o grill</strong>
-              <span class="text-neutral-400"> — aceitar perguntas vagas, pular em mudança "pequena", não revisar o ADR final.</span>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Grill é a etapa 1 do pipeline</strong>
-              <span class="text-neutral-400"> — alimenta CONTEXT.md → /to-prd → /to-issues → implementação.</span>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div>
-              <strong>Exercício é obrigatório</strong>
-              <span class="text-neutral-400"> — só vira hábito depois que você rodar pelo menos um grill em feature real.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo:</h3>
-          <p class="text-neutral-300">1.3 — Do PRD às issues: fatiando em vertical slices</p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-start">
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Grilling inverte o jogo</strong>
+<span class="text-neutral-400"> — o agente pergunta antes de codar. O brief sai forte sem você precisar ser arquiteto.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Dois sabores</strong>
+<span class="text-neutral-400"> — /grill-me para decisões leves; /grill-with-docs para qualquer coisa que vire código.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Use em features novas, decisões arquiteturais, bugs confusos e refactors</strong>
+<span class="text-neutral-400"> — pule em typos e fixes triviais.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Anti-padrões matam o grill</strong>
+<span class="text-neutral-400"> — aceitar perguntas vagas, pular em mudança "pequena", não revisar o ADR final.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Grill é a etapa 1 do pipeline</strong>
+<span class="text-neutral-400"> — alimenta CONTEXT.md → /to-prd → /to-issues → implementação.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong>Exercício é obrigatório</strong>
+<span class="text-neutral-400"> — só vira hábito depois que você rodar pelo menos um grill em feature real.</span>
+</div>
+</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo:</h3>
+<p class="text-neutral-300">1.3 — Do PRD às issues: fatiando em vertical slices</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-start">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">
             ← Voltar para Trilha
           </a>
-          <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-3.html">
             Próximo Módulo →
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between items-center mt-8 pt-8 border-t border-dark-600">
-      <a href="modulo-1-1.html" class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors">← Módulo 1.1</a>
-      <a href="index.html" class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors">Índice da Trilha</a>
-      <a href="modulo-1-3.html" class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors">Módulo 1.3 →</a>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-dark-600 py-8 mt-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>MP Skills — Trilha 1 — Módulo 1.2 — 2026</p>
-    </div>
-  </footer>
-
-  <script>
+</div>
+</div>
+</section>
+<!-- NAV PREV/NEXT -->
+<div class="flex justify-between items-center mt-8 pt-8 border-t border-dark-600">
+<a class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors" href="modulo-1-1.html">← Módulo 1.1</a>
+<a class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors" href="index.html">Índice da Trilha</a>
+<a class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors" href="modulo-1-3.html">Módulo 1.3 →</a>
+</div>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>MP Skills — Trilha 1 — Módulo 1.2 — 2026</p>
+</div>
+</footer>
+<script>
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -906,6 +836,5 @@
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
   </script>
-
 </body>
 </html>

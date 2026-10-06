@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Module 2.3 - Installation and Setup | Skills For Real Engineers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Bordas dark suavizadas */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Light mode - base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha blue) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .bg-blue-900\/30 { background-color: rgba(37, 99, 235, 0.10); }
+    html:not(.dark) .bg-blue-900\/40 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .hover\:bg-blue-500:hover { background-color: #2563eb; }
+    html:not(.dark) .bg-blue-600 { background-color: #2563eb; }
+
+    /* Light mode - emerald (boxes ok) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+
+    /* Light mode - red (boxes de erro) */
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+
+    /* Light mode - purple (T3 nav) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+
+    /* Light mode - gradientes off */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Code box */
+    .code-box {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    html:not(.dark) .code-box { background-color: #0f172a; color: #e2e8f0; }
+    .code-box .c-cmd { color: #7dd3fc; }
+    .code-box .c-flag { color: #fbbf24; }
+    .code-box .c-str { color: #86efac; }
+    .code-box .c-cmt { color: #64748b; font-style: italic; }
+    .code-box .c-key { color: #f472b6; }
+  </style>
+<link href="https://inematds.github.io/mp-skill/curso-skills/curso/trilha2/modulo-2-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/en/curso/trilha2/modulo-2-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/es/curso/trilha2/modulo-2-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/modulo-2-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-2-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha2/modulo-2-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAVIGATION -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🧠</span>
+<span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html">
+<span class="sm:hidden">T1</span>
+<span class="hidden sm:inline">Fundamentals</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html">
+<span class="sm:hidden">T2</span>
+<span class="hidden sm:inline">Installation</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span>
+<span class="hidden sm:inline">Practice</span>
+</a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20">
+<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+</svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-blue-400" href="../../index.html">Start</a>
+<span>/</span>
+<a class="hover:text-blue-400" href="index.html">Track 2</a>
+<span>/</span>
+<span class="text-blue-400">Module 2.3</span>
+</div>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULE 2.3
+      </span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Installation and setup</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        30 seconds from zero to your first <code class="text-blue-400 font-mono">/grill-me</code>. Setup for <strong class="text-neutral-300">mattpocock/skills</strong> no mystery: prerequisites, installer, agent selection, issue tracker setup, and validation.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">9</div>
+<div class="text-xs text-neutral-400">Sections</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">30s</div>
+<div class="text-xs text-neutral-400">Minimum</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Basic</div>
+<div class="text-xs text-neutral-400">Level</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-blue-400">Practice</div>
+<div class="text-xs text-neutral-400">Type</div>
+</div>
+</div>
+</div>
+</header>
+<!-- CONTEUDO -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- SECAO 1: PRE-REQUISITOS -->
+<section class="mb-16" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">📋 Prerequisites</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        Before running any command, make sure your machine has the right environment. The <strong class="text-blue-400">Matt Pocock's skills</strong> run on runtimes that make specific assumptions—skipping this step is the #1 reason installations fail with cryptic messages.
+      </p>
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<span class="mr-2">🎯</span> The essentials in 3 items
+        </h3>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2">
+<span class="text-blue-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Claude Code</strong> (<a class="text-blue-400 hover:underline" href="https://claude.com/claude-code" target="_blank">claude.com/claude-code</a>) <em class="text-neutral-400">or</em> <strong class="text-neutral-100">Codex CLI</strong> installed and logged in.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-blue-400 mt-1">•</span>
+<span><strong class="text-neutral-100">Node.js 18+</strong> on the PATH — used by <code class="text-blue-400 font-mono">npx</code> that downloads the installer.</span>
+</li>
+<li class="flex items-start space-x-2">
+<span class="text-blue-400 mt-1">•</span>
+<span>One <strong class="text-neutral-100">working repository</strong> open (or new folder) — the installer writes to <code class="text-blue-400 font-mono">.claude/</code> e <code class="text-blue-400 font-mono">docs/agents/</code>.</span>
+</li>
+</ul>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Supported configurations</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Claude Code (desktop or terminal)—plugin mode</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Codex CLI — file mode (skills/ in the repo)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>macOS, Linux, WSL2 (native Windows via WSL)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Node 18 LTS, 20 LTS, 22 LTS</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Git repositories (recommended) or standalone folders</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Issue trackers: GitHub, Linear, local (.scratch/)</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Not supported (yet)</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Native Windows without WSL—paths break</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Node 16 or earlier — npx incompatible</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Jira, GitLab Issues, Notion (planned, not ready)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Editors like Cursor/Continue (skill is Claude/Codex)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>No write permission in the project (read-only mounts)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Companies that block the npm registry (without a proxy)</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Quick check (10 seconds)
+        </h3>
+<div class="code-box mb-3"><span class="c-cmt"># Paste into the terminal before continuing:</span>
+<span class="c-cmd">node</span> <span class="c-flag">--version</span> <span class="c-cmt"># must return v18+ </span>
+<span class="c-cmd">claude</span> <span class="c-flag">--version</span> <span class="c-cmt"># or: codex --version</span>
+<span class="c-cmd">git</span> <span class="c-flag">status</span> <span class="c-cmt"># must be inside a repo</span></div>
+<p class="text-neutral-300 text-sm">If any of them fail, fix it <strong>before</strong> before running the installer. Most reported bugs are caused by missing prerequisites.</p>
+</div>
+</section>
+<!-- SECAO 2: INSTALACAO VIA skills.sh -->
+<section class="mb-16" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">📦 Installation via skills.sh (recommended)</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        O <strong class="text-blue-400">skills.sh</strong> is the official path. One command, no cloning a repo, no editing JSON by hand. It detects the runtime (Claude Code or Codex), copies the right files to the right place, and opens a selection screen.
+      </p>
+<div class="code-box mb-6"><span class="c-cmt"># At the root of the project where you want to use the skills:</span>
+<span class="c-cmd">npx</span> <span class="c-str">skills@latest</span> add mattpocock/skills</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">🔧</span> What the installer does behind the scenes
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">1.</span><span>Downloads the package <code class="text-blue-400 font-mono">skills</code> via <code class="text-blue-400 font-mono">npx</code> (doesn't install globally).</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">2.</span><span>Detects whether you’re in Claude Code (looks for <code class="text-blue-400 font-mono">.claude/</code>) or Codex (looks for <code class="text-blue-400 font-mono">.codex/</code>).</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">3.</span><span>Does <code class="text-blue-400 font-mono">git clone --depth 1</code> of <code class="text-blue-400 font-mono">mattpocock/skills</code> in a temporary cache.</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">4.</span><span>List of available skills (engineering/, productivity/, misc/) with checkboxes.</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">5.</span><span>Copy the selected ones to <code class="text-blue-400 font-mono">.claude/skills/</code> (or the Codex equivalent).</span></li>
+<li class="flex items-start space-x-2"><span class="text-primary mt-1">6.</span><span>Register the skills in the <code class="text-blue-400 font-mono">plugin.json</code> or in the local configuration.</span></li>
+</ul>
+</div>
+<p class="text-neutral-400 text-sm mb-6">Doesn't touch anything outside these two directories. Reversible: deleting the skills folder restores the original state.</p>
+</section>
+<!-- SECAO 3: SELECIONANDO SKILLS NO INSTALLER -->
+<section class="mb-16" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🎛️ Selecting skills in the installer</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        After running the command, the installer switches to interactive mode. <strong class="text-blue-400">4 visual steps</strong> until you confirm — you can't go wrong if you follow the screen. Most importantly: <strong class="text-neutral-100">mark <code class="text-blue-400 font-mono">/setup-matt-pocock-skills</code></strong> at this stage, because it's what will configure everything later.
+      </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+<span class="text-blue-400 font-bold">1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Run the command</h4>
+<p class="text-sm text-neutral-400 mb-3">Terminal open at the root of the repo</p>
+<p class="text-neutral-300 text-sm mb-3">You type <code class="text-blue-400 font-mono">npx skills@latest add mattpocock/skills</code>. O <code class="text-blue-400 font-mono">npx</code> downloads the installer (~300KB) and runs in ~5 seconds the first time.</p>
+<p class="text-xs text-neutral-500">Expected output: <code class="text-neutral-300">"Fetching mattpocock/skills..."</code> followed by <code class="text-neutral-300">"Detected runtime: claude-code"</code>.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+<span class="text-blue-400 font-bold">2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Selection screen appears</h4>
+<p class="text-sm text-neutral-400 mb-3">Interactive checklist</p>
+<p class="text-neutral-300 text-sm mb-3">You see all the skills grouped by bucket: <strong>engineering/</strong> (handoff, ica, grill-me…), <strong>productivity/</strong> (setup-matt-pocock-skills, triage-issues…), <strong>misc/</strong>. Use the arrows to navigate and space to mark.</p>
+<p class="text-xs text-neutral-500">Skills <code class="text-neutral-300">personal/</code>, <code class="text-neutral-300">in-progress/</code> e <code class="text-neutral-300">deprecated/</code> don’t appear — protecting the user from drafts.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+<span class="text-blue-400 font-bold">3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Choosing agents — mark /setup-matt-pocock-skills</h4>
+<p class="text-sm text-neutral-400 mb-3">Critical step — don’t skip</p>
+<p class="text-neutral-300 text-sm mb-3">Mark <strong class="text-blue-400">/setup-matt-pocock-skills</strong> as required. This agent runs <em>once</em> after installation and generates the configuration files (labels, doc paths, issue tracker integration). Without it, the other skills work but remain <strong>disconnected from your workflow</strong>.</p>
+<p class="text-xs text-neutral-500">Minimum recommendation: <code class="text-neutral-300">/setup-matt-pocock-skills</code>, <code class="text-neutral-300">/grill-me</code>, <code class="text-neutral-300">/handoff</code>. Then you add the rest.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+<span class="text-blue-400 font-bold">4</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold text-white mb-2">Confirm and review the diff</h4>
+<p class="text-sm text-neutral-400 mb-3">Everything written at once, atomic</p>
+<p class="text-neutral-300 text-sm mb-3">You press Enter. The installer shows a summary: <code class="text-neutral-300">"5 skills installed → .claude/skills/"</code>. If you use Git, do <code class="text-blue-400 font-mono">git status</code> to see everything that was added. It’s recommended to commit right away as "chore: install matt-pocock skills".</p>
+<p class="text-xs text-neutral-500">If something goes wrong along the way, the installer won't leave a partial state: either everything is added, or nothing is.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECAO 4: /setup-matt-pocock-skills -->
+<section class="mb-16" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🪄 Running /setup-matt-pocock-skills</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        With the skills installed, open Claude Code (or Codex) <strong>inside the same project</strong> and trigger the setup agent. It does one <strong class="text-blue-400">short interview</strong> (3–4 questions) and generates the configuration files in the right format for your workflow.
+      </p>
+<div class="code-box mb-6"><span class="c-cmt"># In the Claude Code prompt:</span>
+<span class="c-cmd">/setup-matt-pocock-skills</span>
+<span class="c-key">Agent</span>: I’ll configure your skills. Three quick questions.
+
+<span class="c-key">Agent</span>: 1) Which issue tracker do you use?
+        a) GitHub Issues
+        b) Linear
+        c) Local (.scratch/ in the repo)
+
+<span class="c-key">You</span>:  a
+
+<span class="c-key">Agent</span>: 2) Repo: <span class="c-str">"my-org/my-app"</span>? (detected from git remote)
+<span class="c-key">You</span>:  yes
+
+<span class="c-key">Agent</span>: 3) Which labels does your team use for triage?
+        (enter them separated by commas, or press Enter for the default)
+<span class="c-key">You</span>:  bug, enhancement, question, docs
+
+<span class="c-key">Agent</span>: 4) Where should I save agent docs?
+        Default: docs/agents/ — confirm? (y/n)
+<span class="c-key">You</span>:  y
+
+<span class="c-key">Agent</span>: Configuring...
+        - Creating docs/agents/triage-labels.md
+        - Creating docs/agents/issue-tracker.md
+        - Updating .claude/skills/triage-issues/config.json
+
+<span class="c-key">Agent</span>: Done. Test with /grill-me or /triage-issues.</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Recommendations by team size
+        </h3>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li><strong class="text-neutral-100">Solo / side project:</strong> local issue tracker (<code class="text-blue-400 font-mono">.scratch/</code>). No friction, no external dependencies.</li>
+<li><strong class="text-neutral-100">Small team (2–5 devs):</strong> GitHub Issues. That’s where the code already lives, and everyone has access.</li>
+<li><strong class="text-neutral-100">Medium/large team (6+):</strong> Use Linear if the company already pays for it. Otherwise, GitHub Projects.</li>
+<li><strong class="text-neutral-100">Regulated/closed company:</strong> local + manual sync. Avoids exposing internal decisions in a public SaaS.</li>
+</ul>
+</div>
+</section>
+<!-- SECAO 5: ISSUE TRACKER -->
+<section class="mb-16" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🗂️ Configuring the issue tracker</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        The choice of <strong class="text-blue-400">issue tracker</strong> shapes the rest of the flow. Skills like <code class="text-blue-400 font-mono">/triage-issues</code> e <code class="text-blue-400 font-mono">/handoff</code> need to know where to create/read tickets. The three modes cover 95% of cases.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ When to use each one</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li><strong class="text-emerald-400">GitHub Issues</strong> — public/private repo, the whole team has access, integrates with PRs.</li>
+<li><strong class="text-emerald-400">Linear</strong> — a paid organization using Linear that wants structured cycles/projects.</li>
+<li><strong class="text-emerald-400">Local (.scratch/)</strong> — solo, offline, exploratory. No cost, no auth.</li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ When NOT to use</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li><strong class="text-red-400">GitHub</strong> — if the repo is closed but the tracker needs to work across repos.</li>
+<li><strong class="text-red-400">Linear</strong> — if you're on your own or still validating an idea (overkill).</li>
+<li><strong class="text-red-400">Local</strong> — in teams of 3+ people (each person will have a <code class="text-blue-400 font-mono">.scratch/</code> different, without sync).</li>
+</ul>
+</div>
+</div>
+<p class="text-neutral-300 mb-4">The generated configuration lives in <code class="text-blue-400 font-mono">docs/agents/issue-tracker.md</code>. Example generated by setup when you choose GitHub:</p>
+<div class="code-box mb-6"><span class="c-cmt"># docs/agents/issue-tracker.md</span>
+<span class="c-key">tracker</span>: github
+<span class="c-key">repo</span>: my-org/my-app
+<span class="c-key">default_assignee</span>: <span class="c-str">"@me"</span>
+<span class="c-key">auth</span>: gh-cli  <span class="c-cmt"># use `gh auth status` to check</span>
+<span class="c-key">queries</span>:
+  open_bugs: <span class="c-str">"is:open label:bug"</span>
+  needs_triage: <span class="c-str">"is:open no:label"</span>
+  my_work: <span class="c-str">"is:open assignee:@me"</span>
+<span class="c-key">create_template</span>:
+  body_prefix: <span class="c-str">"&lt;!-- generated by mattpocock/skills --&gt;"</span>
+  add_labels_on_create: [<span class="c-str">"triage"</span>]</div>
+</section>
+<!-- SECAO 6: LABELS DE TRIAGE -->
+<section class="mb-16" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">🏷️ Triage labels</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        The <strong class="text-blue-400">labels</strong> are the vocabulary that connects humans and agents. If you say <em>"this is a bug"</em> and the agent says <em>"this is a defect"</em>, you duplicate tickets. The setup generates a mapping <strong>role → label string</strong> for standardization.
+      </p>
+<p class="text-neutral-300 mb-4">Each <em>semantic role</em> (what the ticket represents in the workflow) becomes a canonical string. You change the strings to match your team’s vocabulary, but keep the roles:</p>
+<div class="code-box mb-6"><span class="c-cmt"># docs/agents/triage-labels.md</span>
+<span class="c-key">labels</span>:
+  <span class="c-cmt"># --- role: issue type ---</span>
+  bug:         <span class="c-str">"bug"</span> <span class="c-cmt"># bug in existing behavior</span>
+  feature:     <span class="c-str">"enhancement"</span> <span class="c-cmt"># request for new behavior</span>
+  docs:        <span class="c-str">"docs"</span> <span class="c-cmt"># documentation improvement</span>
+  question:    <span class="c-str">"question"</span> <span class="c-cmt"># question, not actionable yet</span>
+<span class="c-cmt"># --- role: status in the workflow ---</span>
+  needs_triage: <span class="c-str">"triage"</span> <span class="c-cmt"># just came in and hasn't been evaluated yet</span>
+  blocked:     <span class="c-str">"blocked"</span> <span class="c-cmt"># waiting on something external</span>
+  ready:       <span class="c-str">"ready"</span> <span class="c-cmt"># prioritized and ready to be picked up</span>
+<span class="c-cmt"># --- role: priority ---</span>
+  p0:          <span class="c-str">"priority:p0"</span> <span class="c-cmt"># incident, stop everything</span>
+  p1:          <span class="c-str">"priority:p1"</span> <span class="c-cmt"># high priority for the sprint</span>
+  p2:          <span class="c-str">"priority:p2"</span> <span class="c-cmt"># when there's time</span>
+<span class="c-key">color_hints</span>:
+  bug: <span class="c-str">"#d73a4a"</span>
+  enhancement: <span class="c-str">"#a2eeef"</span>
+  docs: <span class="c-str">"#0075ca"</span></div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">📊</span> Why map role -&gt; string?
+        </h3>
+<p class="text-neutral-300 text-sm mb-2">Because the internal name (<code class="text-blue-400 font-mono">bug</code>) is stable in the agent’s code, but the string visible to the user (<code class="text-blue-400 font-mono">"defeito"</code>, <code class="text-blue-400 font-mono">"erro"</code>, <code class="text-blue-400 font-mono">"bug"</code>) varies across teams.</p>
+<p class="text-neutral-300 text-sm">Renamed the label on GitHub? Edit one line here. The agent keeps working. Without this indirection, you break <em>all</em> the prompts every time the team changes its vocabulary.</p>
+</div>
+</section>
+<!-- SECAO 7: INSTALACAO MANUAL -->
+<section class="mb-16" id="topico-7">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">7</span>
+<h2 class="text-2xl font-bold">🔧 Manual installation (without skills.sh)</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        If your company blocks <code class="text-blue-400 font-mono">npm registry</code>, or you want full control over what goes into the repo, you can <strong class="text-blue-400">everything by hand</strong>. It’s more work, but it works in any environment.
+      </p>
+<div class="code-box mb-6"><span class="c-cmt"># 1) Clone the skills repo to a separate location</span>
+<span class="c-cmd">git</span> clone <span class="c-str">https://github.com/mattpocock/skills.git</span> ~/src/mp-skills
+
+<span class="c-cmt"># 2) Create a skills directory in your project (if it doesn't exist)</span>
+<span class="c-cmd">mkdir</span> <span class="c-flag">-p</span> .claude/skills
+
+<span class="c-cmt"># 3) Symbolic link (recommended — receives updates from git pull)</span>
+<span class="c-cmd">ln</span> <span class="c-flag">-s</span> ~/src/mp-skills/skills/engineering/grill-me .claude/skills/grill-me
+<span class="c-cmd">ln</span> <span class="c-flag">-s</span> ~/src/mp-skills/skills/engineering/handoff .claude/skills/handoff
+<span class="c-cmd">ln</span> <span class="c-flag">-s</span> ~/src/mp-skills/skills/productivity/setup-matt-pocock-skills .claude/skills/setup
+
+<span class="c-cmt"># 4) OR copy (snapshot, doesn't receive updates)</span>
+<span class="c-cmd">cp</span> <span class="c-flag">-r</span> ~/src/mp-skills/skills/engineering/grill-me .claude/skills/
+
+<span class="c-cmt"># 5) Register in plugin.json (if applicable to your setup)</span>
+<span class="c-cmd">cat</span> .claude/plugin.json
+<span class="c-cmt"># adds the skills to the "skills": [...] array</span>
+<span class="c-cmt"># 6) Restart Claude Code to load</span>
+<span class="c-cmd">claude</span> restart</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">🧭</span> Symlink vs. copy
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li><strong class="text-blue-400">Symlink:</strong> one <code class="text-blue-400 font-mono">git pull</code> in the clone, updates everything. Good if you always want the latest.</li>
+<li><strong class="text-blue-400">Copy:</strong> freeze the version. Good for a team that needs a stable skill and PR reviews.</li>
+</ul>
+</div>
+<p class="text-neutral-400 text-sm mb-6">After this manual setup, you still need to run <code class="text-blue-400 font-mono">/setup-matt-pocock-skills</code> inside Claude Code to generate the configuration files. Manual installation only puts the <em>files</em> in place — the configuration is separate.</p>
+</section>
+<!-- SECAO 8: VERIFICACAO -->
+<section class="mb-16" id="topico-8">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">8</span>
+<h2 class="text-2xl font-bold">✅ Verifying that everything works</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        Installed, configured — now prove it's alive. <strong class="text-blue-400"><code>/grill-me</code></strong> is the fastest test: it makes the agent ask questions about the current problem instead of answering directly. If this skill loaded, they all loaded.
+      </p>
+<div class="code-box mb-6"><span class="c-cmt"># In Claude Code, inside the project:</span>
+<span class="c-cmd">/grill-me</span> I want to add authentication to the app
+
+<span class="c-key">Agent</span>: Before suggesting code, let me understand:
+
+  1. Which provider have you decided on? (Auth0, Clerk, custom, NextAuth...)
+  2. Web, mobile, or both?
+  3. Do you already have users in production? (determines migration vs. greenfield)
+  4. Email/password, social, magic link, or a combination?
+  5. What are your session requirements? (JWT, cookie, refresh tokens?)
+
+<span class="c-cmt"># If this appears, it's working. If the agent</span>
+<span class="c-cmt"># respond directly with code; the skill didn't load.</span></div>
+<div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<span class="mr-2">📋</span> Validation checklist
+        </h3>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span><code class="text-blue-400 font-mono">/grill-me &lt;qualquer coisa&gt;</code> asks questions instead of giving direct answers</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span><code class="text-blue-400 font-mono">/handoff</code> generates structured markdown instead of free-form prose</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span>Files <code class="text-blue-400 font-mono">docs/agents/issue-tracker.md</code> e <code class="text-blue-400 font-mono">triage-labels.md</code> exist</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span><code class="text-blue-400 font-mono">.claude/skills/</code> has the folders for the selected skills</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span><code class="text-blue-400 font-mono">git status</code> shows the new files — ready to commit</span></li>
+<li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">✓</span><span>Restarted Claude Code once to make sure the files were read</span></li>
+</ul>
+</div>
+</section>
+<!-- SECAO 9: TROUBLESHOOTING -->
+<section class="mb-16" id="topico-9">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">9</span>
+<h2 class="text-2xl font-bold">🩺 Troubleshooting</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        Almost everything that goes wrong falls into three buckets. Identify the symptom, apply the fix, move on.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Common symptoms</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li><strong class="text-red-400">Skill doesn’t appear</strong> when typing <code class="text-blue-400 font-mono">/</code> — empty autocomplete or built-ins only.</li>
+<li><strong class="text-red-400">Conflict with another skill</strong> — two skills with the same name or trigger, message <code>"ambiguous command"</code>.</li>
+<li><strong class="text-red-400">Plugin won't load</strong> — Claude Code opens, but no custom skills work; error in the startup log.</li>
+<li><strong class="text-red-400">Agent responds directly without running the skill</strong> — you type <code class="text-blue-400 font-mono">/grill-me</code> and it only responds like a regular chat.</li>
+</ul>
+</div>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Solutions</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li><strong class="text-emerald-400">Restart</strong> — 70% of cases. Claude Code only reads <code class="text-blue-400 font-mono">.claude/</code> at startup.</li>
+<li><strong class="text-emerald-400">Rename</strong> the conflicting skill or disable the duplicate in the <code class="text-blue-400 font-mono">plugin.json</code>.</li>
+<li><strong class="text-emerald-400">Validate JSON</strong> — <code class="text-blue-400 font-mono">cat .claude/plugin.json | jq</code>. A trailing comma breaks everything.</li>
+<li><strong class="text-emerald-400">Force a skill prefix</strong> in the prompt: <code class="text-blue-400 font-mono">/grill-me</code> has to be the <em>first</em> word in the message.</li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">🛠️</span> Recipe: skill doesn't appear
+        </h3>
+<ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+<li>Check whether the directory exists: <code class="text-blue-400 font-mono">ls .claude/skills/grill-me</code>.</li>
+<li>Check whether it has <code class="text-blue-400 font-mono">SKILL.md</code> inside with valid frontmatter (name, description).</li>
+<li>Restart: close Claude Code completely (not just the window) and reopen it.</li>
+<li>If it still doesn't appear, check the logs in <code class="text-blue-400 font-mono">~/.claude/logs/</code> — look for <code>"skill load error"</code>.</li>
+<li>Last resort: delete the skill folder, run <code class="text-blue-400 font-mono">npx skills@latest add</code> again.</li>
+</ol>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+<span class="mr-2">⚠️</span> Attention to permissions
+        </h3>
+<p class="text-neutral-300 text-sm">If you ran <code class="text-blue-400 font-mono">npx</code> with <code class="text-blue-400 font-mono">sudo</code> sometimes, the files may have been left owned by root, and Claude Code (running as your user) can't read them. Fix it with: <code class="text-blue-400 font-mono">sudo chown -R $USER .claude/</code>. <strong>Never</strong> run the installer again with sudo.</p>
+</div>
+</section>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center">
+<span class="mr-3">🎓</span> Module Summary
+        </h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Prerequisites</strong>
+<span class="text-neutral-400"> — Claude Code (or Codex) + Node 18+ + a repo with write permission. Without that, nothing runs.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Installation via skills.sh</strong>
+<span class="text-neutral-400"> — <code class="text-blue-400 font-mono">npx skills@latest add mattpocock/skills</code>. One command copies files, registers the plugin, and is reversible.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">4 steps in the installer</strong>
+<span class="text-neutral-400"> — run → screen → mark <code class="text-blue-400 font-mono">/setup-matt-pocock-skills</code> → Confirm.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Setup interviews you</strong>
+<span class="text-neutral-400"> — issue tracker, labels, doc paths. Generates versionable files in <code class="text-blue-400 font-mono">docs/agents/</code>.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Labels = role -&gt; string</strong>
+<span class="text-neutral-400"> — indirection that protects your prompts when the team’s vocabulary changes.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Verified with /grill-me</strong>
+<span class="text-neutral-400"> — if it asks questions instead of answering directly, everything is alive.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-blue-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Troubleshooting</strong>
+<span class="text-neutral-400"> — 70% of problems are solved by restarting Claude Code. Invalid JSON and permissions cover the rest.</span>
+</div>
+</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-blue-400 mb-2">Next Track:</h3>
+<p class="text-neutral-300">Track 3 — Practice: running real skills in real projects, /handoff between sessions, /grill-me for architecture, advanced triage workflows.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="modulo-2-2.html">
+            ← Module 2.2
+          </a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="../trilha3/index.html">
+            Go to Track 3 →
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Skills For Real Engineers - 2026</p>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="pt-BR">
+<html class="dark" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Módulo 1.4 - Código que Funciona: TDD + Diagnose | Skills For Real Engineers</title>
+<title>Module 1.4 - Working Code: TDD + Diagnose | Skills For Real Engineers</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
     tailwind.config = {
@@ -87,7 +87,7 @@
     .code-box { font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace; }
   </style>
 <link href="https://inematds.github.io/mp-skill/curso-skills/curso/trilha1/modulo-1-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/en/curso/trilha1/modulo-1-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/es/curso/trilha1/modulo-1-4.html" hreflang="es" rel="alternate"/></head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-1-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha1/modulo-1-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha1/modulo-1-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-1-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha1/modulo-1-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
 <!-- NAVIGATION -->
 <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,15 +105,15 @@
 <div class="flex items-center space-x-1 sm:space-x-2">
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
 <span class="sm:hidden">T1</span>
-<span class="hidden sm:inline">Fundamentos</span>
+<span class="hidden sm:inline">Fundamentals</span>
 </a>
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 hover:bg-blue-500/10" href="../trilha2/index.html">
 <span class="sm:hidden">T2</span>
-<span class="hidden sm:inline">Sobre o Repo</span>
+<span class="hidden sm:inline">About the Repo</span>
 </a>
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 hover:bg-purple-500/10" href="../trilha3/index.html">
 <span class="sm:hidden">T3</span>
-<span class="hidden sm:inline">Avançado</span>
+<span class="hidden sm:inline">Advanced</span>
 </a>
 <!-- Theme Toggle -->
 <button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
@@ -131,40 +131,40 @@
 <!-- BREADCRUMB -->
 <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 <div class="flex items-center space-x-2 text-sm text-neutral-400">
-<a class="hover:text-emerald-400" href="../../index.html">Início</a>
+<a class="hover:text-emerald-400" href="../../index.html">Start</a>
 <span>/</span>
-<a class="hover:text-emerald-400" href="index.html">Trilha 1</a>
+<a class="hover:text-emerald-400" href="index.html">Track 1</a>
 <span>/</span>
-<span class="text-emerald-400">Módulo 1.4</span>
+<span class="text-emerald-400">Module 1.4</span>
 </div>
 </nav>
 <!-- HEADER -->
 <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
-        MÓDULO 1.4
+        MODULE 1.4
       </span>
-<h1 class="text-3xl sm:text-4xl font-bold mb-4">✅ Código que Funciona: TDD + Diagnose</h1>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">✅ Code That Works: TDD + Diagnose</h1>
 <p class="text-lg text-neutral-400 max-w-3xl">
-        Red, green, refactor — com agente junto. Como usar TDD e o loop /diagnose para garantir que o código realmente funciona, em vez de só "parecer certo" pro agente.
+        Red, green, refactor — with the agent alongside. How to use TDD and the /diagnose loop to make sure the code actually works instead of just "looking right" to the agent.
       </p>
 <!-- Stats Banner -->
 <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
 <div class="text-xl font-bold text-emerald-400">9</div>
-<div class="text-xs text-neutral-400">Tópicos</div>
+<div class="text-xs text-neutral-400">Topics</div>
 </div>
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
 <div class="text-xl font-bold text-emerald-400">45</div>
-<div class="text-xs text-neutral-400">Minutos</div>
+<div class="text-xs text-neutral-400">Minutes</div>
 </div>
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-<div class="text-xl font-bold text-emerald-400">Intermediário</div>
-<div class="text-xs text-neutral-400">Nível</div>
+<div class="text-xl font-bold text-emerald-400">Intermediate</div>
+<div class="text-xs text-neutral-400">Level</div>
 </div>
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-<div class="text-xl font-bold text-emerald-400">Prática</div>
-<div class="text-xs text-neutral-400">Tipo</div>
+<div class="text-xl font-bold text-emerald-400">Practice</div>
+<div class="text-xs text-neutral-400">Type</div>
 </div>
 </div>
 </div>
@@ -175,61 +175,61 @@
 <section class="mb-16" id="topico-1">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
-<h2 class="text-2xl font-bold">🤔 Por que TDD com agente</h2>
+<h2 class="text-2xl font-bold">🤔 Why TDD with an agent</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Agente é um péssimo verificador do próprio trabalho. Ele lê o código que acabou de gerar, vê que <strong class="text-emerald-400">"parece certo"</strong>, e declara vitória. Sem teste rodando, "parece certo" é só uma opinião — e a opinião do agente está enviesada pelo código que ele mesmo escreveu.
+        An agent is a terrible verifier of its own work. It reads the code it just generated and sees that <strong class="text-emerald-400">"looks right"</strong>, and declares victory. Without a test run, “looks right” is just an opinion—and the agent’s opinion is biased by the code it wrote itself.
       </p>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        TDD resolve isso virando o jogo: o teste vem primeiro, falha primeiro, e só depois o código é escrito pra fazer o teste passar. O agente não tem como se enganar — ou o teste fica verde, ou não fica.
+        TDD solves this by turning things around: the test comes first, fails first, and only then is the code written to make the test pass. The agent can’t fool itself: either the test passes or it doesn’t.
       </p>
 <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">🎯</span> O princípio central
+<span class="mr-2">🎯</span> The core principle
         </h3>
 <p class="text-neutral-300 mb-4">
-          Agentes precisam de <strong class="text-emerald-400">sinais objetivos de progresso</strong>. Sem isso, eles giram em círculo, "consertando" coisas que já funcionavam e quebrando o que estava bom.
+          Agents need <strong class="text-emerald-400">objective signs of progress</strong>. Without this, they go in circles, “fixing” things that already worked and breaking what was good.
         </p>
 <ul class="space-y-2 text-neutral-300">
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400 mt-1">•</span>
-<span>Teste vermelho = trabalho a fazer</span>
+<span>Red test = work to do</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400 mt-1">•</span>
-<span>Teste verde = pode parar</span>
+<span>Green test = you can stop</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400 mt-1">•</span>
-<span>Sem teste = sem critério de parada</span>
+<span>No test = no stopping criterion</span>
 </li>
 </ul>
 </div>
 <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-<span class="mr-2">💡</span> Dica prática
+<span class="mr-2">💡</span> Practical tip
         </h3>
 <p class="text-neutral-300">
-          Antes de mandar o agente implementar qualquer coisa nova, pergunte: "qual o teste que prova que isso funciona?". Se você não consegue descrever o teste, o agente também não vai conseguir verificar o resultado.
+          Before asking the agent to implement anything new, ask: "What test proves this works?" If you can't describe the test, the agent won't be able to verify the result either.
         </p>
 </div>
 <!-- Conceitos-chave -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Evidência</div>
-<div class="text-xs text-neutral-400">teste rodando &gt; "parece certo"</div>
+<div class="text-emerald-400 font-bold mb-1">Evidence</div>
+<div class="text-xs text-neutral-400">test running &gt; "seems right"</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Critério</div>
-<div class="text-xs text-neutral-400">verde = pronto</div>
+<div class="text-emerald-400 font-bold mb-1">Criterion</div>
+<div class="text-xs text-neutral-400">green = ready</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">Anti-loop</div>
-<div class="text-xs text-neutral-400">teste impede giro infinito</div>
+<div class="text-xs text-neutral-400">tests prevent infinite loops</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Contrato</div>
-<div class="text-xs text-neutral-400">teste é a especificação</div>
+<div class="text-emerald-400 font-bold mb-1">Contract</div>
+<div class="text-xs text-neutral-400">the test is the specification</div>
 </div>
 </div>
 </section>
@@ -237,10 +237,10 @@
 <section class="mb-16" id="topico-2">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
-<h2 class="text-2xl font-bold">🔄 /tdd: o loop red-green-refactor</h2>
+<h2 class="text-2xl font-bold">🔄 /tdd: the red-green-refactor loop</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        O comando <strong class="text-emerald-400">/tdd</strong> coloca o agente num loop disciplinado de três etapas. Cada etapa tem um objetivo único — não pular, não combinar, não otimizar antes da hora.
+        The command <strong class="text-emerald-400">/tdd</strong> puts the agent in a disciplined three-step loop. Each step has a single goal — don't skip, combine, or optimize prematurely.
       </p>
 <!-- Timeline 3 etapas -->
 <div class="space-y-6 mb-6">
@@ -249,10 +249,10 @@
 <span class="text-red-400 text-2xl">🔴</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-<h4 class="font-semibold text-red-400 mb-2">Red — escreve teste que falha</h4>
-<p class="text-sm text-neutral-400 mb-3">Tempo: 2-5 min</p>
+<h4 class="font-semibold text-red-400 mb-2">Red — write the failing test</h4>
+<p class="text-sm text-neutral-400 mb-3">Time: 2-5 min</p>
 <p class="text-neutral-300 text-sm">
-              Defina o comportamento esperado em forma de teste. Rode o teste e veja-o falhar. Se ele passar de cara, ou o teste está errado, ou a feature já existe. Esse "ver falhar" é a prova de que o teste mede algo de verdade.
+              Define the expected behavior as a test. Run the test and watch it fail. If it passes right away, either the test is wrong or the feature already exists. That “watch it fail” is proof that the test measures something real.
             </p>
 </div>
 </div>
@@ -261,10 +261,10 @@
 <span class="text-emerald-400 text-2xl">🟢</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-<h4 class="font-semibold text-emerald-400 mb-2">Green — código mínimo pra passar</h4>
-<p class="text-sm text-neutral-400 mb-3">Tempo: 5-15 min</p>
+<h4 class="font-semibold text-emerald-400 mb-2">Green — minimum code to pass</h4>
+<p class="text-sm text-neutral-400 mb-3">Time: 5-15 min</p>
 <p class="text-neutral-300 text-sm">
-              Escreva a menor quantidade de código possível pra deixar o teste verde. Hardcode é permitido. Feio é permitido. Lento é permitido. O objetivo é só ver o verde — vai melhorar na próxima etapa.
+              Write the smallest amount of code possible to make the test pass. Hardcoding is allowed. Ugly is allowed. Slow is allowed. The only goal is to see green — you’ll improve it in the next step.
             </p>
 </div>
 </div>
@@ -273,10 +273,10 @@
 <span class="text-blue-400 text-2xl">♻️</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
-<h4 class="font-semibold text-blue-400 mb-2">Refactor — limpa mantendo verde</h4>
-<p class="text-sm text-neutral-400 mb-3">Tempo: 5-10 min</p>
+<h4 class="font-semibold text-blue-400 mb-2">Refactor — clean up while keeping everything green</h4>
+<p class="text-sm text-neutral-400 mb-3">Time: 5-10 min</p>
 <p class="text-neutral-300 text-sm">
-              Agora sim: remova duplicação, dê nomes melhores, extraia funções. A cada mudança, rode os testes. Se virar vermelho, desfaça. O teste é a rede de segurança que torna o refactor seguro.
+              Now, remove duplication, improve names, and extract functions. Run the tests after each change. If they turn red, undo it. The test is the safety net that makes refactoring safe.
             </p>
 </div>
 </div>
@@ -284,7 +284,7 @@
 <!-- Code box diálogo /tdd -->
 <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">💻</span> Diálogo real de /tdd
+<span class="mr-2">💻</span> Real /tdd dialogue
         </h3>
 <pre class="code-box text-sm text-neutral-300 bg-dark-900 rounded-lg p-4 overflow-x-auto"><span class="text-neutral-500"># você</span>
 <span class="text-emerald-400">/tdd</span> implementa função slugify(texto) — minúsculas, espaço vira "-",
@@ -308,20 +308,20 @@ pronto.</pre>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Disciplina</div>
-<div class="text-xs text-neutral-400">uma etapa por vez</div>
+<div class="text-emerald-400 font-bold mb-1">Discipline</div>
+<div class="text-xs text-neutral-400">one step at a time</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Ver falhar</div>
-<div class="text-xs text-neutral-400">teste tem que falhar antes</div>
+<div class="text-emerald-400 font-bold mb-1">See it fail</div>
+<div class="text-xs text-neutral-400">the test has to fail first</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Mínimo</div>
-<div class="text-xs text-neutral-400">não otimize no green</div>
+<div class="text-emerald-400 font-bold mb-1">Minimum</div>
+<div class="text-xs text-neutral-400">don’t optimize on green</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Rede</div>
-<div class="text-xs text-neutral-400">refactor protegido por teste</div>
+<div class="text-emerald-400 font-bold mb-1">Safety net</div>
+<div class="text-xs text-neutral-400">test-protected refactor</div>
 </div>
 </div>
 </section>
@@ -329,55 +329,55 @@ pronto.</pre>
 <section class="mb-16" id="topico-3">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
-<h2 class="text-2xl font-bold">🍰 Vertical slices: uma fatia completa por vez</h2>
+<h2 class="text-2xl font-bold">🍰 Vertical slices: one complete slice at a time</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Quando uma feature toca várias camadas (UI, API, DB), tem dois jeitos de atacar: <strong class="text-emerald-400">horizontalmente</strong> (faz toda a DB, depois toda a API, depois toda a UI) ou <strong class="text-emerald-400">verticalmente</strong> (uma feature de ponta a ponta, depois a próxima). Com agente, vertical sempre ganha.
+        When a feature touches several layers (UI, API, DB), there are two ways to tackle it: <strong class="text-emerald-400">horizontally</strong> (builds the entire DB, then the entire API, then the entire UI) or <strong class="text-emerald-400">vertically</strong> (one feature end to end, then the next). With an agent, vertical slices always win.
       </p>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Vertical slice = você consegue rodar e ver funcionando ao final de cada slice. Horizontal = você só descobre que tudo está errado quando junta tudo no final.
+        Vertical slice = you can run it and see it working at the end of each slice. Horizontal = you only discover that everything is wrong when you put it all together at the end.
       </p>
 <!-- Grid ✓/✗ -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-<h4 class="font-bold text-emerald-400 mb-4">✓ Vertical (FAZER)</h4>
+<h4 class="font-bold text-emerald-400 mb-4">✓ Vertical (DO)</h4>
 <ul class="space-y-3 text-neutral-300 text-sm">
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Feature "criar comentário": migration + endpoint + form, tudo numa slice</span>
+<span>Feature "create comment": migration + endpoint + form, all in one slice</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Teste end-to-end roda ao final de cada slice</span>
+<span>End-to-end test runs at the end of each slice</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Demoável: dá pra mostrar funcionando depois de cada slice</span>
+<span>Demoable: you can show it working after each slice</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Feedback rápido: integração testada a cada feature</span>
+<span>Quick feedback: integration tested with every feature</span>
 </li>
 </ul>
 </div>
 <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-<h4 class="font-bold text-red-400 mb-4">✗ Horizontal (EVITAR)</h4>
+<h4 class="font-bold text-red-400 mb-4">✗ Horizontal (AVOID)</h4>
 <ul class="space-y-3 text-neutral-300 text-sm">
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>"Primeiro faço todas as tabelas, depois todos os endpoints"</span>
+<span>"First I create all the tables, then all the endpoints"</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>Nada roda end-to-end até o final do projeto</span>
+<span>Nothing runs end to end through to the end of the project</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>Big bang integration: tudo quebra junto no fim</span>
+<span>Big bang integration: everything breaks together at the end</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>Agente perde contexto entre camadas e fica inconsistente</span>
+<span>Agent loses context between layers and becomes inconsistent</span>
 </li>
 </ul>
 </div>
@@ -385,7 +385,7 @@ pronto.</pre>
 <!-- Diagrama ASCII -->
 <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">📐</span> Vertical vs Horizontal — diagrama
+<span class="mr-2">📐</span> Vertical vs. Horizontal — diagram
         </h3>
 <pre class="code-box text-sm text-neutral-300 bg-dark-900 rounded-lg p-4 overflow-x-auto">VERTICAL (recomendado)              HORIZONTAL (evitar)
 ┌──────┬──────┬──────┐               ┌──────────────────┐
@@ -402,28 +402,28 @@ end-to-end                (e geralmente quebra)</pre>
 </div>
 <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-<span class="mr-2">💡</span> Regra prática
+<span class="mr-2">💡</span> Practical rule
         </h3>
 <p class="text-neutral-300">
-          Se o agente termina uma slice e você não consegue abrir o app e usar aquela feature, a slice não acabou. Vertical = demoável ao final.
+          If the agent finishes a slice and you can't open the app and use that feature, the slice isn't done. Vertical = demoable at the end.
         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Demoável</div>
-<div class="text-xs text-neutral-400">cada slice mostrável</div>
+<div class="text-emerald-400 font-bold mb-1">Demoable</div>
+<div class="text-xs text-neutral-400">each demonstrable slice</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">End-to-end</div>
-<div class="text-xs text-neutral-400">testa integração já</div>
+<div class="text-xs text-neutral-400">test integration now</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">Feedback</div>
-<div class="text-xs text-neutral-400">descobre cedo o que quebra</div>
+<div class="text-xs text-neutral-400">finds out early what breaks</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Contexto</div>
-<div class="text-xs text-neutral-400">agente foca uma feature</div>
+<div class="text-emerald-400 font-bold mb-1">Context</div>
+<div class="text-xs text-neutral-400">agent focuses on one feature</div>
 </div>
 </div>
 </section>
@@ -431,10 +431,10 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-16" id="topico-4">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
-<h2 class="text-2xl font-bold">🔬 /diagnose: para bugs difíceis</h2>
+<h2 class="text-2xl font-bold">🔬 /diagnose: for difficult bugs</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        TDD resolve bem o trabalho novo. Mas bugs em código existente — especialmente os intermitentes, os que só acontecem em produção, os que ninguém entende — pedem outra abordagem. O <strong class="text-emerald-400">/diagnose</strong> é um loop de seis etapas pensado pra isso.
+        TDD works well for new work. But bugs in existing code—especially intermittent ones, ones that only happen in production, ones no one understands—call for a different approach. The <strong class="text-emerald-400">/diagnose</strong> is a six-step loop designed for this.
       </p>
 <!-- Timeline 6 etapas -->
 <div class="space-y-4 mb-6">
@@ -444,7 +444,7 @@ end-to-end                (e geralmente quebra)</pre>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
 <h4 class="font-semibold mb-1">Reproduce</h4>
-<p class="text-sm text-neutral-300">Consiga ver o bug acontecendo, de forma confiável, no menor cenário possível. Sem reprodução, qualquer "fix" é chute.</p>
+<p class="text-sm text-neutral-300">Reproduce the bug reliably in the smallest possible scenario. Without a reproduction, any “fix” is a guess.</p>
 </div>
 </div>
 <div class="flex items-start space-x-4">
@@ -452,8 +452,8 @@ end-to-end                (e geralmente quebra)</pre>
 <span class="text-emerald-400 font-bold">2</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-<h4 class="font-semibold mb-1">Minimise</h4>
-<p class="text-sm text-neutral-300">Reduza o caso até o esqueleto: menos arquivos, menos dados, menos passos. Quanto menor o caso, mais óbvia fica a causa.</p>
+<h4 class="font-semibold mb-1">Minimize</h4>
+<p class="text-sm text-neutral-300">Reduce the case to its skeleton: fewer files, less data, fewer steps. The smaller the case, the more obvious the cause.</p>
 </div>
 </div>
 <div class="flex items-start space-x-4">
@@ -461,8 +461,8 @@ end-to-end                (e geralmente quebra)</pre>
 <span class="text-emerald-400 font-bold">3</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-<h4 class="font-semibold mb-1">Hypothesise</h4>
-<p class="text-sm text-neutral-300">Liste hipóteses possíveis. Não vá direto na primeira que parece boa — escreva 3-5 e ordene por probabilidade.</p>
+<h4 class="font-semibold mb-1">Hypothesize</h4>
+<p class="text-sm text-neutral-300">List possible hypotheses. Don't jump straight to the first one that seems promising — write 3-5 and rank them by probability.</p>
 </div>
 </div>
 <div class="flex items-start space-x-4">
@@ -471,7 +471,7 @@ end-to-end                (e geralmente quebra)</pre>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
 <h4 class="font-semibold mb-1">Instrument</h4>
-<p class="text-sm text-neutral-300">Adicione logs, prints, breakpoints que <em>provem ou refutem</em> cada hipótese. Não conserte ainda — só meça.</p>
+<p class="text-sm text-neutral-300">Add logs, print statements, breakpoints that <em>prove or disprove</em> each hypothesis. Don't fix anything yet — just measure.</p>
 </div>
 </div>
 <div class="flex items-start space-x-4">
@@ -480,7 +480,7 @@ end-to-end                (e geralmente quebra)</pre>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
 <h4 class="font-semibold mb-1">Fix</h4>
-<p class="text-sm text-neutral-300">Agora sim, com a causa confirmada, escreva o conserto. Mínimo, focado, sem aproveitar pra "também arrumar isso aqui".</p>
+<p class="text-sm text-neutral-300">Now, with the cause confirmed, write the fix. Keep it minimal and focused, without taking the opportunity to "fix this too."</p>
 </div>
 </div>
 <div class="flex items-start space-x-4">
@@ -488,35 +488,35 @@ end-to-end                (e geralmente quebra)</pre>
 <span class="text-emerald-400 font-bold">6</span>
 </div>
 <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-<h4 class="font-semibold mb-1">Regression-test</h4>
-<p class="text-sm text-neutral-300">Transforme a reprodução do passo 1 em teste automatizado. Se o bug voltar um dia, o CI grita antes do usuário.</p>
+<h4 class="font-semibold mb-1">Regression test</h4>
+<p class="text-sm text-neutral-300">Turn the reproduction from step 1 into an automated test. If the bug comes back someday, CI will catch it before the user does.</p>
 </div>
 </div>
 </div>
 <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-<span class="mr-2">📊</span> Por que esse loop em vez de "ir consertando"
+<span class="mr-2">📊</span> Why this loop instead of "just fixing things as you go"
         </h3>
 <p class="text-neutral-300 text-sm">
-          Bug difícil é difícil porque sua intuição já falhou pelo menos uma vez (senão você já tinha consertado). Pular pra "fix" antes de "reproduce + instrument" é apostar que sua intuição vai acertar dessa vez — geralmente não acerta, e o agente reforça o erro escrevendo código que parece resolver mas não resolve.
+          A difficult bug is difficult because your intuition has already failed at least once (otherwise, you would have fixed it already). Jumping to “fix” before “reproduce + instrument” means betting your intuition will be right this time — it usually isn’t, and the agent reinforces the mistake by writing code that looks like it solves the problem but doesn’t.
         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">Repro</div>
-<div class="text-xs text-neutral-400">ver acontecer = começo</div>
+<div class="text-xs text-neutral-400">seeing it happen = the beginning</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Minimiza</div>
-<div class="text-xs text-neutral-400">corta tudo que não importa</div>
+<div class="text-emerald-400 font-bold mb-1">Minimizes</div>
+<div class="text-xs text-neutral-400">cut everything that doesn’t matter</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Mede</div>
-<div class="text-xs text-neutral-400">prova antes de consertar</div>
+<div class="text-emerald-400 font-bold mb-1">Measure</div>
+<div class="text-xs text-neutral-400">prove it before fixing it</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Trava</div>
-<div class="text-xs text-neutral-400">teste impede regressão</div>
+<div class="text-emerald-400 font-bold mb-1">Lock</div>
+<div class="text-xs text-neutral-400">tests prevent regressions</div>
 </div>
 </div>
 </section>
@@ -524,80 +524,80 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-16" id="topico-5">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
-<h2 class="text-2xl font-bold">🎯 Reproduzir antes de consertar</h2>
+<h2 class="text-2xl font-bold">🎯 Reproduce before fixing</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        O erro mais caro em debug é pular a etapa de reprodução. O agente lê o stack trace, vê um nome familiar, e sai escrevendo um fix. Às vezes funciona — mas quando não funciona, ninguém percebe, porque ninguém montou o cenário pra verificar.
+        The most costly debugging mistake is skipping the reproduction step. The agent reads the stack trace, sees a familiar name, and starts writing a fix. Sometimes it works—but when it doesn’t, no one notices, because no one set up the scenario to verify it.
       </p>
 <!-- Grid ✓/✗ -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
-<h4 class="font-bold text-emerald-400 mb-4">✓ Reproduzir primeiro</h4>
+<h4 class="font-bold text-emerald-400 mb-4">✓ Reproduce first</h4>
 <ul class="space-y-3 text-neutral-300 text-sm">
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>"Antes de tocar no código, vou escrever um teste mínimo que falha igual ao bug"</span>
+<span>"Before touching the code, I'll write a minimal test that fails the same way as the bug"</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Confirmar que o teste falha pelo motivo certo (mesmo erro, mesma stack)</span>
+<span>Confirm that the test fails for the right reason (same error, same stack)</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Só então atacar a causa — e medir o resultado pelo mesmo teste</span>
+<span>Only then address the cause — and measure the result with the same test</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-emerald-400">✓</span>
-<span>Quando o teste passa, você TEM PROVA de que consertou</span>
+<span>When the test passes, you HAVE PROOF that you fixed it</span>
 </li>
 </ul>
 </div>
 <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-<h4 class="font-bold text-red-400 mb-4">✗ Anti-padrão: pular pro fix</h4>
+<h4 class="font-bold text-red-400 mb-4">✗ Anti-pattern: jumping to the fix</h4>
 <ul class="space-y-3 text-neutral-300 text-sm">
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>"Ah, sei o que é, vou consertar" — sem reproduzir</span>
+<span>"Oh, I know what that is, I'll fix it" — without reproducing it</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>Agente que lê o erro e já sai mexendo em 5 arquivos</span>
+<span>An agent that reads the error and immediately starts changing 5 files</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>"Acho que era isso" — sem forma de provar</span>
+<span>"I think that was it" — no way to prove it</span>
 </li>
 <li class="flex items-start space-x-2">
 <span class="text-red-400">✗</span>
-<span>Bug volta uma semana depois porque o "fix" não conserta o caso real</span>
+<span>The bug comes back a week later because the “fix” doesn’t address the real case</span>
 </li>
 </ul>
 </div>
 </div>
 <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
-<span class="mr-2">⚠️</span> Sinal de alerta
+<span class="mr-2">⚠️</span> Warning sign
         </h3>
 <p class="text-neutral-300 text-sm">
-          Se o agente diz "vou ajustar isso aqui" e parte editando código sem ter mostrado uma reprodução, interrompa. Peça primeiro: "como você reproduz o bug?". Se não souber responder, ele está chutando.
+          If the agent says "I'll adjust this here" and starts editing code without showing a reproduction, stop it. Ask first: "How do you reproduce the bug?" If it can't answer, it's guessing.
         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Prova</div>
-<div class="text-xs text-neutral-400">repro mostra que existe</div>
+<div class="text-emerald-400 font-bold mb-1">Test</div>
+<div class="text-xs text-neutral-400">repro shows that it exists</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Medida</div>
-<div class="text-xs text-neutral-400">mesmo teste mede o fix</div>
+<div class="text-emerald-400 font-bold mb-1">Measured</div>
+<div class="text-xs text-neutral-400">same test measures the fix</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Anti-chute</div>
-<div class="text-xs text-neutral-400">sem repro = sem certeza</div>
+<div class="text-emerald-400 font-bold mb-1">Anti-guessing</div>
+<div class="text-xs text-neutral-400">no repro = no certainty</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Acionável</div>
-<div class="text-xs text-neutral-400">repro vira teste depois</div>
+<div class="text-emerald-400 font-bold mb-1">Actionable</div>
+<div class="text-xs text-neutral-400">repro becomes a test later</div>
 </div>
 </div>
 </section>
@@ -605,18 +605,18 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-16" id="topico-6">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
-<h2 class="text-2xl font-bold">🛡️ Regression tests: todo bug consertado vira teste</h2>
+<h2 class="text-2xl font-bold">🛡️ Regression tests: every fixed bug becomes a test</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Bug que voltou é o mais frustrante de todos — porque ele já foi consertado uma vez. A regra é simples: <strong class="text-emerald-400">todo bug consertado vira um teste de regressão</strong>. Se você não tem teste pro caso, ele vai voltar.
+        A bug that came back is the most frustrating of all — because it has already been fixed once. The rule is simple: <strong class="text-emerald-400">every fixed bug becomes a regression test</strong>. If you don’t have a test for the case, it will come back.
       </p>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        O melhor momento de escrever esse teste é exatamente quando você acabou de consertar o bug — o cenário está fresco, você sabe exatamente o que falhava, e a reprodução já existe (você usou ela no /diagnose).
+        The best time to write this test is right after you’ve fixed the bug—the scenario is fresh, you know exactly what was failing, and the reproduction already exists (you used it in /diagnose).
       </p>
 <!-- Code box: teste de regressão -->
 <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">💻</span> Exemplo: teste de regressão
+<span class="mr-2">💻</span> Example: regression test
         </h3>
 <pre class="code-box text-sm text-neutral-300 bg-dark-900 rounded-lg p-4 overflow-x-auto"><span class="text-neutral-500"># Bug reportado em produção: "comentário com emoji 🎉 quebrava a API"</span>
 <span class="text-neutral-500"># Causa encontrada via /diagnose: encoding latin-1 num middleware antigo</span>
@@ -637,39 +637,39 @@ end-to-end                (e geralmente quebra)</pre>
 </div>
 <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-<span class="mr-2">💡</span> Se não tem teste, o bug volta
+<span class="mr-2">💡</span> If there's no test, the bug comes back
         </h3>
 <p class="text-neutral-300">
-          Não é pessimismo, é estatística. Refactors futuros, mudanças em dependência, alguém limpando "código velho que ninguém usa" — qualquer um desses traz o bug de volta. O teste é o lembrete automático: <em>"esse caso aqui precisa continuar funcionando"</em>.
+          It's not pessimism, it's statistics. Future refactors, dependency changes, someone cleaning up “old code nobody uses” — any of these can bring the bug back. The test is the automatic reminder: <em>"this case here needs to keep working"</em>.
         </p>
 </div>
 <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-<span class="mr-2">📊</span> Padrão de docstring
+<span class="mr-2">📊</span> Docstring convention
         </h3>
 <ul class="space-y-2 text-neutral-300 text-sm">
-<li>• <strong>Prefixo:</strong> <code class="text-emerald-400">Regression:</code> deixa explícito que o teste existe por causa de um bug</li>
-<li>• <strong>Referência:</strong> número do issue/ticket/PR pra rastrear contexto</li>
-<li>• <strong>Causa raiz:</strong> uma linha — pra quem mexer no teste depois entender</li>
-<li>• <strong>NÃO apagar:</strong> teste de regressão é patrimônio do projeto</li>
+<li>• <strong>Prefix:</strong> <code class="text-emerald-400">Regression:</code> make it explicit that the test exists because of a bug</li>
+<li>• <strong>Reference:</strong> issue/ticket/PR number to track context</li>
+<li>• <strong>Root cause:</strong> one line — so whoever edits the test later understands</li>
+<li>• <strong>DO NOT delete:</strong> a regression test is an asset of the project</li>
 </ul>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Trava</div>
-<div class="text-xs text-neutral-400">bug não volta sem alerta</div>
+<div class="text-emerald-400 font-bold mb-1">Lock</div>
+<div class="text-xs text-neutral-400">the bug doesn't come back without an alert</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Memória</div>
-<div class="text-xs text-neutral-400">documenta a causa raiz</div>
+<div class="text-emerald-400 font-bold mb-1">Memory</div>
+<div class="text-xs text-neutral-400">documents the root cause</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Barato</div>
-<div class="text-xs text-neutral-400">repro já existe, vira teste</div>
+<div class="text-emerald-400 font-bold mb-1">Cheap</div>
+<div class="text-xs text-neutral-400">repro already exists; turn it into a test</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Cumulativo</div>
-<div class="text-xs text-neutral-400">suite vira blindagem</div>
+<div class="text-emerald-400 font-bold mb-1">Cumulative</div>
+<div class="text-xs text-neutral-400">suite becomes a shield</div>
 </div>
 </div>
 </section>
@@ -677,55 +677,55 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-16" id="topico-7">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
-<h2 class="text-2xl font-bold">🔀 Combinando /tdd + /diagnose</h2>
+<h2 class="text-2xl font-bold">🔀 Combining /tdd + /diagnose</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Os dois loops não competem — colaboram. <strong class="text-emerald-400">/tdd</strong> é pra trabalho novo onde você sabe o que quer. <strong class="text-emerald-400">/diagnose</strong> é pra entender por que algo existente não está fazendo o que devia. Bugs complexos quase sempre passam por ambos.
+        The two loops don't compete—they work together. <strong class="text-emerald-400">/tdd</strong> is for new work when you know what you want. <strong class="text-emerald-400">/diagnose</strong> is for understanding why something existing isn't doing what it should. Complex bugs almost always involve both.
       </p>
 <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">🎬</span> Fluxo: bug intermitente em produção
+<span class="mr-2">🎬</span> Workflow: intermittent bug in production
         </h3>
 <p class="text-neutral-300 mb-4">
-          Imagine: relatório de bug "às vezes o pagamento duplica". Você não consegue reproduzir local. O que fazer?
+          Imagine: a bug report says "sometimes the payment is duplicated." You can’t reproduce it locally. What should you do?
         </p>
 <ol class="space-y-3 text-neutral-300 text-sm">
-<li><strong class="text-emerald-400">1. /diagnose — reproduce:</strong> não consegue. Volta um passo: instrumenta produção (logs de transação id, timestamp, request id).</li>
-<li><strong class="text-emerald-400">2. /diagnose — hypothesise:</strong> retry de cliente? race condition no worker? webhook duplicado do gateway?</li>
-<li><strong class="text-emerald-400">3. /diagnose — instrument + minimise:</strong> logs mostram que dois workers pegam o mesmo job quando o cliente faz retry em &lt;1s. Achou: race condition.</li>
-<li><strong class="text-emerald-400">4. /tdd assume a partir daqui — red:</strong> escreve um teste que dispara dois workers simultâneos pro mesmo payload. Falha (duplica).</li>
-<li><strong class="text-emerald-400">5. /tdd — green:</strong> implementa idempotency key na tabela de pagamentos. Teste passa.</li>
-<li><strong class="text-emerald-400">6. /tdd — refactor + regression:</strong> limpa o código, mantém o teste como regressão permanente. Bug não volta.</li>
+<li><strong class="text-emerald-400">1. /diagnose — reproduce:</strong> can’t. Go back a step: instrument production (transaction ID, timestamp, request ID logs).</li>
+<li><strong class="text-emerald-400">2. /diagnose — hypothesise:</strong> client retry? race condition in the worker? duplicate gateway webhook?</li>
+<li><strong class="text-emerald-400">3. /diagnose — instrument + minimize:</strong> logs show that two workers pick up the same job when the client retries in &lt;1s. Found it: a race condition.</li>
+<li><strong class="text-emerald-400">4. /tdd takes over from here — red:</strong> write a test that dispatches two workers simultaneously for the same payload. It fails (duplicates).</li>
+<li><strong class="text-emerald-400">5. /tdd — green:</strong> implements an idempotency key in the payments table. Test passes.</li>
+<li><strong class="text-emerald-400">6. /tdd — refactor + regression:</strong> cleans up the code and keeps the test as a permanent regression test. The bug won’t come back.</li>
 </ol>
 </div>
 <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
-<span class="mr-2">🧭</span> Quando alternar
+<span class="mr-2">🧭</span> When to switch
         </h3>
 <ul class="space-y-2 text-neutral-300 text-sm">
-<li>• <strong>Sabe o que quer construir?</strong> → /tdd direto</li>
-<li>• <strong>Tem bug e sabe reproduzir?</strong> → /diagnose até causa raiz, depois /tdd pro fix</li>
-<li>• <strong>Tem bug e NÃO sabe reproduzir?</strong> → /diagnose começa com instrumentação remota antes de qualquer fix</li>
-<li>• <strong>Refactor com testes existentes?</strong> → fica no green-refactor do /tdd</li>
-<li>• <strong>Refactor SEM testes?</strong> → /tdd primeiro: cobre o comportamento atual com testes; só depois refactor</li>
+<li>• <strong>Do you know what you want to build?</strong> → Go straight to /tdd</li>
+<li>• <strong>Have a bug and know how to reproduce it?</strong> → Use /diagnose to find the root cause, then /tdd for the fix</li>
+<li>• <strong>Have a bug and DON’T know how to reproduce it?</strong> → /diagnose starts with remote instrumentation before any fix</li>
+<li>• <strong>Refactor with existing tests?</strong> → It stays in the green-refactor stage of /tdd</li>
+<li>• <strong>Refactor WITHOUT tests?</strong> → Start with /tdd: cover the current behavior with tests; refactor only afterward</li>
 </ul>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Complementares</div>
-<div class="text-xs text-neutral-400">não escolhe um, usa os dois</div>
+<div class="text-emerald-400 font-bold mb-1">Complementary</div>
+<div class="text-xs text-neutral-400">doesn’t choose one; use both</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">Handoff</div>
-<div class="text-xs text-neutral-400">diagnose entrega ao tdd</div>
+<div class="text-xs text-neutral-400">diagnose hands off to tdd</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
 <div class="text-emerald-400 font-bold mb-1">Repro→Test</div>
-<div class="text-xs text-neutral-400">a ponte entre os dois</div>
+<div class="text-xs text-neutral-400">the bridge between the two</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Definitivo</div>
-<div class="text-xs text-neutral-400">fix + teste = blindagem</div>
+<div class="text-emerald-400 font-bold mb-1">Definitive</div>
+<div class="text-xs text-neutral-400">fix + test = protection</div>
 </div>
 </div>
 </section>
@@ -733,48 +733,48 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-16" id="topico-8">
 <div class="flex items-center space-x-4 mb-6">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">8</span>
-<h2 class="text-2xl font-bold">🏋️ Exercício prático</h2>
+<h2 class="text-2xl font-bold">🏋️ Hands-on exercise</h2>
 </div>
 <p class="text-neutral-300 mb-6 leading-relaxed">
-        Pegue um bug aberto no seu projeto — qualquer um, de preferência um que você tem evitado porque "é estranho". Rode <strong class="text-emerald-400">/diagnose</strong> e anote cada etapa num documento. No final, você vai ter o bug resolvido E um material de revisão pra entender como agentes lidam com bugs.
+        Pick an open bug in your project — any one, preferably one you've been avoiding because "it's weird." Run <strong class="text-emerald-400">/diagnose</strong> and document each step. By the end, you'll have the bug fixed AND review material to understand how agents handle bugs.
       </p>
 <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
-<span class="mr-2">📋</span> Roteiro do exercício
+<span class="mr-2">📋</span> Exercise outline
         </h3>
 <ol class="space-y-3 text-neutral-300 text-sm">
-<li><strong class="text-emerald-400">1.</strong> Escolha o bug. Cole no chat: descrição do problema, stack trace se tiver, contexto mínimo.</li>
-<li><strong class="text-emerald-400">2.</strong> Rode <code class="text-emerald-400">/diagnose</code> e siga as 6 etapas SEM pular.</li>
-<li><strong class="text-emerald-400">3.</strong> A cada etapa, anote em um <code class="text-emerald-400">diagnose-log.md</code>: o que o agente fez, o que descobriu, o que ainda não estava claro.</li>
-<li><strong class="text-emerald-400">4.</strong> Quando chegar no fix, ANTES de aplicar, escreva o teste de regressão (etapa 6 do /diagnose).</li>
-<li><strong class="text-emerald-400">5.</strong> Rode o teste — tem que falhar. Aplique o fix. Rode de novo — tem que passar.</li>
-<li><strong class="text-emerald-400">6.</strong> Commit do fix + teste juntos, com mensagem referenciando a causa raiz.</li>
+<li><strong class="text-emerald-400">1.</strong> Choose the bug. Paste into the chat: problem description, stack trace if available, minimal context.</li>
+<li><strong class="text-emerald-400">2.</strong> Run <code class="text-emerald-400">/diagnose</code> and follow the 6 steps WITHOUT skipping any.</li>
+<li><strong class="text-emerald-400">3.</strong> At each step, make a note in a <code class="text-emerald-400">diagnose-log.md</code>: what the agent did, what it discovered, what still wasn’t clear.</li>
+<li><strong class="text-emerald-400">4.</strong> When you get to the fix, BEFORE applying it, write the regression test (step 6 of /diagnose).</li>
+<li><strong class="text-emerald-400">5.</strong> Run the test — it should fail. Apply the fix. Run it again — it should pass.</li>
+<li><strong class="text-emerald-400">6.</strong> Commit the fix and test together, with a message that references the root cause.</li>
 </ol>
 </div>
 <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
 <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-<span class="mr-2">💡</span> Critério de sucesso
+<span class="mr-2">💡</span> Success criteria
         </h3>
 <p class="text-neutral-300">
-          Não é "o bug foi resolvido". É "eu sei provar que o bug foi resolvido, e tenho um teste que vai gritar se ele voltar". Se você não consegue marcar essas duas caixas, refaça o exercício.
+          It's not “the bug was fixed.” It's “I can prove the bug was fixed, and I have a test that will sound the alarm if it comes back.” If you can't check both boxes, redo the exercise.
         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Concreto</div>
-<div class="text-xs text-neutral-400">bug real, não exemplo</div>
+<div class="text-emerald-400 font-bold mb-1">Concrete</div>
+<div class="text-xs text-neutral-400">real bug, not an example</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Documentado</div>
-<div class="text-xs text-neutral-400">log de cada etapa</div>
+<div class="text-emerald-400 font-bold mb-1">Documented</div>
+<div class="text-xs text-neutral-400">log of each step</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Verificável</div>
-<div class="text-xs text-neutral-400">teste prova o fix</div>
+<div class="text-emerald-400 font-bold mb-1">Verifiable</div>
+<div class="text-xs text-neutral-400">the test proves the fix</div>
 </div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
-<div class="text-emerald-400 font-bold mb-1">Reutilizável</div>
-<div class="text-xs text-neutral-400">log vira referência futura</div>
+<div class="text-emerald-400 font-bold mb-1">Reusable</div>
+<div class="text-xs text-neutral-400">log becomes a future reference</div>
 </div>
 </div>
 </section>
@@ -782,69 +782,69 @@ end-to-end                (e geralmente quebra)</pre>
 <section class="mb-12">
 <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
 <h2 class="text-2xl font-bold mb-6 flex items-center">
-<span class="mr-3">📚</span> Resumo do Módulo
+<span class="mr-3">📚</span> Module Summary
         </h2>
 <div class="space-y-4 mb-8">
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">Agente precisa de evidência objetiva</strong>
-<span class="text-neutral-400"> — "parece certo" não vale; teste rodando vale.</span>
+<strong class="text-white">The agent needs objective evidence</strong>
+<span class="text-neutral-400"> — "looks right" doesn't count; a running test does.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
 <strong class="text-white">/tdd: red → green → refactor</strong>
-<span class="text-neutral-400"> — uma etapa por vez, ver o teste falhar antes de implementar.</span>
+<span class="text-neutral-400"> — one step at a time; see the test fail before implementing.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">Vertical slices &gt; horizontais</strong>
-<span class="text-neutral-400"> — feature inteira de ponta a ponta, demoável ao final de cada slice.</span>
+<strong class="text-white">Vertical slices &gt; horizontal slices</strong>
+<span class="text-neutral-400"> — a complete end-to-end feature, demoable at the end of each slice.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">/diagnose: 6 etapas pra bugs difíceis</strong>
+<strong class="text-white">/diagnose: 6 steps for difficult bugs</strong>
 <span class="text-neutral-400"> — reproduce, minimise, hypothesise, instrument, fix, regression-test.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">Reproduzir antes de consertar</strong>
-<span class="text-neutral-400"> — sem repro, "fix" é chute; com repro, teste mede o conserto.</span>
+<strong class="text-white">Reproduce before fixing</strong>
+<span class="text-neutral-400"> — without a repro, a "fix" is a guess; with a repro, a test measures the fix.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">Bug consertado = teste de regressão</strong>
-<span class="text-neutral-400"> — se não tem teste, o bug volta. Estatística, não pessimismo.</span>
+<strong class="text-white">Fixed bug = regression test</strong>
+<span class="text-neutral-400"> — if there's no test, the bug comes back. Statistics, not pessimism.</span>
 </div>
 </div>
 <div class="flex items-start space-x-3">
 <span class="text-emerald-400 mt-1">✓</span>
 <div>
-<strong class="text-white">/diagnose + /tdd se completam</strong>
-<span class="text-neutral-400"> — diagnose acha a causa, tdd implementa o fix definitivo.</span>
+<strong class="text-white">/diagnose + /tdd complement each other</strong>
+<span class="text-neutral-400"> — diagnose finds the cause; tdd implements the permanent fix.</span>
 </div>
 </div>
 </div>
 <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-<h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
-<p class="text-neutral-300">1.5 — Próximos passos da trilha de Fundamentos</p>
+<h3 class="font-semibold text-emerald-400 mb-2">Next Module:</h3>
+<p class="text-neutral-300">1.5 — Next steps in the Fundamentals track</p>
 </div>
 <div class="flex flex-col sm:flex-row gap-4">
 <a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">
-            ← Voltar para Trilha
+            ← Back to Track
           </a>
 <a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-5.html">
-            Próximo Módulo →
+            Next Module →
           </a>
 </div>
 </div>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Module 1.5 — Healthy Architecture | Skills For Real Engineers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    /* Light mode - cores de acento (trilha emerald T1) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .bg-emerald-900\/30 { background-color: rgba(5, 150, 105, 0.10); }
+    html:not(.dark) .bg-emerald-900\/40 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    /* Dark mode - bordas e linhas divisorias mais suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* Code box */
+    .code-box { font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.6; }
+  </style>
+<link href="https://inematds.github.io/mp-skill/curso-skills/curso/trilha1/modulo-1-5.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/en/curso/trilha1/modulo-1-5.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/mp-skill/curso-skills/es/curso/trilha1/modulo-1-5.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-5.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-1-5.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha1/modulo-1-5.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<!-- NAVIGATION -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🛠️</span>
+<span class="font-bold text-lg hidden sm:inline">Skills For Real Engineers</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html">
+<span class="sm:hidden">T1</span>
+<span class="hidden sm:inline">Fundamentals</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 hover:bg-blue-500/10" href="../trilha2/index.html">
+<span class="sm:hidden">T2</span>
+<span class="hidden sm:inline">About the Repo</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 hover:bg-purple-500/10" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span>
+<span class="hidden sm:inline">Advanced</span>
+</a>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2" id="theme-toggle">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-emerald-400" href="../../index.html">Start</a>
+<span>/</span>
+<a class="hover:text-emerald-400" href="index.html">Track 1</a>
+<span>/</span>
+<span class="text-emerald-400">Module 1.5</span>
+</div>
+</nav>
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULE 1.5
+      </span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏗️ Healthy Architecture</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">
+        Get out of the mud ball without refactoring everything. Identify areas for improvement, tackle them incrementally, keep decisions alive.
+      </p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">8</div>
+<div class="text-xs text-neutral-400">Sections</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">35</div>
+<div class="text-xs text-neutral-400">Minutes</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Inter</div>
+<div class="text-xs text-neutral-400">Level</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+<div class="text-xl font-bold text-emerald-400">Practice</div>
+<div class="text-xs text-neutral-400">Type</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- SEÇÃO 1: Sintomas de ball of mud -->
+<section class="mb-16" id="topico-1">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+<h2 class="text-2xl font-bold">🪣 Symptoms of a ball of mud</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        "Big ball of mud" is the architectural term for code where <strong class="text-emerald-400">nothing belongs</strong>:
+        mixed responsibilities, circular dependencies, modules that grow by accretion. You recognize it by the
+        smell: every simple change cascades across three unrelated files.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Healthy code</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Each module has a clear, nameable responsibility</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Dependencies flow in one direction (high → low level)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Consistent vocabulary across code, tests, and docs</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Duplication is an exception and is justified</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>You predict where a new feature will live</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Changing one implementation doesn’t leak into 10 places</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Ball of mud</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Giant "helper" / "utils" / "core" modules with no focus</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A imports B, which imports A (cycles)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>The same concept has 3 names (user / customer / account)</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Copy-paste with small changes in several places</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Every new feature requires a "tour" to find out where to put it</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Changing one rule requires hunting through 8 files</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">Typical smells (architectural code smells)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• <strong>God modules:</strong> a file with 2,000 lines that "everyone imports"</li>
+<li>• <strong>Shotgun surgery:</strong> a simple change touches 15 files</li>
+<li>• <strong>Feature envy:</strong> methods that operate more on another class's data than on their own</li>
+<li>• <strong>Magic strings / numbers</strong> scattered without a central constant</li>
+<li>• <strong>Conditionals by type:</strong> giant if/elif checking "type === 'X'"</li>
+<li>• <strong>Wrappers that only pass things along:</strong> layers that don't make any decisions</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Responsibility</div><div class="text-xs text-neutral-400">Each module does one thing, with a clear name.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Direction</div><div class="text-xs text-neutral-400">Dependencies without cycles.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Vocabulary</div><div class="text-xs text-neutral-400">One concept = one name.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Predictability</div><div class="text-xs text-neutral-400">Where does a new feature live? You know.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 2: /improve-codebase-architecture -->
+<section class="mb-16" id="topico-2">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+<h2 class="text-2xl font-bold">🔍 /improve-codebase-architecture</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        The command <strong class="text-emerald-400">/improve-codebase-architecture</strong> doesn’t ask you to "refactor everything."
+        It does the most useful thing: <strong class="text-emerald-400">list deepening opportunities</strong> — points where
+        the code can become significantly healthier, ordered by impact. The analysis is informed by the
+        <code class="text-emerald-400 text-sm">CONTEXT.md</code> and the project's ADRs, so the suggestions respect
+        what has already been decided.
+      </p>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">⚙️</span> What the command does
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Reads CONTEXT.md to understand the project's domain and vocabulary</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Reads the ADRs to learn which architectural decisions are in effect</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Scans the code structure for smells that contradict the domain</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Returns a prioritized list of opportunities, not a rewrite plan</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Each item has: description, estimated impact, effort, and a starting point</span></li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-semibold text-neutral-100">Example output</h4>
+<span class="text-xs text-neutral-500">terminal</span>
+</div>
+<pre class="code-box text-neutral-300 overflow-x-auto"><span class="text-emerald-400">$</span> /improve-codebase-architecture
+<span class="text-neutral-500"># 5 deepening opportunities identified (sorted by impact)</span>
+<span class="text-emerald-400">[1] HIGH</span>  src/billing/ — "materialization cascade" lives in 4 modules
+       Impact:  unifica lógica fragmentada, fecha conceito do CONTEXT.md
+       Effort:  2-3 dias  |  Risk: medium
+       Start:   src/billing/cascade.py (extract; ADR-009 references this)
+<span class="text-emerald-400">[2] HIGH</span>  src/utils/helpers.py — 1,847 lines, 23 unrelated functions
+       Impact:  quebra god module; melhora descoberta
+       Effort:  1-2 dias  |  Risk: low (mostly mechanical)
+       Start:   agrupar por consumer; mover; testar
+<span class="text-emerald-400">[3] MED</span>   "customer" vs "user" vs "account" usados intercambiavelmente
+       Impact:  alinha código ao glossário do CONTEXT.md (Sec. 2.3)
+       Effort:  1 dia    |  Risk: low
+       Start:   renomear customer.* (canonical) e atualizar callsites
+<span class="text-emerald-400">[4] MED</span>   ciclo: api/orders → services/inventory → api/orders
+       Impact:  remove ciclo; clarifica direção de dependência
+       Effort:  meio dia |  Risk: low
+       Start:   extract InventoryPort interface
+<span class="text-emerald-400">[5] LOW</span>   tests/ duplica fixtures de billing em 6 arquivos
+       Impact:  reduz manutenção de testes
+       Effort:  2h       |  Risk: very low
+       Start:   conftest.py compartilhado por subdir</pre>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Tip
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Run this command <strong>before</strong> for planning the next cycle. It gives you an honest list of architectural debt so you can choose 1 item per sprint—not tackle everything at once.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Informed</div><div class="text-xs text-neutral-400">Reads CONTEXT.md and ADRs.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Prioritized</div><div class="text-xs text-neutral-400">Impact × effort.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Actionable</div><div class="text-xs text-neutral-400">Each item has a starting point.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Non-destructive</div><div class="text-xs text-neutral-400">Suggests deepening, not a rewrite.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 3: /zoom-out -->
+<section class="mb-16" id="topico-3">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+<h2 class="text-2xl font-bold">🔭 /zoom-out — broader perspective</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        There’s a common failure pattern: the agent opens a file, starts optimizing a function, and after
+        20 minutes is rewriting isolated logic — without realizing that <strong class="text-emerald-400">that function
+        shouldn't even exist in this module</strong>. <code class="text-emerald-400 text-sm">/zoom-out</code> is for
+        this: forcing the agent to stop and ask for higher-level context before continuing.
+      </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Initial zoom-in (detail)</h4>
+<p class="text-sm text-neutral-400 mb-3">The agent opens file X and starts editing</p>
+<p class="text-neutral-300 text-sm">
+              A narrow focus is necessary to make the immediate change, but it becomes a trap when the function, file,
+              or even the entire module is in the wrong place. The agent "digs in" without asking whether the problem is bigger.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Zoom-out (overview)</h4>
+<p class="text-sm text-neutral-400 mb-3">/zoom-out — asks for architectural context</p>
+<p class="text-neutral-300 text-sm">
+              The command moves up a level: what is this module responsible for? What does CONTEXT.md say? Where does this logic
+              <em>should</em> belong? The right question changes from "how can I improve this function" to "does this function belong
+              here?". Often, the best edit is <strong class="text-emerald-400">move or remove</strong>, don't optimize.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Informed zoom-in (detail with a map)</h4>
+<p class="text-sm text-neutral-400 mb-3">Back to the code, but with the big picture</p>
+<p class="text-neutral-300 text-sm">
+              Now local editing is guided by the architecture. You know what NOT to do (create new coupling,
+              duplicate logic from another module) and what TO do (extract, move, align names with the glossary).
+              Details matter, but they serve the structure.
+            </p>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Use /zoom-out when…
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• You've been editing the same file for &gt;15 minutes with no clear progress</li>
+<li>• A simple change is turning into 4 different files</li>
+<li>• The agent is "fixing" something that's actually a symptom of another problem</li>
+<li>• Before accepting a major suggestion that touches multiple modules</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">For the focus</div><div class="text-xs text-neutral-400">Breaks the detail tunnel.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Repositions</div><div class="text-xs text-neutral-400">The right question, not a quick answer.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Uses CONTEXT.md</div><div class="text-xs text-neutral-400">Domain as a compass.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Come back better</div><div class="text-xs text-neutral-400">Zoom-in 2 ≠ zoom-in 1.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 4: Deepening (não rewrite) -->
+<section class="mb-16" id="topico-4">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+<h2 class="text-2xl font-bold">🌱 Deepening opportunities, not rewrites</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+<strong class="text-emerald-400">Deepening</strong> is a term borrowed from Eric Evans (DDD): deepen the
+        modeling where the domain matters most, without throwing away what already works. It's the opposite of the impulse to "rewrite from scratch"—which is expensive, rarely delivers what it promises, and discards all the learning
+        embedded in the current code.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Destructive rewrite</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Let's throw it out and redo it with the new architecture"</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Parallel branch for 3–6 months without delivering</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Misses edge cases the current code already handles</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Big bang merge → mass silent regressions</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Team gets stuck on the new work; support for the old work falls behind</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Lessons learned (CONTEXT.md, ADRs) turn into junk</span></li>
+</ul>
+</div>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Incremental deepening</h4>
+<ul class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Let's improve 1 opportunity per sprint without stopping delivery"</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Each PR is small, reviewable, and mergeable</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Keeps edge cases while refining the form</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Regressions show up early, in small changes</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Team keeps delivering features alongside it</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>CONTEXT.md and ADRs evolve together, becoming a living reference</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">📖</span> Term: deepening
+        </h3>
+<p class="text-neutral-300 text-sm mb-2">
+<strong>Deepening</strong> = deepen domain modeling incrementally. Instead of rewriting, you
+          identify concepts that are "crooked" in the code (hidden in utils, scattered around, poorly named) and
+          elevate them to first-class concepts—one extraction at a time.
+        </p>
+<p class="text-neutral-300 text-sm">
+          Origin: <em>Domain-Driven Design</em> (Eric Evans, 2003) — "deepening the model".
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Incremental</div><div class="text-xs text-neutral-400">1 improvement per sprint.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">No long-lived branch</div><div class="text-xs text-neutral-400">Continuous merge.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Preserves</div><div class="text-xs text-neutral-400">Edge cases already mastered.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Cumulative</div><div class="text-xs text-neutral-400">Architecture visibly improves.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 5: CONTEXT.md como guia -->
+<section class="mb-16" id="topico-5">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+<h2 class="text-2xl font-bold">🧭 CONTEXT.md as a guide</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        O <code class="text-emerald-400 text-sm">CONTEXT.md</code> isn’t just onboarding — it’s
+        <strong class="text-emerald-400">the architectural standard</strong> of the project. The domain language it
+        describes guides where to refactor: modules that implement core concepts deserve more architectural attention
+        than generic infrastructure.
+      </p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<span class="mr-2">🎯</span> Principle: domain concept = architectural attention
+        </h3>
+<p class="text-neutral-300 text-sm mb-3">
+          Example: if CONTEXT.md describes “materialization cascade” as a key concept in the billing system —
+          the chain through which price changes propagate to active contracts — then the module that implements
+          that cascade <strong class="text-blue-400">can’t</strong> be hidden in <code>utils/helpers.py</code>
+          split into 4 separate functions.
+        </p>
+<p class="text-neutral-300 text-sm">
+          The obvious deepening here is to extract <code>billing/cascade.py</code> with the cascade as a named entity,
+          aligned with the CONTEXT.md vocabulary. The command <code>/improve-codebase-architecture</code> see this
+          misalignment because <em>it reads CONTEXT.md</em>.
+        </p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">Questions that CONTEXT.md answers</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• <strong>What are the core concepts?</strong> → They deserve their own modules and consistent names</li>
+<li>• <strong>What is the canonical glossary?</strong> → “customer” vs. “user” is settled here, not in PR review</li>
+<li>• <strong>What are the boundaries?</strong> → where a feature belongs is determined by the bounded context</li>
+<li>• <strong>What invariants exist?</strong> → rules that MUST NOT be violated during refactoring</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Tip
+        </h3>
+<p class="text-neutral-300 text-sm">
+          If CONTEXT.md is vague or out of date, <strong>this</strong> is the first deepening opportunity. Without
+          it, any architectural improvement will be local and lose coherence.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Ruler</div><div class="text-xs text-neutral-400">Checks code against the domain.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Glossary</div><div class="text-xs text-neutral-400">Resolves naming disputes.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Boundaries</div><div class="text-xs text-neutral-400">Where the feature lives.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Invariants</div><div class="text-xs text-neutral-400">Untouchable rules during refactoring.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 6: ADRs -->
+<section class="mb-16" id="topico-6">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+<h2 class="text-2xl font-bold">📜 ADRs as architectural memory</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        ADR = <strong class="text-emerald-400">Architecture Decision Record</strong>. One short document for each significant architectural decision. Without ADRs, the next refactor silently undoes a deliberate choice—because nobody remembers <em>why</em> X was separated from Y.
+      </p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-semibold text-neutral-100">ADR-009 — example</h4>
+<span class="text-xs text-neutral-500">docs/adr/0009-separate-cascade.md</span>
+</div>
+<pre class="code-box text-neutral-300 overflow-x-auto"><span class="text-emerald-400"># ADR-009: Separar materialization cascade de pricing</span>
+<span class="text-emerald-400">## Status</span>
+Accepted — 2025-08-14
+<span class="text-emerald-400">## Contexto</span>
+A "materialization cascade" propaga mudanças de preço para contratos
+ativos. Originalmente vivia dentro de pricing/calculator.py porque
+parecia "cálculo de preço". Na prática, são duas responsabilidades:
+  - pricing/    → calcula o preço de UM item, sem estado
+  - cascade/    → reage a mudanças, atualiza N contratos, com estado
+Misturadas, qualquer mudança em pricing arriscava efeito colateral
+em milhares de contratos ativos.
+<span class="text-emerald-400">## Decisão</span>
+Extrair cascade para billing/cascade.py como entidade nomeada e
+independente. pricing/ vira pure function. cascade/ orquestra.
+<span class="text-emerald-400">## Consequências</span>
++ pricing testável sem mock de DB
++ cascade tem ownership claro de invariantes (idempotência, ordem)
++ vocabulário do CONTEXT.md (Sec. 4) finalmente reflete o código
+- duas pastas onde antes havia uma (custo de descoberta)
+- imports adicionais entre os módulos (acoplamento explícito)
+<span class="text-emerald-400">## Alternativas consideradas</span>
+- Manter junto: rejeitado, acopla cálculo a propagação
+- Event bus: prematuro, sem necessidade de async hoje
+- Inline em cada caller: rejeitado, duplicação garantida</pre>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+<span class="mr-2">🧠</span> Why ADRs matter in deepening
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li>• Without an ADR, in 6 months someone will "consolidate" the cascade back into pricing because it seems redundant</li>
+<li>• The ADR is proof that the separation <em>has already been considered</em> and there's a reason</li>
+<li>• <code>/improve-codebase-architecture</code> reads ADRs before suggesting anything — it won’t propose something that’s already been rejected</li>
+<li>• Discontinued ADRs are useful too: they record what we learned ("we tried X; it didn't work because Y")</li>
+</ul>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Tip: short ADR &gt; perfect ADR
+        </h3>
+<p class="text-neutral-300 text-sm">
+          A 1-page ADR beats a 10-page ADR nobody writes. Status, Context, Decision, Consequences—
+          four headings, short paragraphs. Number them sequentially (0001, 0002…) and don’t delete them: mark them as
+          <code>Superseded by ADR-XXX</code> when replaced.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Memory</div><div class="text-xs text-neutral-400">Why X ≠ Y, documented.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Anti-regression</div><div class="text-xs text-neutral-400">The next refactor doesn't undo it.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Short</div><div class="text-xs text-neutral-400">1 page &gt; 10.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Immortal</div><div class="text-xs text-neutral-400">Replace, don't delete.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 7: Exemplo de melhoria progressiva -->
+<section class="mb-16" id="topico-7">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
+<h2 class="text-2xl font-bold">📈 Example of progressive improvement</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        How a team gets out of a ball of mud without stopping the product. A 3-sprint narrative based on a real pattern:
+        <strong class="text-emerald-400">one opportunity per sprint</strong>, CONTEXT.md and ADRs updated every cycle.
+      </p>
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S0</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 0 — Diagnosis</h4>
+<p class="text-sm text-neutral-400 mb-3">We ran /improve-codebase-architecture for the first time</p>
+<p class="text-neutral-300 text-sm">
+              The output lists 5 opportunities. The team discusses them for 30 minutes, chooses 3 to tackle over the next 3 sprints, in order
+              of impact. The other 2 explicitly go into the backlog — not forgotten, not urgent.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S1</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 1 — Extract the cascade</h4>
+<p class="text-sm text-neutral-400 mb-3">Opportunity #1: scattered materialization cascade</p>
+<p class="text-neutral-300 text-sm">
+              Team extracts <code>billing/cascade.py</code> as a named module. Small PR, ~400 lines moved, no behavior changes. Write ADR-009 documenting the decision. Update CONTEXT.md (Sec. 4) with the canonical vocabulary. New features continue alongside it, without a parallel branch.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S2</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 2 — Break up the god module</h4>
+<p class="text-sm text-neutral-400 mb-3">Opportunity #2: utils/helpers.py with 1,847 lines</p>
+<p class="text-neutral-300 text-sm">
+              Mostly mechanical: group functions by consumer, move them into nearby modules. 3 “orphan” functions raise
+              questions — what are they? The answer comes from CONTEXT.md (one is a cascade and should have gone in S1; the other two
+              expose a new concept that becomes ADR-010). Bug avoided.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S3</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 3 — Align vocabulary</h4>
+<p class="text-sm text-neutral-400 mb-3">Opportunity #3: customer / user / account used interchangeably</p>
+<p class="text-neutral-300 text-sm">
+              Renaming guided by the CONTEXT.md glossary. It’s mechanical, but touches many files—feature flags don’t help here, so: small PRs by subdirectory, approved by that subdirectory’s code owner. In the end, the code speaks the same language as the docs and product teams.
+            </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<span class="text-emerald-400 font-bold">S4</span>
+</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Sprint 4 — Re-diagnosis</h4>
+<p class="text-sm text-neutral-400 mb-3">Run /improve-codebase-architecture again</p>
+<p class="text-neutral-300 text-sm">
+              New list: the 3 original opportunities are gone (they were resolved). The 2 that remained in the backlog
+              are still there. But 2 new ones appeared because the domain evolved over the 3 sprints. Architecture improved
+              <strong class="text-emerald-400">visibly</strong>, no big bang, no stopping delivery.
+            </p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+<span class="mr-2">📊</span> Result in 4 sprints
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>3 high-impact opportunities resolved, 2 new ADRs</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>CONTEXT.md updated 3 times, becoming a living reference</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Zero pauses in product features</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Bug avoided (orphan cascade in helpers) found by coincidence</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Team trusts the process: the next round is already planned</span></li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">1 per sprint</div><div class="text-xs text-neutral-400">Sustainable cadence.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Living docs</div><div class="text-xs text-neutral-400">CONTEXT.md + ADRs evolve.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">No pause</div><div class="text-xs text-neutral-400">Features continue.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Cumulative</div><div class="text-xs text-neutral-400">Re-diagnosis shows improvement.</div></div>
+</div>
+</section>
+<!-- SEÇÃO 8: Exercício -->
+<section class="mb-16" id="topico-8">
+<div class="flex items-center space-x-4 mb-6">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">8</span>
+<h2 class="text-2xl font-bold">🎯 Hands-on exercise</h2>
+</div>
+<p class="text-neutral-300 mb-6 leading-relaxed">
+        You don’t learn deepening by reading. You learn by running the command in your project and <strong class="text-emerald-400">defending the choice</strong> of the first opportunity to tackle.
+      </p>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+<span class="mr-2">🛠️</span> Steps
+        </h3>
+<ol class="space-y-3 text-neutral-300 text-sm">
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">1.</span>
+<div>
+<strong class="text-emerald-400">Confirm the basics:</strong> does your project have a CONTEXT.md? Does it have at least
+              1-2 ADRs? If not, start there (that's the pre-deepening).
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">2.</span>
+<div>
+<strong class="text-emerald-400">Run /improve-codebase-architecture</strong> in the actual project (not in
+              a sandbox).
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">3.</span>
+<div>
+<strong class="text-emerald-400">Write down the first 3 suggestions</strong> with: description, impact, effort.
+              Not all 5 — just the first 3.
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">4.</span>
+<div>
+<strong class="text-emerald-400">Which one do you tackle first?</strong> It may be #1 — but it may not be.
+              Defend your choice in 3 sentences: why this one, why now, and what the risk is if you leave it.
+            </div>
+</li>
+<li class="flex items-start space-x-3">
+<span class="text-emerald-400 font-bold flex-shrink-0">5.</span>
+<div>
+<strong class="text-emerald-400">Bonus:</strong> draft the ADR before touching the code. If you can't write 1 page explaining why, maybe the suggestion isn't mature enough yet.
+            </div>
+</li>
+</ol>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+<span class="mr-2">💡</span> Selection criterion
+        </h3>
+<p class="text-neutral-300 text-sm">
+          Good first choice: <strong>high impact, low-to-medium effort, low risk, touches the concept in CONTEXT.md</strong>.
+          A bad first choice: high impact but high risk—save it for when the team already trusts the process.
+        </p>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+<span class="mr-2">⚠️</span> Do not
+        </h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Tackle all 5 opportunities at once — you'll end up rewriting</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Skip the ADR — in 6 months, no one remembers why</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Refactor without a pre-existing test covering the path—write one first</span></li>
+</ul>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Run</div><div class="text-xs text-neutral-400">In the real project, not an example.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">3, not 5</div><div class="text-xs text-neutral-400">Focus on the choice.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">Defend</div><div class="text-xs text-neutral-400">3 sentences: this, now, risk.</div></div>
+<div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold text-sm mb-1">ADR first</div><div class="text-xs text-neutral-400">If you don't write it, it's not ready.</div></div>
+</div>
+</section>
+<!-- RESUMO + PRÓXIMOS PASSOS -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center">
+<span class="mr-3">✅</span> Module Summary
+        </h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">A ball of mud can be diagnosed</strong>
+<span class="text-neutral-400"> — specific smells (god modules, cycles, inconsistent vocabulary, duplication).</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">/improve-codebase-architecture lists opportunities</strong>
+<span class="text-neutral-400"> — informed by CONTEXT.md and ADRs, prioritized by impact.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">/zoom-out breaks the tunnel vision of detail</strong>
+<span class="text-neutral-400"> — returns the architectural perspective before the next edit.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">Deepening &gt; rewrite</strong>
+<span class="text-neutral-400"> — one cumulative improvement per sprint, with no long-lived branch.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">CONTEXT.md is the yardstick</strong>
+<span class="text-neutral-400"> — a domain concept deserves a module, a name, and architectural attention.</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<span class="text-emerald-400 mt-1">✓</span>
+<div>
+<strong class="text-white">ADRs preserve decisions</strong>
+<span class="text-neutral-400"> — without them, the next refactor undoes the changes because no one knows about them.</span>
+</div>
+</div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-emerald-400 mb-2">Next Module:</h3>
+<p class="text-neutral-300">1.6 — continuing the skills journey.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">
+            ← Back to Track
+          </a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-6.html">
+            Next Module →
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Skills For Real Engineers — 2026</p>
+</div>
+</footer>
+<!-- SCRIPTS -->
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      html.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
